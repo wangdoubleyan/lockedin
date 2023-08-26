@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SelectView: View {
-    @State private var hr: Int = 0
-    @State private var min: Int = 5
+    @State var hr: Int = 0
+    @State var min: Int = 5
     
     var body: some View {
         NavigationStack {
