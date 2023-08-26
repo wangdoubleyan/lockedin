@@ -21,7 +21,7 @@ struct SelectView: View {
                 
                 HStack {
                     Picker("", selection: $hr) {
-                        ForEach(0..<6, id: \.self) { i in
+                        ForEach(0..<13, id: \.self) { i in
                             Text("\(i) hr").tag(i)
                         }
                     }

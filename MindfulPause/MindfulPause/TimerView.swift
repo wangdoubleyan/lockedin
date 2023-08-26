@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TimerView: View {
-    @State var hr: Int = 0
-    @State var min: Int = 1
+    @State var hr: Int = 1
+    @State var min: Int = 0
     @State var progress = 0.0
     @State var timeRemaining = 0
     
@@ -33,10 +33,6 @@ struct TimerView: View {
                 .animation(.linear(duration: 1), value: progress)
             
             VStack(spacing: 5) {
-                Text("Pause Remaining")
-                    .opacity(0.8)
-                    .font(.headline)
-                
                 Text("\(printFormattedTime(timeRemaining))")
                     .font(.title)
                     .bold()
@@ -70,10 +66,16 @@ struct TimerView: View {
     
     func printFormattedTime(_ seconds: Int) -> String {
         let (h, m, s) = formatTime(seconds)
-        if h > 0 && m < 1 {
+        if h > 0 && m < 1 && s < 1 {
+            return "\(h) hr"
+        } else if h > 0 && m < 1 {
             return "\(h) hr \(s) sec"
+        } else if h > 0 && s < 1 {
+            return "\(h) hr \(m) min"
         } else if h > 0 {
             return "\(h) hr \(m) min \(s) sec"
+        } else if m > 0 && s < 1 {
+            return "\(m) min"
         } else if m > 0 {
             return "\(m) min \(s) sec"
         } else {
