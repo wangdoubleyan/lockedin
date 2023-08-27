@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct TimerView: View {
-    @State var hr: Int = 1
-    @State var min: Int = 0
-    @State var progress = 0.0
-    @State var timeRemaining = 0
-    
+    @ObservedObject var time: Time
+    @State private var progress = 0.0
+    @State private var timeRemaining = 0
+    @State private var stroke = 0.0
+    @State private var opacity = 0.0
+        
     var totalTime: Double {
-        Double(hr * 60 * 60 + min * 60)
+        Double(time.hr * 60 * 60 + time.min * 60)
     }
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -22,29 +23,45 @@ struct TimerView: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(lineWidth: 30)
+                .stroke(lineWidth: stroke)
                 .foregroundStyle(.gray)
                 .opacity(0.1)
+                .animation(.smooth(duration: 3), value: stroke)
             
             Circle()
-                .trim(from: 0.0, to: Swift.min(progress, 1.0))
-                .stroke(Color.blue.opacity(0.2), style: StrokeStyle(lineWidth: 25.0, lineCap: .round, lineJoin: .round))
+                .trim(from: 0.0, to: min(progress, 1.0))
+                .stroke(Color.blue.opacity(opacity), style: StrokeStyle(lineWidth: 30.0, lineCap: .round, lineJoin: .round))
                 .rotationEffect(Angle(degrees: 270))
+                .animation(.smooth(duration: 3), value: opacity)
                 .animation(.linear(duration: 1), value: progress)
+                
+                
             
-            VStack(spacing: 5) {
+            
+            VStack {
                 Text("\(printFormattedTime(timeRemaining))")
-                    .font(.title)
+                    .font(.largeTitle)
                     .bold()
                     .fontDesign(.rounded)
+                    .multilineTextAlignment(.center)
+                    .transition(.slide)
             }
-            .padding()
-    
+            .onChange(of: timeRemaining, initial: true) { oldValue, newValue in
+                if Double(newValue) == 0 {
+                    snapBack()
+                } else if Double(newValue) == totalTime / 4 || Double(newValue) == totalTime / 2 || Double(newValue) == totalTime / 4 * 3 {
+                    snapBack()
+                }
+            }
         }
-        .frame(width: 275, height: 275)
-        .padding()
+        .padding(80)
         .onAppear {
-            calculateTimeRemaining(hours: hr, minutes: min)
+            if time.hr == 0 && time.min == 0 {
+                time.min = 1
+            }
+            calculateTimeRemaining(hours: time.hr, minutes: time.min)
+            stroke = 40.0
+            opacity = 0.2
         }
         .onReceive(timer) { time in
             if timeRemaining > 0 {
@@ -52,12 +69,12 @@ struct TimerView: View {
                 progress += 1.0 / totalTime
             }
         }
+        
     }
     
     
-    func calculateTimeRemaining(hours: Int, minutes: Int) -> Int {
+    func calculateTimeRemaining(hours: Int, minutes: Int) {
         timeRemaining = hours * 60 * 60 + minutes * 60
-        return timeRemaining
     }
         
     func formatTime(_ seconds: Int) -> (Int, Int, Int) {
@@ -66,25 +83,48 @@ struct TimerView: View {
     
     func printFormattedTime(_ seconds: Int) -> String {
         let (h, m, s) = formatTime(seconds)
+        
         if h > 0 && m < 1 && s < 1 {
             return "\(h) hr"
         } else if h > 0 && m < 1 {
-            return "\(h) hr \(s) sec"
+            return """
+                    \(h) hr
+                    \(s) sec
+                    """
         } else if h > 0 && s < 1 {
-            return "\(h) hr \(m) min"
+            return """
+                    \(h) hr
+                    \(m) min
+                    """
         } else if h > 0 {
-            return "\(h) hr \(m) min \(s) sec"
+            return """
+                    \(h) hr
+                    \(m) min
+                    \(s) sec
+                    """
         } else if m > 0 && s < 1 {
-            return "\(m) min"
+            return """
+                    \(m) min
+                    """
         } else if m > 0 {
-            return "\(m) min \(s) sec"
+            return """
+                    \(m) min
+                    \(s) sec
+                    """
         } else {
-            return "\(s) sec"
+            return """
+                    \(s) sec
+                    """
         }
-       
     }
-}
+    
+    func snapBack() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+    }
 
+}
+    
 #Preview {
-    TimerView()
+    TimerView(time: Time())
 }

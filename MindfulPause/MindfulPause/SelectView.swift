@@ -7,9 +7,13 @@
 
 import SwiftUI
 
+class Time: ObservableObject {
+    @Published var hr = 0
+    @Published var min = 1
+}
+
 struct SelectView: View {
-    @State var hr: Int = 0
-    @State var min: Int = 5
+    @StateObject var time = Time()
     
     var body: some View {
         NavigationStack {
@@ -18,25 +22,24 @@ struct SelectView: View {
                     .font(.title)
                     .fontDesign(.rounded)
                     .bold()
-                
-                HStack {
-                    Picker("", selection: $hr) {
+                                    
+                HStack(spacing: 0) {
+                    Picker("Select hours", selection: $time.hr) {
                         ForEach(0..<13, id: \.self) { i in
                             Text("\(i) hr").tag(i)
                         }
                     }
                     .pickerStyle(.wheel)
-                    Picker("", selection: $min) {
-                        ForEach(0..<60, id: \.self) { i in
+
+                    Picker("Select minutes", selection: $time.min) {
+                        ForEach((time.hr > 0 ? 0 : 1)..<60, id: \.self) { i in
                             Text("\(i) min").tag(i)
                         }
                     }
                     .pickerStyle(.wheel)
                 }
-                .padding()
-                
                 NavigationLink {
-                    TimerView()
+                    TimerView(time: time)
                 } label: {
                     Text("Let's Pause")
                         .fontDesign(.rounded)
