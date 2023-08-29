@@ -17,41 +17,92 @@ struct SelectView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Text("How long do you want to pause?")
-                    .font(.title)
-                    .fontDesign(.rounded)
-                    .bold()
-                                    
-                HStack(spacing: 0) {
-                    Picker("Select hours", selection: $time.hr) {
-                        ForEach(0..<13, id: \.self) { i in
-                            Text("\(i) hr").tag(i)
-                        }
-                    }
-                    .pickerStyle(.wheel)
-
-                    Picker("Select minutes", selection: $time.min) {
-                        ForEach((time.hr > 0 ? 0 : 1)..<60, id: \.self) { i in
-                            Text("\(i) min").tag(i)
-                        }
-                    }
-                    .pickerStyle(.wheel)
-                }
-                NavigationLink {
-                    TimerView(time: time)
-                } label: {
-                    Text("Let's Pause")
+            ZStack {
+                Color.theme.background
+                    .ignoresSafeArea()
+                VStack(alignment: .leading) {
+                    Spacer()
+                    Spacer()
+                    
+                    Text("Hello, friend!")
+                        .foregroundStyle(Color.theme.secondary)
+                        .font(.title)
                         .fontDesign(.rounded)
-                        .font(.headline)
                         .bold()
+                    
+                    Text("How long do you want to Pause?")
+                        .foregroundStyle(Color.theme.foreground)
+                        .font(.title)
+                        .fontDesign(.rounded)
+                        .bold()
+                    
+                    Spacer()
+                    
+                    HStack {
+                        Picker("Select hours", selection: $time.hr) {
+                            ForEach(0..<13, id: \.self) { i in
+                                Text("\(i) hr").tag(i)
+                                    .foregroundStyle(Color.theme.secondary)
+                                    .font(.title)
+                                    .fontDesign(.rounded)
+                                    .bold()
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        
+                        Picker("Select minutes", selection: $time.min) {
+                            ForEach((time.hr > 0 ? 0 : 1)..<60, id: \.self) { i in
+                                Text("\(i) min").tag(i)
+                                    .foregroundStyle(Color.theme.secondary)
+                                    .font(.title)
+                                    .fontDesign(.rounded)
+                                    .bold()
+                                                                }
+                        }
+                        .pickerStyle(.wheel)
+                    }
+                    .padding(-10)
+        
+                    
+                    Spacer()
+                    
+
+                    NavigationLink {
+                        TimerView(time: time)
+                    } label: {
+                        Text("Let's Pause")
+                            .foregroundStyle(Color.theme.foreground)
+                            .fontDesign(.rounded)
+                            .font(.headline)
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .contentShape(Rectangle())
+                            .padding(.vertical)
+                        
+                    }
+                    .background(Color.theme.accent)
+                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                    
+
+                    Spacer()
                 }
-                .padding(20)
-                .background(.blue.opacity(0.2))
-                .foregroundStyle(.primary)
-                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .padding()
             }
-            .padding()
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button {
+                        
+                    } label: {
+                        Label("Settings", systemImage: "gearshape.fill")
+                    }
+                }
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Image("Logo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 25)
+                }
+            }
         }
     }
 }

@@ -11,7 +11,8 @@ import SwiftUI
 struct MindfulPauseApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SelectView()
+                .preferredColorScheme(.dark)
         }
     }
 }

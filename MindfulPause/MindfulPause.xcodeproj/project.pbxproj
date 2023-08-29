@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		12820B032A99A8550054DBFF /* MindfulPauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B022A99A8550054DBFF /* MindfulPauseApp.swift */; };
-		12820B052A99A8550054DBFF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B042A99A8550054DBFF /* ContentView.swift */; };
 		12820B072A99A8570054DBFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B062A99A8570054DBFF /* Assets.xcassets */; };
 		12820B0A2A99A8570054DBFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B092A99A8570054DBFF /* Preview Assets.xcassets */; };
 		12820B112A99A8A60054DBFF /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B102A99A8A60054DBFF /* SelectView.swift */; };
 		12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B122A99A8AF0054DBFF /* TimerView.swift */; };
+		12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2640A2A9C5A1F00CE0FDD /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		12820AFF2A99A8550054DBFF /* MindfulPause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindfulPause.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12820B022A99A8550054DBFF /* MindfulPauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindfulPauseApp.swift; sourceTree = "<group>"; };
-		12820B042A99A8550054DBFF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		12820B062A99A8570054DBFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12820B092A99A8570054DBFF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		12820B102A99A8A60054DBFF /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		12820B122A99A8AF0054DBFF /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		12A2640A2A9C5A1F00CE0FDD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +55,8 @@
 		12820B012A99A8550054DBFF /* MindfulPause */ = {
 			isa = PBXGroup;
 			children = (
+				12A2640A2A9C5A1F00CE0FDD /* Color.swift */,
 				12820B022A99A8550054DBFF /* MindfulPauseApp.swift */,
-				12820B042A99A8550054DBFF /* ContentView.swift */,
 				12820B102A99A8A60054DBFF /* SelectView.swift */,
 				12820B122A99A8AF0054DBFF /* TimerView.swift */,
 				12820B062A99A8570054DBFF /* Assets.xcassets */,
@@ -143,8 +143,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12820B052A99A8550054DBFF /* ContentView.swift in Sources */,
 				12820B032A99A8550054DBFF /* MindfulPauseApp.swift in Sources */,
+				12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */,
 				12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */,
 				12820B112A99A8A60054DBFF /* SelectView.swift in Sources */,
 			);
