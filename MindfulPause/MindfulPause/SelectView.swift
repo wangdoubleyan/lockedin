@@ -74,7 +74,6 @@ struct SelectView: View {
                             .foregroundStyle(Color.theme.foreground)
                             .fontDesign(.rounded)
                             .font(.headline)
-                            .bold()
                             .frame(maxWidth: .infinity, alignment: .center)
                             .contentShape(Rectangle())
                             .padding(.vertical)

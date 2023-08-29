@@ -8,8 +8,23 @@
 import SwiftUI
 import AVFoundation
 
+extension UINavigationController: UIGestureRecognizerDelegate {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        interactivePopGestureRecognizer?.delegate = self
+    }
+
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
+    }
+}
+
 struct TimerView: View {
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @ObservedObject var time: Time
+    
     @State private var progress = 0.0
     @State private var timeRemaining = 0
     @State private var stroke = 0.0
@@ -18,12 +33,23 @@ struct TimerView: View {
     
     let stunGrenade: SystemSoundID = 1112
     let win: SystemSoundID = 1110
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         
     var totalTime: Double {
         Double(time.hr * 60 * 60 + time.min * 60)
     }
     
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    var back : some View { Button(action: {
+        self.presentationMode.wrappedValue.dismiss()
+        }) {
+            HStack {
+                Label("Back", systemImage: "arrowshape.backward.fill")
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color.theme.accent)
+            }
+            
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -74,6 +100,8 @@ struct TimerView: View {
                 if timeRemaining > 0 {
                     timeRemaining -= 1
                     progress += 1.0 / totalTime
+                } else if timeRemaining == 0 {
+                    dismiss()
                 }
             }
             Color.theme.secondary
@@ -82,6 +110,8 @@ struct TimerView: View {
                 .animation(.easeInOut(duration: 1), value: flash)
         }
         .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: back)
     }
     
     
@@ -131,9 +161,6 @@ struct TimerView: View {
     }
     
     func snapBack() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.warning)
-        
         AudioServicesPlaySystemSound(win)
     }
     
