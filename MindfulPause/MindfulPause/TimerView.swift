@@ -8,22 +8,11 @@
 import SwiftUI
 import AVFoundation
 
-extension UINavigationController: UIGestureRecognizerDelegate {
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-        interactivePopGestureRecognizer?.delegate = self
-    }
-
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count > 1
-    }
-}
-
 struct TimerView: View {
     @Environment(\.dismiss) var dismiss
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject var time: Time
+    @ObservedObject var settings: Settings
     
     @State private var progress = 0.0
     @State private var timeRemaining = 0
@@ -37,18 +26,6 @@ struct TimerView: View {
         
     var totalTime: Double {
         Double(time.hr * 60 * 60 + time.min * 60)
-    }
-    
-    var back : some View { Button(action: {
-        self.presentationMode.wrappedValue.dismiss()
-        }) {
-            HStack {
-                Label("Back", systemImage: "arrowshape.backward.fill")
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(Color.theme.accent)
-            }
-            
-        }
     }
     
     var body: some View {
@@ -79,11 +56,13 @@ struct TimerView: View {
                         .transition(.slide)
                 }
                 .onChange(of: timeRemaining, initial: true) { oldValue, newValue in
-                    if Double(newValue) == 0 {
-                        snapBack()
-                    } else if Double(newValue) == totalTime / 4 || Double(newValue) == totalTime / 2 || Double(newValue) == totalTime / 4 * 3 {
-                        snapBack()
-                        flashBang()
+                    if settings.isSnapBackOn {
+                        if Double(newValue) == 0 {
+                            snapBack()
+                        } else if Double(newValue) == totalTime / 4 || Double(newValue) == totalTime / 2 || Double(newValue) == totalTime / 4 * 3 {
+                            snapBack()
+                            flashBang()
+                        }
                     }
                 }
             }
@@ -110,8 +89,6 @@ struct TimerView: View {
                 .animation(.easeInOut(duration: 1), value: flash)
         }
         .ignoresSafeArea()
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: back)
     }
     
     
@@ -176,5 +153,5 @@ struct TimerView: View {
 }
     
 #Preview {
-    TimerView(time: Time())
+    TimerView(time: Time(), settings: Settings())
 }

@@ -8,12 +8,13 @@
 import SwiftUI
 
 class Time: ObservableObject {
-    @Published var hr = 0
-    @Published var min = 1
+    @AppStorage("hr") var hr = 0
+    @AppStorage("min") var min = 1
 }
 
 struct SelectView: View {
     @StateObject var time = Time()
+    
     
     var body: some View {
         NavigationStack {
@@ -62,13 +63,12 @@ struct SelectView: View {
                         .pickerStyle(.wheel)
                     }
                     .padding(-10)
-        
                     
                     Spacer()
                     
 
                     NavigationLink {
-                        TimerView(time: time)
+                        TimerView(time: time, settings: Settings())
                     } label: {
                         Text("Let's Pause")
                             .foregroundStyle(Color.theme.foreground)
@@ -89,10 +89,10 @@ struct SelectView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button {
-                        
+                    NavigationLink {
+                        SettingsView()
                     } label: {
-                        Label("Settings", systemImage: "gearshape.fill")
+                        Label("Settings", systemImage: "gearshape")
                     }
                 }
                 ToolbarItemGroup(placement: .topBarLeading) {
