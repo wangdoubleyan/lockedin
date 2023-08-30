@@ -90,7 +90,7 @@ struct SelectView: View {
                     NavigationLink {
                         SettingsView()
                     } label: {
-                        Label("Settings", systemImage: "gearshape")
+                        Label("Settings", systemImage: "gearshape.fill")
                     }
                 }
                 ToolbarItemGroup(placement: .topBarLeading) {

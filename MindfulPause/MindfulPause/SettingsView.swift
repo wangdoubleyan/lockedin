@@ -33,7 +33,7 @@ struct SettingsView: View {
                 } header: {
                     Text("Timer")
                 } footer: {
-                    Text("SnapBacks help you focus on the present moment by bringing your attention back with visual, audio, and sensory stimuli.")
+                    Text("SnapBacks help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
                 }
             }
             .tint(Color.theme.accent)

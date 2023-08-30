@@ -11,14 +11,17 @@ import AVKit
 class SoundManager {
     static let instance = SoundManager()
     
-    var player: AVAudioPlayer?
+    var player = AVAudioPlayer()
     
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "chime", withExtension: ".mp3") else { return }
+    @IBAction func playSound(sound: String) {
+        guard let url = Bundle.main.url(forResource: sound, withExtension: "m4a") else { return }
         
         do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
             player = try AVAudioPlayer(contentsOf: url)
-            player?.play()
+            player.play()
         } catch let error {
             print("Error playing sound. \(error.localizedDescription)")
         }
@@ -37,8 +40,10 @@ struct TimerView: View {
     @State private var stroke = 0.0
     @State private var opacity = 0.0
     @State private var flash = 0.0
+    @State private var counter = 0
+    @State private var isTimerPaused = false
 
-    var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var timerInterval =  Timer.publish(every: 15, on: .main, in: .common).autoconnect()
     var totalTime: Double {
         Double(time.hr * 60 * 60 + time.min * 60)
@@ -71,6 +76,32 @@ struct TimerView: View {
                         .multilineTextAlignment(.center)
                         .transition(.slide)
                 }
+                
+                VStack {
+                    Spacer()
+                    Button {
+                        if isTimerPaused {
+                            timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+                            timerInterval = Timer.publish(every: settings.interval, on: .main, in: .common).autoconnect()
+                            isTimerPaused.toggle()
+                        } else {
+                            self.timer.upstream.connect().cancel()
+                            self.timerInterval.upstream.connect().cancel()
+                            isTimerPaused.toggle()
+                        }
+                        
+                    } label: {
+                        if isTimerPaused {
+                            Image(systemName: "play.fill")
+                                .font(.largeTitle)
+                        } else {
+                            Image(systemName: "pause.fill")
+                                .font(.largeTitle)
+                        }
+                    }
+                    .padding(.bottom, 50)
+                }
+            
             }
             .padding(80)
             .onAppear {
@@ -82,6 +113,7 @@ struct TimerView: View {
                     progress += 1.0 / totalTime
                 } else if timeRemaining == 0 {
                     end()
+                    
                 }
             }
             .onReceive(timerInterval) { time in
@@ -142,8 +174,8 @@ struct TimerView: View {
     }
     
     func snapBack() {
-        if Double(timeRemaining) != totalTime {
-            SoundManager.instance.playSound()
+        if Double(timeRemaining) > 0 {
+            SoundManager.instance.playSound(sound: "SnapBackSound")
             vibrate()
             
             flash = 1
@@ -168,16 +200,19 @@ struct TimerView: View {
         stroke = 40.0
         opacity = 1
         UIApplication.shared.isIdleTimerDisabled = true
+        start()
     }
     
     func start() {
-        SoundManager.instance.playSound()
         vibrate()
     }
     
     func end() {
-        SoundManager.instance.playSound()
-        vibrate()
+        if counter == 0 {
+            counter += 1
+            SoundManager.instance.playSound(sound: "EndSound")
+            vibrate()
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             dismiss()
             UIApplication.shared.isIdleTimerDisabled = false
