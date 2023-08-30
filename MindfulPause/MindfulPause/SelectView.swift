@@ -72,7 +72,6 @@ struct SelectView: View {
                     } label: {
                         Text("Let's Pause")
                             .foregroundStyle(Color.theme.foreground)
-                            .fontDesign(.rounded)
                             .font(.headline)
                             .frame(maxWidth: .infinity, alignment: .center)
                             .contentShape(Rectangle())
@@ -81,7 +80,6 @@ struct SelectView: View {
                     }
                     .background(Color.theme.accent)
                     .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                    
 
                     Spacer()
                 }

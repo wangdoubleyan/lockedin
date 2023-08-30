@@ -6,7 +6,25 @@
 //
 
 import SwiftUI
-import AVFoundation
+import AVKit
+
+class SoundManager {
+    static let instance = SoundManager()
+    
+    var player: AVAudioPlayer?
+    
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "chime", withExtension: ".mp3") else { return }
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+        } catch let error {
+            print("Error playing sound. \(error.localizedDescription)")
+        }
+        
+    }
+}
 
 struct TimerView: View {
     @Environment(\.dismiss) var dismiss
@@ -19,11 +37,9 @@ struct TimerView: View {
     @State private var stroke = 0.0
     @State private var opacity = 0.0
     @State private var flash = 0.0
-    
-    let stunGrenade: SystemSoundID = 1112
-    let win: SystemSoundID = 1110
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-        
+
+    var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var timerInterval =  Timer.publish(every: 15, on: .main, in: .common).autoconnect()
     var totalTime: Double {
         Double(time.hr * 60 * 60 + time.min * 60)
     }
@@ -55,33 +71,21 @@ struct TimerView: View {
                         .multilineTextAlignment(.center)
                         .transition(.slide)
                 }
-                .onChange(of: timeRemaining, initial: true) { oldValue, newValue in
-                    if settings.isSnapBackOn {
-                        if Double(newValue) == 0 {
-                            snapBack()
-                        } else if Double(newValue) == totalTime / 4 || Double(newValue) == totalTime / 2 || Double(newValue) == totalTime / 4 * 3 {
-                            snapBack()
-                            flashBang()
-                        }
-                    }
-                }
             }
             .padding(80)
             .onAppear {
-                if time.hr == 0 && time.min == 0 {
-                    time.min = 1
-                }
-                calculateTimeRemaining(hours: time.hr, minutes: time.min)
-                stroke = 40.0
-                opacity = 1
+                appear()
             }
             .onReceive(timer) { time in
                 if timeRemaining > 0 {
                     timeRemaining -= 1
                     progress += 1.0 / totalTime
                 } else if timeRemaining == 0 {
-                    dismiss()
+                    end()
                 }
+            }
+            .onReceive(timerInterval) { time in
+                snapBack()
             }
             Color.theme.secondary
                 .ignoresSafeArea()
@@ -138,18 +142,48 @@ struct TimerView: View {
     }
     
     func snapBack() {
-        AudioServicesPlaySystemSound(win)
-    }
-    
-    func flashBang() {
-        AudioServicesPlaySystemSound(stunGrenade)
-        flash = 0.4
-        
-        withAnimation(.easeOut.delay(1)) {
-            flash = 0.0
+        if Double(timeRemaining) != totalTime {
+            SoundManager.instance.playSound()
+            vibrate()
+            
+            flash = 1
+            
+            withAnimation(.easeOut.delay(1)) {
+                flash = 0.0
+            }
         }
     }
-
+    
+    func vibrate() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.warning)
+    }
+    
+    func appear() {
+        if time.hr == 0 && time.min == 0 {
+            time.min = 1
+        }
+        calculateTimeRemaining(hours: time.hr, minutes: time.min)
+        timerInterval = Timer.publish(every: settings.interval, on: .main, in: .common).autoconnect()
+        stroke = 40.0
+        opacity = 1
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    func start() {
+        SoundManager.instance.playSound()
+        vibrate()
+    }
+    
+    func end() {
+        SoundManager.instance.playSound()
+        vibrate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            dismiss()
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
+        
+    }
 }
     
 #Preview {
