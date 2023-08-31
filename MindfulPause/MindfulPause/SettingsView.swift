@@ -56,7 +56,7 @@ struct SettingsView: View {
                     Text("Connect")
                         .foregroundStyle(Color.theme.secondary)
                 } footer: {
-                    Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > MindfulPause")
+                    Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > MindfulPause.")
                         .foregroundStyle(Color.theme.secondary)
                 }
                 

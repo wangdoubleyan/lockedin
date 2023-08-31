@@ -69,7 +69,7 @@ struct TimerView: View {
                     .rotationEffect(Angle(degrees: 270))
                     .animation(.easeIn(duration: 3), value: opacity)
                     .animation(.linear(duration: 1), value: progress)
-            
+                
                 VStack {
                     Text("\(printFormattedTime(timeRemaining))")
                         .foregroundStyle(Color.theme.foreground)
@@ -79,35 +79,9 @@ struct TimerView: View {
                         .multilineTextAlignment(.center)
                         .transition(.slide)
                 }
-                
-                VStack {
-                    Spacer()
-                    Button {
-                        if isTimerPaused {
-                            timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-                            timerInterval = Timer.publish(every: settings.interval, on: .main, in: .common).autoconnect()
-                            isTimerPaused.toggle()
-                        } else {
-                            self.timer.upstream.connect().cancel()
-                            self.timerInterval.upstream.connect().cancel()
-                            isTimerPaused.toggle()
-                        }
-                        
-                    } label: {
-                        if isTimerPaused {
-                            Image(systemName: "play.fill")
-                                .font(.largeTitle)
-                        } else {
-                            Image(systemName: "pause.fill")
-                                .font(.largeTitle)
-                        }
-                    }
-                    .padding(.bottom, 50)
-                    .foregroundStyle(Color.theme.foreground)
-                }
             
             }
-            .padding(80)
+            .frame(width: 250, height: 250)
             .onAppear {
                 appear()
             }
@@ -127,6 +101,32 @@ struct TimerView: View {
                 .ignoresSafeArea()
                 .opacity(flash)
                 .animation(.easeInOut(duration: 1), value: flash)
+            
+            GeometryReader { geometry in
+                Button {
+                    if isTimerPaused {
+                        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+                        timerInterval = Timer.publish(every: settings.interval, on: .main, in: .common).autoconnect()
+                        isTimerPaused.toggle()
+                    } else {
+                        self.timer.upstream.connect().cancel()
+                        self.timerInterval.upstream.connect().cancel()
+                        isTimerPaused.toggle()
+                    }
+                    
+                } label: {
+                    if isTimerPaused {
+                        Image(systemName: "play.fill")
+                            .font(.system(size: 50))
+                        
+                    } else {
+                        Image(systemName: "pause.fill")
+                            .font(.system(size: 50))
+                    }
+                }
+                .position(x: geometry.size.width / 2, y: geometry.size.height * 0.83)
+            }
+
         }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
@@ -138,7 +138,7 @@ struct TimerView: View {
                     HStack(spacing: 5) {
                         Image(systemName: "arrowshape.backward.fill")
                         Text("Back")
-                            .font(.headline)
+
                     }
                 }
             }
