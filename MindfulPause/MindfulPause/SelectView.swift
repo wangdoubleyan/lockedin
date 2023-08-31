@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+extension UINavigationController: UIGestureRecognizerDelegate {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        interactivePopGestureRecognizer?.delegate = self
+    }
+
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
+    }
+}
+
 class Time: ObservableObject {
     @AppStorage("hr") var hr = 0
     @AppStorage("min") var min = 1

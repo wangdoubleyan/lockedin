@@ -31,6 +31,7 @@ class SoundManager {
 
 struct TimerView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject var time: Time
     @ObservedObject var settings: Settings
@@ -125,6 +126,28 @@ struct TimerView: View {
                 .animation(.easeInOut(duration: 1), value: flash)
         }
         .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack(spacing: 5) {
+                        Image(systemName: "arrowshape.backward.fill")
+                        Text("Back")
+                            .font(.headline)
+                    }
+                }
+            }
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text("Pause Timer")
+                        .bold()
+                        .fontDesign(.rounded)
+                        .font(.title)
+                }
+            }
+        }
     }
     
     
