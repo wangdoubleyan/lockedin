@@ -14,6 +14,7 @@
 		12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B122A99A8AF0054DBFF /* TimerView.swift */; };
 		12943F932A9FDDB90035C146 /* EndSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12943F922A9FDDB90035C146 /* EndSound.m4a */; };
 		12943F972A9FE9E30035C146 /* SnapBackSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12943F962A9FE9E30035C146 /* SnapBackSound.m4a */; };
+		12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12943F9B2AA05AD30035C146 /* HealthKitManager.swift */; };
 		12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2640A2A9C5A1F00CE0FDD /* Color.swift */; };
 		12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1D9602A9DA38600E047AF /* SettingsView.swift */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,9 @@
 		12820B122A99A8AF0054DBFF /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		12943F922A9FDDB90035C146 /* EndSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = EndSound.m4a; sourceTree = "<group>"; };
 		12943F962A9FE9E30035C146 /* SnapBackSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnapBackSound.m4a; sourceTree = "<group>"; };
+		12943F9A2AA055420035C146 /* MindfulPause.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindfulPause.entitlements; sourceTree = "<group>"; };
+		12943F9B2AA05AD30035C146 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		12943FA02AA05FFE0035C146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		12A2640A2A9C5A1F00CE0FDD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		12F1D9602A9DA38600E047AF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,13 +65,16 @@
 		12820B012A99A8550054DBFF /* MindfulPause */ = {
 			isa = PBXGroup;
 			children = (
+				12943FA02AA05FFE0035C146 /* Info.plist */,
+				12943F9A2AA055420035C146 /* MindfulPause.entitlements */,
+				12943F9B2AA05AD30035C146 /* HealthKitManager.swift */,
 				12A2640A2A9C5A1F00CE0FDD /* Color.swift */,
 				12820B022A99A8550054DBFF /* MindfulPauseApp.swift */,
 				12820B102A99A8A60054DBFF /* SelectView.swift */,
 				12820B122A99A8AF0054DBFF /* TimerView.swift */,
 				12F1D9602A9DA38600E047AF /* SettingsView.swift */,
-				12943F8D2A9FAEDB0035C146 /* Sounds */,
 				12820B062A99A8570054DBFF /* Assets.xcassets */,
+				12943F8D2A9FAEDB0035C146 /* Sounds */,
 				12820B082A99A8570054DBFF /* Preview Content */,
 			);
 			path = MindfulPause;
@@ -164,6 +171,7 @@
 			files = (
 				12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */,
 				12820B032A99A8550054DBFF /* MindfulPauseApp.swift in Sources */,
+				12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */,
 				12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */,
 				12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */,
 				12820B112A99A8A60054DBFF /* SelectView.swift in Sources */,
@@ -297,12 +305,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MindfulPause/MindfulPause.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MindfulPause/Preview Content\"";
 				DEVELOPMENT_TEAM = 72WSQ57Y67;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MindfulPause/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let the application save Mindful Minutes to Health";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MindfulPause will save Pause time to Health";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -317,7 +329,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -326,12 +338,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MindfulPause/MindfulPause.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MindfulPause/Preview Content\"";
 				DEVELOPMENT_TEAM = 72WSQ57Y67;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MindfulPause/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let the application save Mindful Minutes to Health";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MindfulPause will save Pause time to Health";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -346,7 +362,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

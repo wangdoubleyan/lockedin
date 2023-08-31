@@ -9,24 +9,15 @@ import SwiftUI
 
 @main
 struct MindfulPauseApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject private var healthKitManager = HealthKitManager()
+    
     var body: some Scene {
         WindowGroup {
             SelectView()
-                .preferredColorScheme(.dark)
+                .preferredColorScheme(.dark) 
                 .onAppear {
-                    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                    AppDelegate.orientationLock = .portrait
+                    healthKitManager.requestAuthorization()
                 }
         }
-    }
-}
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-         
-    static var orientationLock = UIInterfaceOrientationMask.all
- 
-    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        return AppDelegate.orientationLock
     }
 }

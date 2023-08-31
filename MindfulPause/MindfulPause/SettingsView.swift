@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HealthKit
 
 class Settings: ObservableObject {
     @AppStorage("isSnapBackOn") var isSnapBackOn = true
@@ -13,6 +14,10 @@ class Settings: ObservableObject {
 }
 
 struct SettingsView: View {
+    @State private var authorizationStatus: HKAuthorizationStatus = .notDetermined
+    @ObservedObject private var healthKitManager = HealthKitManager()
+    @State private var isAccessGranted = false
+    
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
     
@@ -25,51 +30,89 @@ struct SettingsView: View {
                 Section {
                     Toggle(isOn: $settings.isSnapBackOn) {
                         Text("SnapBacks")
-                            .font(.headline)
                     }
                     Picker("SnapBack Interval", selection: $settings.interval) {
                         ForEach(intervals, id: \.self) { interval in
                             Text("\(interval.formatted()) sec").tag(interval)
                         }
                     }
-                    .font(.headline)
                 } header: {
                     Text("Pause timer").foregroundStyle(Color.theme.secondary)
                 } footer: {
                     Text("SnapBacks help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
                         .foregroundStyle(Color.theme.secondary)
                 }
-                .listRowBackground(Color.theme.surface)
+                
+                Section {
+                    Toggle("Apple Health", isOn: $isAccessGranted)
+                        .onChange(of: isAccessGranted) { oldValue, newValue in
+                            if newValue == true {
+                                DispatchQueue.main.async {
+                                    healthKitManager.requestAuthorization()
+                                }
+                            }
+                        }
+                } header: {
+                    Text("Connect")
+                        .foregroundStyle(Color.theme.secondary)
+                } footer: {
+                    Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > MindfulPause")
+                        .foregroundStyle(Color.theme.secondary)
+                }
+                
+                
+                
             }
             .background(Color.theme.background)
             .scrollContentBackground(.hidden)
             .navigationTitle("Settings")
-        }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    HStack(spacing: 5) {
-                        Image(systemName: "arrowshape.backward.fill")
-                        Text("Back")
-                            .font(.headline)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        HStack(spacing: 5) {
+                            Image(systemName: "arrowshape.backward.fill")
+                            Text("Back")
+                                .font(.headline)
+                        }
                     }
                 }
-            }
-            ToolbarItem(placement: .principal) { // <3>
-                VStack {
-                    Text("Settings")
-                        .bold()
-                        .fontDesign(.rounded)
-                        .font(.title)
+                ToolbarItem(placement: .principal) {
+                    VStack {
+                        Text("Settings")
+                            .bold()
+                            .fontDesign(.rounded)
+                            .font(.title)
+                    }
                 }
+                
             }
-                    
+        }
+        .onAppear {
+            healthKitManager.checkAuthorizationStatus { status in
+                authorizationStatus = status
+            }
+            
+            authorization()
+        }
+    }
+    
+    private func authorization() {
+        switch authorizationStatus {
+        case .notDetermined:
+            isAccessGranted = false
+        case .sharingDenied:
+            isAccessGranted = false
+        case .sharingAuthorized:
+            isAccessGranted = true
+        @unknown default:
+            isAccessGranted = false
         }
     }
 }
+
 
 #Preview {
     SettingsView()

@@ -30,6 +30,8 @@ class SoundManager {
 }
 
 struct TimerView: View {
+    @ObservedObject private var healthKitManager = HealthKitManager()
+    
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
     
@@ -101,6 +103,7 @@ struct TimerView: View {
                         }
                     }
                     .padding(.bottom, 50)
+                    .foregroundStyle(Color.theme.foreground)
                 }
             
             }
@@ -233,8 +236,9 @@ struct TimerView: View {
     func end() {
         if counter == 0 {
             counter += 1
-            SoundManager.instance.playSound(sound: "EndSound")
             vibrate()
+            SoundManager.instance.playSound(sound: "EndSound")
+            healthKitManager.saveMindfulMinutes(minutes: totalTime)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             dismiss()

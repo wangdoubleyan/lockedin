@@ -15,9 +15,9 @@ extension Color {
 struct ColorTheme {
     let accent = Color("AccentColor")
     let background = Color("AlmostBlack")
-    let surface = Color("DarkGray")
-    let foreground = Color("White")
+    let surface = Color("GloomyGray")
+    let foreground = Color("SnowWhite")
     let primary = Color("Fawn")
-    let secondary = Color("Gray")
+    let secondary = Color("DullGray")
     
 }

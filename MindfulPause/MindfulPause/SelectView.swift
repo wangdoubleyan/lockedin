@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import HealthKit
 
 extension UINavigationController: UIGestureRecognizerDelegate {
     override open func viewDidLoad() {
@@ -25,7 +26,6 @@ class Time: ObservableObject {
 
 struct SelectView: View {
     @StateObject var time = Time()
-    
     
     var body: some View {
         NavigationStack {
