@@ -30,40 +30,46 @@ struct SettingsView: View {
                 Section {
                     Toggle(isOn: $settings.isSnapBackOn) {
                         Text("SnapBacks")
+                            .foregroundStyle(Color.theme.foreground)
                     }
-                    Picker("SnapBack Interval", selection: $settings.interval) {
+                    Picker(selection: $settings.interval) {
                         ForEach(intervals, id: \.self) { interval in
                             Text("\(interval.formatted()) sec").tag(interval)
                         }
+                    } label: {
+                        Text("SnapBack Interval")
+                            .foregroundStyle(Color.theme.foreground)
                     }
                 } header: {
                     Text("Pause timer").foregroundStyle(Color.theme.secondary)
                 } footer: {
                     Text("SnapBacks help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
-                        .foregroundStyle(Color.theme.secondary)
+                        
                 }
                 
                 Section {
-                    Toggle("Apple Health", isOn: $isAccessGranted)
-                        .onChange(of: isAccessGranted) { oldValue, newValue in
-                            if newValue == true {
-                                DispatchQueue.main.async {
-                                    healthKitManager.requestAuthorization()
-                                }
+                    Toggle(isOn: $isAccessGranted) {
+                        Text("Apple Health")
+                            .foregroundStyle(Color.theme.foreground)
+                    }
+                    .onChange(of: isAccessGranted) { oldValue, newValue in
+                        if newValue == true {
+                            DispatchQueue.main.async {
+                                healthKitManager.requestAuthorization()
                             }
                         }
+                    }
                 } header: {
                     Text("Connect")
-                        .foregroundStyle(Color.theme.secondary)
                 } footer: {
                     Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > MindfulPause.")
-                        .foregroundStyle(Color.theme.secondary)
                 }
                 
                 
                 
             }
             .background(Color.theme.background)
+            .foregroundStyle(Color.theme.secondary)
             .scrollContentBackground(.hidden)
             .navigationTitle("Settings")
             .navigationBarBackButtonHidden(true)

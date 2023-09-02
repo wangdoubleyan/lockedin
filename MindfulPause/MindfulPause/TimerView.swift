@@ -144,7 +144,7 @@ struct TimerView: View {
             }
             ToolbarItem(placement: .principal) {
                 VStack {
-                    Text("Pause Timer")
+                    Text("Pause")
                         .bold()
                         .fontDesign(.rounded)
                         .font(.title)
