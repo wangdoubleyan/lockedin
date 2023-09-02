@@ -77,6 +77,7 @@ struct SettingsView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
                         presentationMode.wrappedValue.dismiss()
+                        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     } label: {
                         HStack(spacing: 5) {
                             Image(systemName: "arrowshape.backward.fill")
@@ -97,6 +98,7 @@ struct SettingsView: View {
             }
         }
         .onAppear {
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
             healthKitManager.checkAuthorizationStatus { status in
                 authorizationStatus = status
             }

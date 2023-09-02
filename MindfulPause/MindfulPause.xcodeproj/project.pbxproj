@@ -74,7 +74,7 @@
 				12820B122A99A8AF0054DBFF /* TimerView.swift */,
 				12F1D9602A9DA38600E047AF /* SettingsView.swift */,
 				12820B062A99A8570054DBFF /* Assets.xcassets */,
-				12943F8D2A9FAEDB0035C146 /* Sounds */,
+				12943F8D2A9FAEDB0035C146 /* StartSound */,
 				12820B082A99A8570054DBFF /* Preview Content */,
 			);
 			path = MindfulPause;
@@ -88,13 +88,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		12943F8D2A9FAEDB0035C146 /* Sounds */ = {
+		12943F8D2A9FAEDB0035C146 /* StartSound */ = {
 			isa = PBXGroup;
 			children = (
 				12943F962A9FE9E30035C146 /* SnapBackSound.m4a */,
 				12943F922A9FDDB90035C146 /* EndSound.m4a */,
 			);
-			path = Sounds;
+			path = StartSound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

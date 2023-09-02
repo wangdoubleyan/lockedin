@@ -114,6 +114,7 @@ struct TimerView: View {
                         isTimerPaused.toggle()
                     }
                     
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 } label: {
                     if isTimerPaused {
                         Image(systemName: "play.fill")
@@ -134,10 +135,12 @@ struct TimerView: View {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
                     presentationMode.wrappedValue.dismiss()
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 } label: {
                     HStack(spacing: 5) {
                         Image(systemName: "arrowshape.backward.fill")
                         Text("Back")
+                            .font(.headline)
 
                     }
                 }
@@ -202,7 +205,7 @@ struct TimerView: View {
     func snapBack() {
         if Double(timeRemaining) > 0 {
             SoundManager.instance.playSound(sound: "SnapBackSound")
-            vibrate()
+            haptic()
             
             flash = 1
             
@@ -213,8 +216,11 @@ struct TimerView: View {
     }
     
     func vibrate() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.warning)
+        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+    }
+    
+    func haptic() {
+        UINotificationFeedbackGenerator().notificationOccurred(.warning)
     }
     
     func appear() {
@@ -236,13 +242,14 @@ struct TimerView: View {
     func end() {
         if counter == 0 {
             counter += 1
-            vibrate()
+            haptic()
             SoundManager.instance.playSound(sound: "EndSound")
             healthKitManager.saveMindfulMinutes(minutes: totalTime)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             dismiss()
             UIApplication.shared.isIdleTimerDisabled = false
+            vibrate()
         }
         
     }
