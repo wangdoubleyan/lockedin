@@ -241,9 +241,9 @@ struct TimerView: View {
             healthKitManager.saveMindfulMinutes(minutes: totalTime)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            dismiss()
             UIApplication.shared.isIdleTimerDisabled = false
             vibrate()
+            dismiss()
         }
         
     }

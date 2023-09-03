@@ -97,7 +97,7 @@ struct SettingsView: View {
                 
                 Section {
                     Toggle(isOn: $isNotificationAccessGrated) {
-                        Text("Daily Reminders")
+                        Text("Daily Reminder")
                             .foregroundStyle(Color.theme.foreground)
                     }
                     .onChange(of: isNotificationAccessGrated) { oldValue, newValue in
@@ -113,6 +113,8 @@ struct SettingsView: View {
                                     .foregroundStyle(Color.theme.foreground)
                             }
                             .onChange(of: selectedDate) {
+                                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                                 notify.sendNotification(date: selectedDate, title: "Time to Pause!", body: "Feeling stressed? Complete a short Pause right now.")
                                 print(selectedDate)
                             }
@@ -156,7 +158,7 @@ struct SettingsView: View {
                     VStack {
                         Text("Settings")
                             .fontDesign(.rounded)
-                            .font(.title3)
+                            .font(.title2)
                             .bold()
                     }
                 }
