@@ -45,9 +45,10 @@ struct TimerView: View {
     @State private var flash = 0.0
     @State private var counter = 0
     @State private var isTimerPaused = false
+    @State private var pausedAt = 0
+    @State private var intervalCounter = -1.0
 
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @State private var timerInterval =  Timer.publish(every: 15, on: .main, in: .common).autoconnect()
     var totalTime: Double {
         Double(time.hr * 60 * 60 + time.min * 60)
     }
@@ -71,13 +72,20 @@ struct TimerView: View {
                     .animation(.linear(duration: 1), value: progress)
                 
                 VStack {
-                    Text("\(printFormattedTime(timeRemaining))")
-                        .foregroundStyle(Color.theme.foreground)
-                        .font(.largeTitle)
-                        .bold()
-                        .fontDesign(.rounded)
-                        .multilineTextAlignment(.center)
-                        .transition(.slide)
+                    if timeRemaining > 0 {
+                        Text("\(printFormattedTime(timeRemaining))")
+                            .foregroundStyle(Color.theme.foreground)
+                            .font(.largeTitle)
+                            .bold()
+                            .fontDesign(.rounded)
+                            .multilineTextAlignment(.center)
+                    } else {
+                        Text("Done!")
+                            .foregroundStyle(Color.theme.foreground)
+                            .font(.largeTitle)
+                            .bold()
+                            .fontDesign(.rounded)
+                    }
                 }
             
             }
@@ -86,16 +94,22 @@ struct TimerView: View {
                 appear()
             }
             .onReceive(timer) { time in
-                if timeRemaining > 0 {
-                    timeRemaining -= 1
-                    progress += 1.0 / totalTime
-                } else if timeRemaining == 0 {
+                if timeRemaining <= 0 {
                     end()
-                    
+                    return
                 }
-            }
-            .onReceive(timerInterval) { time in
-                snapBack()
+                
+                timeRemaining -= 1
+                progress += 1.0 / totalTime
+                
+                if intervalCounter == 0 {
+                    snapBack()
+                    intervalCounter = settings.interval - 1
+                } else if intervalCounter < 0 {
+                    intervalCounter = settings.interval - 2
+                } else {
+                    intervalCounter -= 1
+                }
             }
             Color.theme.secondary
                 .ignoresSafeArea()
@@ -106,23 +120,21 @@ struct TimerView: View {
                 Button {
                     if isTimerPaused {
                         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-                        timerInterval = Timer.publish(every: settings.interval, on: .main, in: .common).autoconnect()
                         isTimerPaused.toggle()
                     } else {
                         self.timer.upstream.connect().cancel()
-                        self.timerInterval.upstream.connect().cancel()
                         isTimerPaused.toggle()
                     }
                     
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 } label: {
                     if isTimerPaused {
-                        Image(systemName: "play.fill")
-                            .font(.system(size: 50))
+                        Image(systemName: "play")
+                            .font(.system(size: 40))
                         
                     } else {
-                        Image(systemName: "pause.fill")
-                            .font(.system(size: 50))
+                        Image(systemName: "pause")
+                            .font(.system(size: 40))
                     }
                 }
                 .position(x: geometry.size.width / 2, y: geometry.size.height * 0.83)
@@ -138,9 +150,8 @@ struct TimerView: View {
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 } label: {
                     HStack(spacing: 5) {
-                        Image(systemName: "arrowshape.backward.fill")
+                        Image(systemName: "arrow.left")
                         Text("Back")
-                            .font(.headline)
 
                     }
                 }
@@ -150,7 +161,7 @@ struct TimerView: View {
                     Text("Pause")
                         .bold()
                         .fontDesign(.rounded)
-                        .font(.title)
+                        .font(.title2)
                 }
             }
         }
@@ -162,55 +173,39 @@ struct TimerView: View {
     }
         
     func formatTime(_ seconds: Int) -> (Int, Int, Int) {
-        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+        let hours = seconds / 3600
+        let minutes = (seconds % 3600) / 60
+        let remainingSeconds = (seconds % 3600) % 60
+        return (hours, minutes, remainingSeconds)
     }
-    
+
     func printFormattedTime(_ seconds: Int) -> String {
         let (h, m, s) = formatTime(seconds)
         
-        if h > 0 && m < 1 && s < 1 {
-            return "\(h) hr"
-        } else if h > 0 && m < 1 {
-            return """
-                    \(h) hr
-                    \(s) sec
-                    """
-        } else if h > 0 && s < 1 {
-            return """
-                    \(h) hr
-                    \(m) min
-                    """
-        } else if h > 0 {
-            return """
-                    \(h) hr
-                    \(m) min
-                    \(s) sec
-                    """
-        } else if m > 0 && s < 1 {
-            return """
-                    \(m) min
-                    """
-        } else if m > 0 {
-            return """
-                    \(m) min
-                    \(s) sec
-                    """
-        } else {
-            return """
-                    \(s) sec
-                    """
-        }
+        var timeComponents: [String] = []
+        
+        if h > 0 { timeComponents.append("\(h) hr") }
+        if m > 0 { timeComponents.append("\(m) min") }
+        if s > 0 { timeComponents.append("\(s) sec") }
+        
+        return timeComponents.joined(separator: "\n")
     }
+
     
     func snapBack() {
         if Double(timeRemaining) > 0 {
-            SoundManager.instance.playSound(sound: "SnapBackSound")
+            DispatchQueue.global(qos: .background).async {
+                SoundManager.instance.playSound(sound: "SnapBackSound")
+            }
+            
             haptic()
             
-            flash = 1
-            
-            withAnimation(.easeOut.delay(1)) {
-                flash = 0.0
+            DispatchQueue.main.async {
+                flash = 1
+                
+                withAnimation(.easeOut.delay(0.5)) {
+                    flash = 0.0
+                }
             }
         }
     }
@@ -228,7 +223,6 @@ struct TimerView: View {
             time.min = 1
         }
         calculateTimeRemaining(hours: time.hr, minutes: time.min)
-        timerInterval = Timer.publish(every: settings.interval, on: .main, in: .common).autoconnect()
         stroke = 40.0
         opacity = 1
         UIApplication.shared.isIdleTimerDisabled = true

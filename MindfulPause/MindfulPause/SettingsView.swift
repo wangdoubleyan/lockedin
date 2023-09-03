@@ -9,6 +9,16 @@ import SwiftUI
 import HealthKit
 import UserNotifications
 
+extension Date: RawRepresentable {
+    public var rawValue: String {
+        self.timeIntervalSinceReferenceDate.description
+    }
+    
+    public init?(rawValue: String) {
+        self = Date(timeIntervalSinceReferenceDate: Double(rawValue) ?? 0.0)
+    }
+}
+
 class Settings: ObservableObject {
     @AppStorage("isSnapBackOn") var isSnapBackOn = true
     @AppStorage("interval") var interval = 15.0
@@ -17,7 +27,8 @@ class Settings: ObservableObject {
 struct SettingsView: View {
     @State private var isHealthAccessGranted = false
     @State private var isNotificationAccessGrated = false
-    @State private var selectedDate = Date()
+    
+    @AppStorage("selectedDate") var selectedDate = Date()
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
@@ -54,7 +65,12 @@ struct SettingsView: View {
                     Text("SnapBacks help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
                         
                 }
-                
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                        .fill(Color.theme.surface)
+                        
+                )
+                .listRowSeparator(.hidden)
                 Section {
                     Toggle(isOn: $isHealthAccessGranted) {
                         Text("Apple Health")
@@ -72,10 +88,16 @@ struct SettingsView: View {
                 } footer: {
                     Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > MindfulPause.")
                 }
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                        .fill(Color.theme.surface)
+                        
+                )
+
                 
                 Section {
                     Toggle(isOn: $isNotificationAccessGrated) {
-                        Text("Daily Reminder")
+                        Text("Daily Reminders")
                             .foregroundStyle(Color.theme.foreground)
                     }
                     .onChange(of: isNotificationAccessGrated) { oldValue, newValue in
@@ -87,26 +109,32 @@ struct SettingsView: View {
                     if isNotificationAccessGrated {
                         HStack {
                             DatePicker(selection: $selectedDate, displayedComponents: .hourAndMinute) {
-                                Text("Time")
+                                Text("When?")
                                     .foregroundStyle(Color.theme.foreground)
                             }
-                            Button {
+                            .onChange(of: selectedDate) {
                                 notify.sendNotification(date: selectedDate, title: "Time to Pause!", body: "Feeling stressed? Complete a short Pause right now.")
-                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                            } label: {
-                                Text("Confirm")
-                                    .foregroundStyle(Color.theme.foreground)
+                                print(selectedDate)
                             }
-                            .buttonStyle(.bordered)
-                            .tint(Color.theme.accent)
-    
                         }
+
                     }
                 } header: {
                     Text("Notifications")
+                } footer: {
+                    Text("You will be reminded to Pause daiy at \(selectedDate.formatted(.dateTime.hour().minute())).")
                 }
-            
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                        .fill(Color.theme.surface)
+                        
+                )
+                .listRowSeparator(.hidden)
+
             }
+            .tint(Color.theme.accent)
+            .listRowSpacing(6)
+            .environment(\.defaultMinListRowHeight, 60)
             .background(Color.theme.background)
             .foregroundStyle(Color.theme.secondary)
             .scrollContentBackground(.hidden)
@@ -119,18 +147,17 @@ struct SettingsView: View {
                         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     } label: {
                         HStack(spacing: 5) {
-                            Image(systemName: "arrowshape.backward.fill")
+                            Image(systemName: "arrow.left")
                             Text("Back")
-                                .font(.headline)
                         }
                     }
                 }
                 ToolbarItem(placement: .principal) {
                     VStack {
                         Text("Settings")
-                            .bold()
                             .fontDesign(.rounded)
-                            .font(.title)
+                            .font(.title3)
+                            .bold()
                     }
                 }
                 
@@ -144,6 +171,9 @@ struct SettingsView: View {
                         
             healthKitAuthorization()
             notificationAuthorization()
+            
+            print(selectedDate)
+            
         }
     }
     

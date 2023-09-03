@@ -27,6 +27,7 @@ class Time: ObservableObject {
 
 struct SelectView: View {
     @StateObject var time = Time()
+    let hour = Calendar.current.component(.hour, from: Date())
     
     var body: some View {
         NavigationStack {
@@ -37,12 +38,34 @@ struct SelectView: View {
                     Spacer()
                     Spacer()
                     
-                    Text("Hello, friend!")
-                        .foregroundStyle(Color.theme.secondary)
-                        .font(.title)
-                        .fontDesign(.rounded)
-                        .bold()
-                    
+                    if hour <= 12 {
+                        Text("Good morning,")
+                            .foregroundStyle(Color.theme.secondary)
+                            .font(.title)
+                            .fontDesign(.rounded)
+                            .bold()
+                    }
+                    else if hour <= 17 {
+                        Text("Good afternoon,")
+                            .foregroundStyle(Color.theme.secondary)
+                            .font(.title)
+                            .fontDesign(.rounded)
+                            .bold()
+                    }
+                    else if hour <= 21 {
+                        Text("Good evening,")
+                            .foregroundStyle(Color.theme.secondary)
+                            .font(.title)
+                            .fontDesign(.rounded)
+                            .bold()
+                    } else {
+                        Text("Good night,")
+                            .foregroundStyle(Color.theme.secondary)
+                            .font(.title)
+                            .fontDesign(.rounded)
+                            .bold()
+                    }
+                        
                     Text("How long do you want to Pause?")
                         .foregroundStyle(Color.theme.foreground)
                         .font(.title)
@@ -102,7 +125,7 @@ struct SelectView: View {
                     NavigationLink {
                         SettingsView()
                     } label: {
-                        Label("Settings", systemImage: "gearshape.fill")
+                        Label("Settings", systemImage: "gear")
                     }
                 }
                 ToolbarItemGroup(placement: .topBarLeading) {
