@@ -7,6 +7,7 @@
 
 import SwiftUI
 import HealthKit
+import UserNotifications
 
 extension UINavigationController: UIGestureRecognizerDelegate {
     override open func viewDidLoad() {
@@ -109,6 +110,15 @@ struct SelectView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 25)
+                }
+            }
+        }
+        .onAppear {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                if success {
+                    print("All set!")
+                } else if let error = error {
+                    print(error.localizedDescription)
                 }
             }
         }

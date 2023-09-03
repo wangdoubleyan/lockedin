@@ -7,6 +7,7 @@
 
 import SwiftUI
 import HealthKit
+import UserNotifications
 
 class Settings: ObservableObject {
     @AppStorage("isSnapBackOn") var isSnapBackOn = true
@@ -14,15 +15,20 @@ class Settings: ObservableObject {
 }
 
 struct SettingsView: View {
-    @State private var authorizationStatus: HKAuthorizationStatus = .notDetermined
-    @ObservedObject private var healthKitManager = HealthKitManager()
-    @State private var isAccessGranted = false
+    @State private var isHealthAccessGranted = false
+    @State private var isNotificationAccessGrated = false
+    @State private var selectedDate = Date()
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject var settings = Settings()
+    @State private var healthAuthorizationStatus: HKAuthorizationStatus = .notDetermined
+    @State private var notificationAuthorizationStatus: UNAuthorizationStatus = .notDetermined
+    @ObservedObject private var healthKitManager = HealthKitManager()
+    
     let intervals = [5.0, 10.0, 15.0, 20.0, 30.0, 60.0]
+    let notify = NotificationManager()
     
     var body: some View {
         ZStack {
@@ -32,27 +38,29 @@ struct SettingsView: View {
                         Text("SnapBacks")
                             .foregroundStyle(Color.theme.foreground)
                     }
-                    Picker(selection: $settings.interval) {
-                        ForEach(intervals, id: \.self) { interval in
-                            Text("\(interval.formatted()) sec").tag(interval)
+                    if settings.isSnapBackOn {
+                        Picker(selection: $settings.interval) {
+                            ForEach(intervals, id: \.self) { interval in
+                                Text("\(interval.formatted()) sec").tag(interval)
+                            }
+                        } label: {
+                            Text("Interval")
+                                .foregroundStyle(Color.theme.foreground)
                         }
-                    } label: {
-                        Text("SnapBack Interval")
-                            .foregroundStyle(Color.theme.foreground)
                     }
                 } header: {
-                    Text("Pause timer").foregroundStyle(Color.theme.secondary)
+                    Text("Pause").foregroundStyle(Color.theme.secondary)
                 } footer: {
                     Text("SnapBacks help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
                         
                 }
                 
                 Section {
-                    Toggle(isOn: $isAccessGranted) {
+                    Toggle(isOn: $isHealthAccessGranted) {
                         Text("Apple Health")
                             .foregroundStyle(Color.theme.foreground)
                     }
-                    .onChange(of: isAccessGranted) { oldValue, newValue in
+                    .onChange(of: isHealthAccessGranted) { oldValue, newValue in
                         if newValue == true {
                             DispatchQueue.main.async {
                                 healthKitManager.requestAuthorization()
@@ -65,8 +73,39 @@ struct SettingsView: View {
                     Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > MindfulPause.")
                 }
                 
-                
-                
+                Section {
+                    Toggle(isOn: $isNotificationAccessGrated) {
+                        Text("Daily Reminder")
+                            .foregroundStyle(Color.theme.foreground)
+                    }
+                    .onChange(of: isNotificationAccessGrated) { oldValue, newValue in
+                        if newValue == false {
+                            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                        }
+                    }
+                    if isNotificationAccessGrated {
+                        HStack {
+                            DatePicker(selection: $selectedDate, displayedComponents: .hourAndMinute) {
+                                Text("Time")
+                                    .foregroundStyle(Color.theme.foreground)
+                            }
+                            Button {
+                                notify.sendNotification(date: selectedDate, title: "Time to Pause!", body: "Feeling stressed? Complete a short Pause right now.")
+                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                            } label: {
+                                Text("Confirm")
+                                    .foregroundStyle(Color.theme.foreground)
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(Color.theme.accent)
+    
+                        }
+                    }
+                } header: {
+                    Text("Notifications")
+                }
+            
             }
             .background(Color.theme.background)
             .foregroundStyle(Color.theme.secondary)
@@ -100,24 +139,47 @@ struct SettingsView: View {
         .onAppear {
             UIImpactFeedbackGenerator(style: .soft).impactOccurred()
             healthKitManager.checkAuthorizationStatus { status in
-                authorizationStatus = status
+                healthAuthorizationStatus = status
             }
-            
-            authorization()
+                        
+            healthKitAuthorization()
+            notificationAuthorization()
         }
     }
     
-    private func authorization() {
-        switch authorizationStatus {
+    private func healthKitAuthorization() {
+        switch healthAuthorizationStatus {
         case .notDetermined:
-            isAccessGranted = false
+            isHealthAccessGranted = false
         case .sharingDenied:
-            isAccessGranted = false
+            isHealthAccessGranted = false
         case .sharingAuthorized:
-            isAccessGranted = true
+            isHealthAccessGranted = true
         @unknown default:
-            isAccessGranted = false
+            isHealthAccessGranted = false
         }
+    }
+    
+    private func notificationAuthorization() {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            print("Checking notification status")
+            
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                isNotificationAccessGrated = false
+            case .authorized:
+                isNotificationAccessGrated = true
+            case .denied:
+                isNotificationAccessGrated = false
+            case .ephemeral:
+                isNotificationAccessGrated = true
+            case .provisional:
+                isNotificationAccessGrated = true
+            @unknown default:
+                isNotificationAccessGrated = false
+            }
+        }
+        
     }
 }
 

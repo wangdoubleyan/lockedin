@@ -16,6 +16,7 @@
 		12943F972A9FE9E30035C146 /* SnapBackSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12943F962A9FE9E30035C146 /* SnapBackSound.m4a */; };
 		12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12943F9B2AA05AD30035C146 /* HealthKitManager.swift */; };
 		12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2640A2A9C5A1F00CE0FDD /* Color.swift */; };
+		12DC4F0F2AA31064001AF2C5 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */; };
 		12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1D9602A9DA38600E047AF /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		12943F9B2AA05AD30035C146 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		12943FA02AA05FFE0035C146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		12A2640A2A9C5A1F00CE0FDD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		12F1D9602A9DA38600E047AF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,14 +69,15 @@
 			children = (
 				12943FA02AA05FFE0035C146 /* Info.plist */,
 				12943F9A2AA055420035C146 /* MindfulPause.entitlements */,
-				12943F9B2AA05AD30035C146 /* HealthKitManager.swift */,
-				12A2640A2A9C5A1F00CE0FDD /* Color.swift */,
 				12820B022A99A8550054DBFF /* MindfulPauseApp.swift */,
 				12820B102A99A8A60054DBFF /* SelectView.swift */,
 				12820B122A99A8AF0054DBFF /* TimerView.swift */,
 				12F1D9602A9DA38600E047AF /* SettingsView.swift */,
+				12943F9B2AA05AD30035C146 /* HealthKitManager.swift */,
+				12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */,
+				12A2640A2A9C5A1F00CE0FDD /* Color.swift */,
 				12820B062A99A8570054DBFF /* Assets.xcassets */,
-				12943F8D2A9FAEDB0035C146 /* StartSound */,
+				12943F8D2A9FAEDB0035C146 /* Sounds */,
 				12820B082A99A8570054DBFF /* Preview Content */,
 			);
 			path = MindfulPause;
@@ -88,13 +91,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		12943F8D2A9FAEDB0035C146 /* StartSound */ = {
+		12943F8D2A9FAEDB0035C146 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
 				12943F962A9FE9E30035C146 /* SnapBackSound.m4a */,
 				12943F922A9FDDB90035C146 /* EndSound.m4a */,
 			);
-			path = StartSound;
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +176,7 @@
 				12820B032A99A8550054DBFF /* MindfulPauseApp.swift in Sources */,
 				12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */,
 				12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */,
+				12DC4F0F2AA31064001AF2C5 /* NotificationManager.swift in Sources */,
 				12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */,
 				12820B112A99A8A60054DBFF /* SelectView.swift in Sources */,
 			);
@@ -318,8 +322,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -351,8 +355,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
