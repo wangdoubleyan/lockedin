@@ -7,28 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120D5D312AA595D90024257F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D302AA595D90024257F /* WidgetKit.framework */; };
+		120D5D332AA595D90024257F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D322AA595D90024257F /* SwiftUI.framework */; };
+		120D5D362AA595D90024257F /* MindfulPauseWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120D5D352AA595D90024257F /* MindfulPauseWidgetBundle.swift */; };
+		120D5D382AA595D90024257F /* MindfulPauseWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120D5D372AA595D90024257F /* MindfulPauseWidget.swift */; };
+		120D5D3A2AA595DA0024257F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 120D5D392AA595DA0024257F /* Assets.xcassets */; };
+		120D5D3E2AA595DA0024257F /* MindfulPauseWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 120D5D2E2AA595D90024257F /* MindfulPauseWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		120D5D482AA629110024257F /* SnapBackSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 120D5D472AA629110024257F /* SnapBackSound.m4a */; };
+		120D5D4A2AA629350024257F /* EndSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 120D5D492AA629350024257F /* EndSound.m4a */; };
 		12820B032A99A8550054DBFF /* MindfulPauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B022A99A8550054DBFF /* MindfulPauseApp.swift */; };
 		12820B072A99A8570054DBFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B062A99A8570054DBFF /* Assets.xcassets */; };
 		12820B0A2A99A8570054DBFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B092A99A8570054DBFF /* Preview Assets.xcassets */; };
 		12820B112A99A8A60054DBFF /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B102A99A8A60054DBFF /* SelectView.swift */; };
 		12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B122A99A8AF0054DBFF /* TimerView.swift */; };
-		12943F932A9FDDB90035C146 /* EndSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12943F922A9FDDB90035C146 /* EndSound.m4a */; };
-		12943F972A9FE9E30035C146 /* SnapBackSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12943F962A9FE9E30035C146 /* SnapBackSound.m4a */; };
 		12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12943F9B2AA05AD30035C146 /* HealthKitManager.swift */; };
 		12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2640A2A9C5A1F00CE0FDD /* Color.swift */; };
 		12DC4F0F2AA31064001AF2C5 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */; };
 		12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1D9602A9DA38600E047AF /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		120D5D3C2AA595DA0024257F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12820AF72A99A8550054DBFF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 120D5D2D2AA595D90024257F;
+			remoteInfo = MindfulPauseWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		120D5D3F2AA595DA0024257F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				120D5D3E2AA595DA0024257F /* MindfulPauseWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		120D5D2E2AA595D90024257F /* MindfulPauseWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MindfulPauseWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		120D5D302AA595D90024257F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		120D5D322AA595D90024257F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		120D5D352AA595D90024257F /* MindfulPauseWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindfulPauseWidgetBundle.swift; sourceTree = "<group>"; };
+		120D5D372AA595D90024257F /* MindfulPauseWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindfulPauseWidget.swift; sourceTree = "<group>"; };
+		120D5D392AA595DA0024257F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		120D5D3B2AA595DA0024257F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		120D5D472AA629110024257F /* SnapBackSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnapBackSound.m4a; sourceTree = "<group>"; };
+		120D5D492AA629350024257F /* EndSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = EndSound.m4a; sourceTree = "<group>"; };
 		12820AFF2A99A8550054DBFF /* MindfulPause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindfulPause.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12820B022A99A8550054DBFF /* MindfulPauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindfulPauseApp.swift; sourceTree = "<group>"; };
 		12820B062A99A8570054DBFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12820B092A99A8570054DBFF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		12820B102A99A8A60054DBFF /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		12820B122A99A8AF0054DBFF /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		12943F922A9FDDB90035C146 /* EndSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = EndSound.m4a; sourceTree = "<group>"; };
-		12943F962A9FE9E30035C146 /* SnapBackSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnapBackSound.m4a; sourceTree = "<group>"; };
 		12943F9A2AA055420035C146 /* MindfulPause.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindfulPause.entitlements; sourceTree = "<group>"; };
 		12943F9B2AA05AD30035C146 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		12943FA02AA05FFE0035C146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -38,6 +75,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		120D5D2B2AA595D90024257F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				120D5D332AA595D90024257F /* SwiftUI.framework in Frameworks */,
+				120D5D312AA595D90024257F /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		12820AFC2A99A8550054DBFF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -48,10 +94,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		120D5D2F2AA595D90024257F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				120D5D302AA595D90024257F /* WidgetKit.framework */,
+				120D5D322AA595D90024257F /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		120D5D342AA595D90024257F /* MindfulPauseWidget */ = {
+			isa = PBXGroup;
+			children = (
+				120D5D352AA595D90024257F /* MindfulPauseWidgetBundle.swift */,
+				120D5D372AA595D90024257F /* MindfulPauseWidget.swift */,
+				120D5D392AA595DA0024257F /* Assets.xcassets */,
+				120D5D3B2AA595DA0024257F /* Info.plist */,
+			);
+			path = MindfulPauseWidget;
+			sourceTree = "<group>";
+		};
 		12820AF62A99A8550054DBFF = {
 			isa = PBXGroup;
 			children = (
 				12820B012A99A8550054DBFF /* MindfulPause */,
+				120D5D342AA595D90024257F /* MindfulPauseWidget */,
+				120D5D2F2AA595D90024257F /* Frameworks */,
 				12820B002A99A8550054DBFF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				12820AFF2A99A8550054DBFF /* MindfulPause.app */,
+				120D5D2E2AA595D90024257F /* MindfulPauseWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,8 +163,8 @@
 		12943F8D2A9FAEDB0035C146 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				12943F962A9FE9E30035C146 /* SnapBackSound.m4a */,
-				12943F922A9FDDB90035C146 /* EndSound.m4a */,
+				120D5D472AA629110024257F /* SnapBackSound.m4a */,
+				120D5D492AA629350024257F /* EndSound.m4a */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -103,6 +172,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		120D5D2D2AA595D90024257F /* MindfulPauseWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 120D5D422AA595DA0024257F /* Build configuration list for PBXNativeTarget "MindfulPauseWidgetExtension" */;
+			buildPhases = (
+				120D5D2A2AA595D90024257F /* Sources */,
+				120D5D2B2AA595D90024257F /* Frameworks */,
+				120D5D2C2AA595D90024257F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MindfulPauseWidgetExtension;
+			productName = MindfulPauseWidgetExtension;
+			productReference = 120D5D2E2AA595D90024257F /* MindfulPauseWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		12820AFE2A99A8550054DBFF /* MindfulPause */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 12820B0D2A99A8570054DBFF /* Build configuration list for PBXNativeTarget "MindfulPause" */;
@@ -110,10 +196,12 @@
 				12820AFB2A99A8550054DBFF /* Sources */,
 				12820AFC2A99A8550054DBFF /* Frameworks */,
 				12820AFD2A99A8550054DBFF /* Resources */,
+				120D5D3F2AA595DA0024257F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				120D5D3D2AA595DA0024257F /* PBXTargetDependency */,
 			);
 			name = MindfulPause;
 			productName = MindfulPause;
@@ -130,6 +218,9 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					120D5D2D2AA595D90024257F = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					12820AFE2A99A8550054DBFF = {
 						CreatedOnToolsVersion = 15.0;
 					};
@@ -149,25 +240,43 @@
 			projectRoot = "";
 			targets = (
 				12820AFE2A99A8550054DBFF /* MindfulPause */,
+				120D5D2D2AA595D90024257F /* MindfulPauseWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		120D5D2C2AA595D90024257F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				120D5D3A2AA595DA0024257F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		12820AFD2A99A8550054DBFF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				12820B0A2A99A8570054DBFF /* Preview Assets.xcassets in Resources */,
+				120D5D4A2AA629350024257F /* EndSound.m4a in Resources */,
 				12820B072A99A8570054DBFF /* Assets.xcassets in Resources */,
-				12943F932A9FDDB90035C146 /* EndSound.m4a in Resources */,
-				12943F972A9FE9E30035C146 /* SnapBackSound.m4a in Resources */,
+				120D5D482AA629110024257F /* SnapBackSound.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		120D5D2A2AA595D90024257F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				120D5D382AA595D90024257F /* MindfulPauseWidget.swift in Sources */,
+				120D5D362AA595D90024257F /* MindfulPauseWidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		12820AFB2A99A8550054DBFF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,7 +293,71 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		120D5D3D2AA595DA0024257F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 120D5D2D2AA595D90024257F /* MindfulPauseWidgetExtension */;
+			targetProxy = 120D5D3C2AA595DA0024257F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		120D5D402AA595DA0024257F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 72WSQ57Y67;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MindfulPauseWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MindfulPauseWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MindfulPause.MindfulPauseWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		120D5D412AA595DA0024257F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 72WSQ57Y67;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MindfulPauseWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MindfulPauseWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MindfulPause.MindfulPauseWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		12820B0B2A99A8570054DBFF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -307,6 +480,7 @@
 		12820B0E2A99A8570054DBFF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MindfulPause/MindfulPause.entitlements;
@@ -317,13 +491,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MindfulPause/Info.plist;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let the application save Mindful Minutes to Health";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MindfulPause will save Pause time to Health";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let the application save Mindful Minutes to Health.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MindfulPause will save how long you Paused into Health.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -340,6 +515,7 @@
 		12820B0F2A99A8570054DBFF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MindfulPause/MindfulPause.entitlements;
@@ -350,13 +526,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MindfulPause/Info.plist;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let the application save Mindful Minutes to Health";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MindfulPause will save Pause time to Health";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let the application save Mindful Minutes to Health.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MindfulPause will save how long you Paused into Health.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -373,6 +550,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		120D5D422AA595DA0024257F /* Build configuration list for PBXNativeTarget "MindfulPauseWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				120D5D402AA595DA0024257F /* Debug */,
+				120D5D412AA595DA0024257F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		12820AFA2A99A8550054DBFF /* Build configuration list for PBXProject "MindfulPause" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -12,10 +12,9 @@ struct MindfulPauseApp: App {
     @StateObject private var healthKitManager = HealthKitManager()
     
     var body: some Scene {
-        
         WindowGroup {
             SelectView()
-                .preferredColorScheme(.dark) 
+                .preferredColorScheme(.dark)
                 .onAppear {
                     healthKitManager.requestAuthorization()
                 }

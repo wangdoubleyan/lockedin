@@ -27,6 +27,7 @@ class Time: ObservableObject {
 
 struct SelectView: View {
     @StateObject var time = Time()
+    @State private var showTimerView = false
     let hour = Calendar.current.component(.hour, from: Date())
     
     var body: some View {
@@ -65,7 +66,7 @@ struct SelectView: View {
                             .fontDesign(.rounded)
                             .bold()
                     }
-                        
+                    
                     Text("How long do you want to Pause?")
                         .foregroundStyle(Color.theme.foreground)
                         .font(.title)
@@ -93,7 +94,7 @@ struct SelectView: View {
                                     .font(.title)
                                     .fontDesign(.rounded)
                                     .bold()
-                                                                }
+                            }
                         }
                         .pickerStyle(.wheel)
                     }
@@ -101,7 +102,7 @@ struct SelectView: View {
                     
                     Spacer()
                     
-
+                    
                     NavigationLink {
                         TimerView(time: time, settings: Settings())
                     } label: {
@@ -115,7 +116,7 @@ struct SelectView: View {
                     }
                     .background(Color.theme.accent)
                     .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-
+                    
                     Spacer()
                 }
                 .padding()
@@ -125,7 +126,7 @@ struct SelectView: View {
                     NavigationLink {
                         SettingsView()
                     } label: {
-                        Label("Settings", systemImage: "gear")
+                        Label("Settings", systemImage: "gearshape.fill")
                     }
                 }
                 ToolbarItemGroup(placement: .topBarLeading) {
@@ -135,7 +136,11 @@ struct SelectView: View {
                         .frame(width: 25)
                 }
             }
+            .navigationDestination(isPresented: $showTimerView) {
+                TimerView(time: time, settings: Settings())
+            }
         }
+    
         .onAppear {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                 if success {
@@ -144,6 +149,11 @@ struct SelectView: View {
                     print(error.localizedDescription)
                 }
             }
+        }
+        .onOpenURL { url in
+            print("Received deep link: \(url)")
+            showTimerView = true // Set the state to show TimerView
+            Time().min = 1
         }
     }
 }

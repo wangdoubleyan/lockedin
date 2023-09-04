@@ -76,7 +76,7 @@ struct SettingsView: View {
                         Text("Apple Health")
                             .foregroundStyle(Color.theme.foreground)
                     }
-                    .onChange(of: isHealthAccessGranted) { oldValue, newValue in
+                    .onChange(of: isHealthAccessGranted) { newValue in
                         if newValue == true {
                             DispatchQueue.main.async {
                                 healthKitManager.requestAuthorization()
@@ -100,7 +100,7 @@ struct SettingsView: View {
                         Text("Daily Reminder")
                             .foregroundStyle(Color.theme.foreground)
                     }
-                    .onChange(of: isNotificationAccessGrated) { oldValue, newValue in
+                    .onChange(of: isNotificationAccessGrated) { newValue in
                         if newValue == false {
                             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
@@ -112,7 +112,7 @@ struct SettingsView: View {
                                 Text("When?")
                                     .foregroundStyle(Color.theme.foreground)
                             }
-                            .onChange(of: selectedDate) {
+                            .onChange(of: selectedDate) { newValue in
                                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                                 UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                                 notify.sendNotification(date: selectedDate, title: "Time to Pause!", body: "Feeling stressed? Complete a short Pause right now.")
@@ -149,8 +149,11 @@ struct SettingsView: View {
                         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     } label: {
                         HStack(spacing: 5) {
-                            Image(systemName: "arrow.left")
+                            Text(Image(systemName: "arrow.left"))
+                                .fontWeight(.bold)
                             Text("Back")
+                                .font(.headline)
+
                         }
                     }
                 }

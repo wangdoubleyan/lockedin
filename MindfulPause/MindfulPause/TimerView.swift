@@ -129,11 +129,11 @@ struct TimerView: View {
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 } label: {
                     if isTimerPaused {
-                        Image(systemName: "play")
+                        Image(systemName: "play.fill")
                             .font(.system(size: 40))
                         
                     } else {
-                        Image(systemName: "pause")
+                        Image(systemName: "pause.fill")
                             .font(.system(size: 40))
                     }
                 }
@@ -150,8 +150,10 @@ struct TimerView: View {
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 } label: {
                     HStack(spacing: 5) {
-                        Image(systemName: "arrow.left")
+                        Text(Image(systemName: "arrow.left"))
+                            .fontWeight(.bold)
                         Text("Back")
+                            .font(.headline)
 
                     }
                 }
@@ -194,17 +196,17 @@ struct TimerView: View {
     
     func snapBack() {
         if Double(timeRemaining) > 0 {
-            DispatchQueue.global(qos: .background).async {
-                SoundManager.instance.playSound(sound: "SnapBackSound")
-            }
-            
-            haptic()
-            
             DispatchQueue.main.async {
-                flash = 1
-                
-                withAnimation(.easeOut.delay(0.5)) {
-                    flash = 0.0
+                if settings.isSnapBackOn {
+                    SoundManager.instance.playSound(sound: "SnapBackSound")
+                    
+                    haptic()
+                    
+                    flash = 1
+                    
+                    withAnimation(.easeOut.delay(0.4)) {
+                        flash = 0.0
+                    }
                 }
             }
         }
@@ -236,13 +238,12 @@ struct TimerView: View {
     func end() {
         if counter == 0 {
             counter += 1
-            haptic()
+            vibrate()
             SoundManager.instance.playSound(sound: "EndSound")
             healthKitManager.saveMindfulMinutes(minutes: totalTime)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             UIApplication.shared.isIdleTimerDisabled = false
-            vibrate()
             dismiss()
         }
         
