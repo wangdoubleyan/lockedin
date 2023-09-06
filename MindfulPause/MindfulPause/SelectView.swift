@@ -151,9 +151,8 @@ struct SelectView: View {
             }
         }
         .onOpenURL { url in
-            print("Received deep link: \(url)")
-            showTimerView = true // Set the state to show TimerView
-            Time().min = 1
+            time.min = 1
+            showTimerView = true
         }
     }
 }

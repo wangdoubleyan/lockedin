@@ -15,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "124B87192AA583040096434D"
+               BlueprintIdentifier = "120D5D2D2AA595D90024257F"
                BuildableName = "MindfulPauseWidgetExtension.appex"
                BlueprintName = "MindfulPauseWidgetExtension"
                ReferencedContainer = "container:MindfulPause.xcodeproj">
@@ -61,7 +61,7 @@
          BundleIdentifier = "com.apple.springboard">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "124B87192AA583040096434D"
+            BlueprintIdentifier = "120D5D2D2AA595D90024257F"
             BuildableName = "MindfulPauseWidgetExtension.appex"
             BlueprintName = "MindfulPauseWidgetExtension"
             ReferencedContainer = "container:MindfulPause.xcodeproj">
