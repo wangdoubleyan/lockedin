@@ -2,7 +2,7 @@
 //  MindfulPauseWidget.swift
 //  MindfulPauseWidget
 //
-//  Created by Matsvei Liapich on 9/4/23.
+//  Created by Matsvei Liapich on 9/7/23.
 //
 
 import WidgetKit
@@ -55,7 +55,7 @@ struct MindfulPauseWidgetEntryView : View {
                         .foregroundStyle(Color("DullGray"))
                         .bold()
                     Spacer()
-                    
+
                     Image(systemName: "play.fill")
                         .foregroundStyle(Color("AccentColor"))
                         .font(.largeTitle)
@@ -68,7 +68,7 @@ struct MindfulPauseWidgetEntryView : View {
                     .stroke(lineWidth: 40)
                     .foregroundStyle(Color("DullGray"))
                     .opacity(0.2)
-                
+
                 Circle()
                     .trim(from: 0.0, to: min(0.8, 1.0))
                     .stroke(Color("Fawn"), style: StrokeStyle(lineWidth: 25.0, lineCap: .round, lineJoin: .round))
@@ -94,9 +94,8 @@ struct MindfulPauseWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("Quick Start")
-        .description("Automatically starts a 1 minute Pause.")
-        .supportedFamilies([.systemSmall])
+        .configurationDisplayName("My Widget")
+        .description("This is an example widget.")
     }
 }
 

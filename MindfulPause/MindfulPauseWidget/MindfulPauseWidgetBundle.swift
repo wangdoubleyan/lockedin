@@ -2,7 +2,7 @@
 //  MindfulPauseWidgetBundle.swift
 //  MindfulPauseWidget
 //
-//  Created by Matsvei Liapich on 9/4/23.
+//  Created by Matsvei Liapich on 9/7/23.
 //
 
 import WidgetKit
