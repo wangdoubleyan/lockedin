@@ -1,6 +1,5 @@
 # MindfulPause - Meditation Timer
-![poster1](https://github.com/matsveil/mindful-pause/assets/109008007/74128714-b558-4696-806d-13e33252553e)
-
+![show](https://github.com/matsveil/mindful-pause/assets/109008007/a697f95d-2e71-483c-b52b-30bed3f8747f)
 
 ## Features
 - 🔁 Set custom Pause interval
