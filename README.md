@@ -1,4 +1,4 @@
-# MindfulPause - Meditation Timer
+# MindfulPause: Meditation Timer
 ![show](https://github.com/matsveil/mindful-pause/assets/109008007/a697f95d-2e71-483c-b52b-30bed3f8747f)
 
 ## Features
