@@ -45,18 +45,24 @@ struct SettingsView: View {
         ZStack {
             List {
                 Section {
-                    Toggle(isOn: $settings.isSnapBackOn) {
-                        Text("SnapBacks")
-                            .foregroundStyle(Color.theme.foreground)
-                    }
-                    if settings.isSnapBackOn {
-                        Picker(selection: $settings.interval) {
-                            ForEach(intervals, id: \.self) { interval in
-                                Text("\(interval.formatted()) sec").tag(interval)
-                            }
-                        } label: {
-                            Text("Interval")
+                    HStack {
+                        Image(systemName: "alarm.fill")
+                        Toggle(isOn: $settings.isSnapBackOn) {
+                            Text("SnapBacks")
                                 .foregroundStyle(Color.theme.foreground)
+                        }
+                    }
+                    HStack {
+                        Image(systemName: "timer")
+                        if settings.isSnapBackOn {
+                            Picker(selection: $settings.interval) {
+                                ForEach(intervals, id: \.self) { interval in
+                                    Text("\(interval.formatted()) sec").tag(interval)
+                                }
+                            } label: {
+                                Text("Interval")
+                                    .foregroundStyle(Color.theme.foreground)
+                            }
                         }
                     }
                 } header: {
@@ -69,14 +75,17 @@ struct SettingsView: View {
                 .listRowBackground(Color.theme.surface)
                 
                 Section {
-                    Toggle(isOn: $isHealthAccessGranted) {
-                        Text("Apple Health")
-                            .foregroundStyle(Color.theme.foreground)
-                    }
-                    .onChange(of: isHealthAccessGranted) { newValue in
-                        if newValue == true {
-                            DispatchQueue.main.async {
-                                healthKitManager.requestAuthorization()
+                    HStack {
+                        Image(systemName: "heart.text.square.fill")
+                        Toggle(isOn: $isHealthAccessGranted) {
+                            Text("Apple Health")
+                                .foregroundStyle(Color.theme.foreground)
+                        }
+                        .onChange(of: isHealthAccessGranted) { newValue in
+                            if newValue == true {
+                                DispatchQueue.main.async {
+                                    healthKitManager.requestAuthorization()
+                                }
                             }
                         }
                     }
@@ -88,18 +97,22 @@ struct SettingsView: View {
                 .listRowBackground(Color.theme.surface)
                 
                 Section {
-                    Toggle(isOn: $isNotificationAccessGrated) {
-                        Text("Daily Reminder")
-                            .foregroundStyle(Color.theme.foreground)
-                    }
-                    .onChange(of: isNotificationAccessGrated) { newValue in
-                        if newValue == false {
-                            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-                            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                    HStack {
+                        Image(systemName: "bell.badge.fill")
+                        Toggle(isOn: $isNotificationAccessGrated) {
+                            Text("Daily Reminder")
+                                .foregroundStyle(Color.theme.foreground)
+                        }
+                        .onChange(of: isNotificationAccessGrated) { newValue in
+                            if newValue == false {
+                                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                            }
                         }
                     }
                     if isNotificationAccessGrated {
                         HStack {
+                            Image(systemName: "clock.arrow.circlepath")
                             DatePicker(selection: $selectedDate, displayedComponents: .hourAndMinute) {
                                 Text("When?")
                                     .foregroundStyle(Color.theme.foreground)
@@ -119,6 +132,22 @@ struct SettingsView: View {
                     Text("You will be reminded to Pause daiy at \(selectedDate.formatted(.dateTime.hour().minute())).")
                 }
                 .listRowBackground(Color.theme.surface)
+                
+                Section {
+                    HStack {
+                        Image(systemName: "info.circle.fill")
+                        Link("Credit", destination: URL(string: "https://github.com/matsveil/mindful-pause/blob/main/CREDIT.md")!)
+                            .foregroundStyle(Color.theme.foreground)
+                    }
+                    HStack {
+                        Image(systemName: "curlybraces.square.fill")
+                        Link("Open Source", destination: URL(string: "https://github.com/matsveil/mindful-pause/blob/main/LICENSE")!)
+                            .foregroundStyle(Color.theme.foreground)
+                    }
+                } header: {
+                    Text("Legal")
+                }
+                .listRowBackground(Color.theme.surface)
             }
             .tint(Color.theme.accent)
             .background(Color.theme.background)
@@ -126,7 +155,6 @@ struct SettingsView: View {
             .scrollContentBackground(.hidden)
             .navigationTitle("Settings")
             .navigationBarBackButtonHidden(true)
-            .environment(\.defaultMinListRowHeight, 60)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
