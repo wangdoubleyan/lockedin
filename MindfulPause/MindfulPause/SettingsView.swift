@@ -63,14 +63,11 @@ struct SettingsView: View {
                     Text("Pause").foregroundStyle(Color.theme.secondary)
                 } footer: {
                     Text("SnapBacks help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
-                        
+                    
                 }
-                .listRowBackground(
-                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.surface)
-                        
-                )
-                .listRowSeparator(.hidden)
+
+                .listRowBackground(Color.theme.surface)
+                
                 Section {
                     Toggle(isOn: $isHealthAccessGranted) {
                         Text("Apple Health")
@@ -88,12 +85,7 @@ struct SettingsView: View {
                 } footer: {
                     Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > MindfulPause.")
                 }
-                .listRowBackground(
-                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.surface)
-                        
-                )
-
+                .listRowBackground(Color.theme.surface)
                 
                 Section {
                     Toggle(isOn: $isNotificationAccessGrated) {
@@ -119,31 +111,24 @@ struct SettingsView: View {
                                 print(selectedDate)
                             }
                         }
-
+                        
                     }
                 } header: {
                     Text("Notifications")
                 } footer: {
                     Text("You will be reminded to Pause daiy at \(selectedDate.formatted(.dateTime.hour().minute())).")
                 }
-                .listRowBackground(
-                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.surface)
-                        
-                )
-                .listRowSeparator(.hidden)
-
+                .listRowBackground(Color.theme.surface)
             }
             .tint(Color.theme.accent)
-            .listRowSpacing(6)
-            .environment(\.defaultMinListRowHeight, 60)
             .background(Color.theme.background)
             .foregroundStyle(Color.theme.secondary)
             .scrollContentBackground(.hidden)
             .navigationTitle("Settings")
             .navigationBarBackButtonHidden(true)
+            .environment(\.defaultMinListRowHeight, 60)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button {
                         presentationMode.wrappedValue.dismiss()
                         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -153,7 +138,7 @@ struct SettingsView: View {
                                 .fontWeight(.bold)
                             Text("Back")
                                 .font(.headline)
-
+                            
                         }
                     }
                 }
@@ -218,7 +203,8 @@ struct SettingsView: View {
     }
 }
 
-
-#Preview {
-    SettingsView()
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView()
+    }
 }

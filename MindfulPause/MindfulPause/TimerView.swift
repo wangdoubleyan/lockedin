@@ -62,7 +62,7 @@ struct TimerView: View {
                     .stroke(lineWidth: stroke)
                     .foregroundStyle(Color.theme.secondary)
                     .opacity(0.2)
-                    .animation(.smooth(duration: 1), value: stroke)
+                    .animation(.linear(duration: 1), value: stroke)
                 
                 Circle()
                     .trim(from: 0.0, to: min(progress, 1.0))
@@ -144,7 +144,7 @@ struct TimerView: View {
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: .navigationBarLeading) {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -249,7 +249,9 @@ struct TimerView: View {
         
     }
 }
-    
-#Preview {
-    TimerView(time: Time(), settings: Settings())
+
+struct TimerView_Previews: PreviewProvider {
+    static var previews: some View {
+        TimerView(time: Time(), settings: Settings())
+    }
 }

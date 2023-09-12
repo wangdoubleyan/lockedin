@@ -15,23 +15,22 @@
 		12820B112A99A8A60054DBFF /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B102A99A8A60054DBFF /* SelectView.swift */; };
 		12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B122A99A8AF0054DBFF /* TimerView.swift */; };
 		12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12943F9B2AA05AD30035C146 /* HealthKitManager.swift */; };
+		12977BBA2AB031900063EF9F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D302AA595D90024257F /* WidgetKit.framework */; };
+		12977BBB2AB031900063EF9F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D322AA595D90024257F /* SwiftUI.framework */; };
+		12977BBE2AB031900063EF9F /* MindfulPauseWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12977BBD2AB031900063EF9F /* MindfulPauseWidgetBundle.swift */; };
+		12977BC02AB031900063EF9F /* MindfulPauseWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12977BBF2AB031900063EF9F /* MindfulPauseWidget.swift */; };
+		12977BC22AB031900063EF9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12977BC12AB031900063EF9F /* Assets.xcassets */; };
 		12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2640A2A9C5A1F00CE0FDD /* Color.swift */; };
 		12DC4F0F2AA31064001AF2C5 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */; };
 		12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1D9602A9DA38600E047AF /* SettingsView.swift */; };
-		12FBAF642AAAC4450039DF81 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D302AA595D90024257F /* WidgetKit.framework */; };
-		12FBAF652AAAC4450039DF81 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D322AA595D90024257F /* SwiftUI.framework */; };
-		12FBAF682AAAC4450039DF81 /* MindfulPauseWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBAF672AAAC4450039DF81 /* MindfulPauseWidgetBundle.swift */; };
-		12FBAF6A2AAAC4450039DF81 /* MindfulPauseWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBAF692AAAC4450039DF81 /* MindfulPauseWidget.swift */; };
-		12FBAF6C2AAAC4460039DF81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12FBAF6B2AAAC4460039DF81 /* Assets.xcassets */; };
-		12FBAF702AAAC4460039DF81 /* MindfulPauseWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 12FBAF632AAAC4450039DF81 /* MindfulPauseWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		12FBAF6E2AAAC4460039DF81 /* PBXContainerItemProxy */ = {
+		12977BC42AB031900063EF9F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 12820AF72A99A8550054DBFF /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 12FBAF622AAAC4450039DF81;
+			remoteGlobalIDString = 12977BB82AB0318F0063EF9F;
 			remoteInfo = MindfulPauseWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
@@ -43,7 +42,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				12FBAF702AAAC4460039DF81 /* MindfulPauseWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,14 +62,14 @@
 		12943F9A2AA055420035C146 /* MindfulPause.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindfulPause.entitlements; sourceTree = "<group>"; };
 		12943F9B2AA05AD30035C146 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		12943FA02AA05FFE0035C146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		12977BB92AB0318F0063EF9F /* MindfulPauseWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MindfulPauseWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		12977BBD2AB031900063EF9F /* MindfulPauseWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindfulPauseWidgetBundle.swift; sourceTree = "<group>"; };
+		12977BBF2AB031900063EF9F /* MindfulPauseWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindfulPauseWidget.swift; sourceTree = "<group>"; };
+		12977BC12AB031900063EF9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		12977BC32AB031900063EF9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12A2640A2A9C5A1F00CE0FDD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		12F1D9602A9DA38600E047AF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		12FBAF632AAAC4450039DF81 /* MindfulPauseWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MindfulPauseWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		12FBAF672AAAC4450039DF81 /* MindfulPauseWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindfulPauseWidgetBundle.swift; sourceTree = "<group>"; };
-		12FBAF692AAAC4450039DF81 /* MindfulPauseWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindfulPauseWidget.swift; sourceTree = "<group>"; };
-		12FBAF6B2AAAC4460039DF81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		12FBAF6D2AAAC4460039DF81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,12 +80,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		12FBAF602AAAC4450039DF81 /* Frameworks */ = {
+		12977BB62AB0318F0063EF9F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12FBAF652AAAC4450039DF81 /* SwiftUI.framework in Frameworks */,
-				12FBAF642AAAC4450039DF81 /* WidgetKit.framework in Frameworks */,
+				12977BBB2AB031900063EF9F /* SwiftUI.framework in Frameworks */,
+				12977BBA2AB031900063EF9F /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				12820B012A99A8550054DBFF /* MindfulPause */,
-				12FBAF662AAAC4450039DF81 /* MindfulPauseWidget */,
+				12977BBC2AB031900063EF9F /* MindfulPauseWidget */,
 				120D5D2F2AA595D90024257F /* Frameworks */,
 				12820B002A99A8550054DBFF /* Products */,
 			);
@@ -117,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				12820AFF2A99A8550054DBFF /* MindfulPause.app */,
-				12FBAF632AAAC4450039DF81 /* MindfulPauseWidgetExtension.appex */,
+				12977BB92AB0318F0063EF9F /* MindfulPauseWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,13 +156,13 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
-		12FBAF662AAAC4450039DF81 /* MindfulPauseWidget */ = {
+		12977BBC2AB031900063EF9F /* MindfulPauseWidget */ = {
 			isa = PBXGroup;
 			children = (
-				12FBAF672AAAC4450039DF81 /* MindfulPauseWidgetBundle.swift */,
-				12FBAF692AAAC4450039DF81 /* MindfulPauseWidget.swift */,
-				12FBAF6B2AAAC4460039DF81 /* Assets.xcassets */,
-				12FBAF6D2AAAC4460039DF81 /* Info.plist */,
+				12977BBD2AB031900063EF9F /* MindfulPauseWidgetBundle.swift */,
+				12977BBF2AB031900063EF9F /* MindfulPauseWidget.swift */,
+				12977BC12AB031900063EF9F /* Assets.xcassets */,
+				12977BC32AB031900063EF9F /* Info.plist */,
 			);
 			path = MindfulPauseWidget;
 			sourceTree = "<group>";
@@ -184,20 +182,20 @@
 			buildRules = (
 			);
 			dependencies = (
-				12FBAF6F2AAAC4460039DF81 /* PBXTargetDependency */,
+				12977BC52AB031900063EF9F /* PBXTargetDependency */,
 			);
 			name = MindfulPause;
 			productName = MindfulPause;
 			productReference = 12820AFF2A99A8550054DBFF /* MindfulPause.app */;
 			productType = "com.apple.product-type.application";
 		};
-		12FBAF622AAAC4450039DF81 /* MindfulPauseWidgetExtension */ = {
+		12977BB82AB0318F0063EF9F /* MindfulPauseWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 12FBAF712AAAC4460039DF81 /* Build configuration list for PBXNativeTarget "MindfulPauseWidgetExtension" */;
+			buildConfigurationList = 12977BC62AB031900063EF9F /* Build configuration list for PBXNativeTarget "MindfulPauseWidgetExtension" */;
 			buildPhases = (
-				12FBAF5F2AAAC4450039DF81 /* Sources */,
-				12FBAF602AAAC4450039DF81 /* Frameworks */,
-				12FBAF612AAAC4450039DF81 /* Resources */,
+				12977BB52AB0318F0063EF9F /* Sources */,
+				12977BB62AB0318F0063EF9F /* Frameworks */,
+				12977BB72AB0318F0063EF9F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -205,7 +203,7 @@
 			);
 			name = MindfulPauseWidgetExtension;
 			productName = MindfulPauseWidgetExtension;
-			productReference = 12FBAF632AAAC4450039DF81 /* MindfulPauseWidgetExtension.appex */;
+			productReference = 12977BB92AB0318F0063EF9F /* MindfulPauseWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -215,14 +213,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					12820AFE2A99A8550054DBFF = {
 						CreatedOnToolsVersion = 15.0;
 					};
-					12FBAF622AAAC4450039DF81 = {
-						CreatedOnToolsVersion = 15.0;
+					12977BB82AB0318F0063EF9F = {
+						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -240,7 +238,7 @@
 			projectRoot = "";
 			targets = (
 				12820AFE2A99A8550054DBFF /* MindfulPause */,
-				12FBAF622AAAC4450039DF81 /* MindfulPauseWidgetExtension */,
+				12977BB82AB0318F0063EF9F /* MindfulPauseWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -257,11 +255,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		12FBAF612AAAC4450039DF81 /* Resources */ = {
+		12977BB72AB0318F0063EF9F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12FBAF6C2AAAC4460039DF81 /* Assets.xcassets in Resources */,
+				12977BC22AB031900063EF9F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,22 +280,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		12FBAF5F2AAAC4450039DF81 /* Sources */ = {
+		12977BB52AB0318F0063EF9F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12FBAF6A2AAAC4450039DF81 /* MindfulPauseWidget.swift in Sources */,
-				12FBAF682AAAC4450039DF81 /* MindfulPauseWidgetBundle.swift in Sources */,
+				12977BC02AB031900063EF9F /* MindfulPauseWidget.swift in Sources */,
+				12977BBE2AB031900063EF9F /* MindfulPauseWidgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		12FBAF6F2AAAC4460039DF81 /* PBXTargetDependency */ = {
+		12977BC52AB031900063EF9F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 12FBAF622AAAC4450039DF81 /* MindfulPauseWidgetExtension */;
-			targetProxy = 12FBAF6E2AAAC4460039DF81 /* PBXContainerItemProxy */;
+			target = 12977BB82AB0318F0063EF9F /* MindfulPauseWidgetExtension */;
+			targetProxy = 12977BC42AB031900063EF9F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -495,18 +493,21 @@
 			};
 			name = Release;
 		};
-		12FBAF722AAAC4460039DF81 /* Debug */ = {
+		12977BC72AB031900063EF9F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQ579GB38P;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MindfulPauseWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MindfulPauseWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -516,24 +517,28 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.matsveil.MindfulPause.MindfulPauseWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		12FBAF732AAAC4460039DF81 /* Release */ = {
+		12977BC82AB031900063EF9F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQ579GB38P;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MindfulPauseWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MindfulPauseWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -544,6 +549,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -570,11 +576,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		12FBAF712AAAC4460039DF81 /* Build configuration list for PBXNativeTarget "MindfulPauseWidgetExtension" */ = {
+		12977BC62AB031900063EF9F /* Build configuration list for PBXNativeTarget "MindfulPauseWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				12FBAF722AAAC4460039DF81 /* Debug */,
-				12FBAF732AAAC4460039DF81 /* Release */,
+				12977BC72AB031900063EF9F /* Debug */,
+				12977BC82AB031900063EF9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

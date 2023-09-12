@@ -2,7 +2,7 @@
 //  MindfulPauseWidget.swift
 //  MindfulPauseWidget
 //
-//  Created by Matsvei Liapich on 9/7/23.
+//  Created by Matsvei Liapich on 9/12/23.
 //
 
 import WidgetKit
@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
+        SimpleEntry(date: Date())
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+        let entry = SimpleEntry(date: Date())
         completion(entry)
     }
 
@@ -25,7 +25,7 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
+            let entry = SimpleEntry(date: entryDate)
             entries.append(entry)
         }
 
@@ -36,7 +36,6 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let emoji: String
 }
 
 struct MindfulPauseWidgetEntryView : View {
@@ -80,28 +79,22 @@ struct MindfulPauseWidgetEntryView : View {
     }
 }
 
+
 struct MindfulPauseWidget: Widget {
     let kind: String = "MindfulPauseWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            if #available(iOS 17.0, *) {
-                MindfulPauseWidgetEntryView(entry: entry)
-                    .containerBackground(Color("WidgetBackground"), for: .widget)
-            } else {
-                MindfulPauseWidgetEntryView(entry: entry)
-                    .padding()
-                    .background()
-            }
+            MindfulPauseWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
     }
 }
 
-#Preview(as: .systemSmall) {
-    MindfulPauseWidget()
-} timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
+struct MindfulPauseWidget_Previews: PreviewProvider {
+    static var previews: some View {
+        MindfulPauseWidgetEntryView(entry: SimpleEntry(date: Date()))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
 }

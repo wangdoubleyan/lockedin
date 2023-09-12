@@ -122,14 +122,14 @@ struct SelectView: View {
                 .padding()
             }
             .toolbar {
-                ToolbarItemGroup(placement: .topBarTrailing) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink {
                         SettingsView()
                     } label: {
                         Label("Settings", systemImage: "gearshape.fill")
                     }
                 }
-                ToolbarItemGroup(placement: .topBarLeading) {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
                     Image("Logo")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -157,6 +157,8 @@ struct SelectView: View {
     }
 }
 
-#Preview {
-    SelectView()
+struct SelectView_Previews: PreviewProvider {
+    static var previews: some View {
+        SelectView()
+    }
 }
