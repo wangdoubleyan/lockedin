@@ -43,42 +43,45 @@ struct MindfulPauseWidgetEntryView : View {
 
     var body: some View {
         ZStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Pause")
-                        .font(.largeTitle)
-                        .foregroundStyle(.white)
-                        .bold()
-                    Text("1 min")
-                        .font(.headline)
-                        .foregroundStyle(Color("DullGray"))
-                        .bold()
-                    Spacer()
-
-                    Image(systemName: "play.fill")
-                        .foregroundStyle(Color("AccentColor"))
-                        .font(.largeTitle)
-                }
-                Spacer()
-            }
-            .padding(5)
+            Color("WidgetBackground")
             ZStack {
-                Circle()
-                    .stroke(lineWidth: 40)
-                    .foregroundStyle(Color("DullGray"))
-                    .opacity(0.2)
-
-                Circle()
-                    .trim(from: 0.0, to: min(0.8, 1.0))
-                    .stroke(Color("Fawn"), style: StrokeStyle(lineWidth: 25.0, lineCap: .round, lineJoin: .round))
-                    .rotationEffect(Angle(degrees: 270))
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Pause")
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                            .bold()
+                        Text("1 min")
+                            .font(.headline)
+                            .foregroundStyle(Color("DullGray"))
+                            .bold()
+                        Spacer()
+                        
+                        Image(systemName: "play.fill")
+                            .foregroundStyle(Color("AccentColor"))
+                            .font(.largeTitle)
+                    }
+                    Spacer()
+                }
+                .padding(5)
+                ZStack {
+                    Circle()
+                        .stroke(lineWidth: 40)
+                        .foregroundStyle(Color("DullGray"))
+                        .opacity(0.2)
+                    
+                    Circle()
+                        .trim(from: 0.0, to: min(0.8, 1.0))
+                        .stroke(Color("Fawn"), style: StrokeStyle(lineWidth: 25.0, lineCap: .round, lineJoin: .round))
+                        .rotationEffect(Angle(degrees: 270))
+                }
+                .offset(x: 70, y: 70)
             }
-            .offset(x: 70, y: 70)
+            .widgetURL(URL(string: "widget://link0"))
+            .padding()
         }
-        .widgetURL(URL(string: "widget://link0"))
     }
 }
-
 
 struct MindfulPauseWidget: Widget {
     let kind: String = "MindfulPauseWidget"
@@ -87,8 +90,8 @@ struct MindfulPauseWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             MindfulPauseWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Quick Start")
+        .description("Start a 1 minute Pause.")
     }
 }
 

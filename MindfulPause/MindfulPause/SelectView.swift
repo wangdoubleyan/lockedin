@@ -26,6 +26,7 @@ class Time: ObservableObject {
 }
 
 struct SelectView: View {
+    @StateObject private var healthKitManager = HealthKitManager()
     @StateObject var time = Time()
     @State private var showTimerView = false
     let hour = Calendar.current.component(.hour, from: Date())
