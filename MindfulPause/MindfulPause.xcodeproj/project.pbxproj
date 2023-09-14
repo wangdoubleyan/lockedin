@@ -436,8 +436,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MindfulPause/Info.plist;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let the application save Mindful Minutes to Health.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MindfulPause will save how long you Paused into Health.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let MindfulPause to save your Pause duration to Mindful Minutes in Apple Health.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MindfulPause will save the duration of your Pause to Mindful Minutes in Apple Health.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -473,8 +473,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MindfulPause/Info.plist;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let the application save Mindful Minutes to Health.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MindfulPause will save how long you Paused into Health.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let MindfulPause to save your Pause duration to Mindful Minutes in Apple Health.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MindfulPause will save the duration of your Pause to Mindful Minutes in Apple Health.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
