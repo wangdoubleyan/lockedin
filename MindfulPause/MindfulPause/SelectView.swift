@@ -127,14 +127,18 @@ struct SelectView: View {
                     NavigationLink {
                         SettingsView()
                     } label: {
-                        Label("Settings", systemImage: "gearshape.fill")
+                        Text(Image(systemName: "gear.circle.fill"))
+                            .font(.system(size: 35))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(Color.theme.secondary.opacity(0.8))
+            
                     }
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Image("Logo")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 25)
+                        .frame(width: 35)
                 }
             }
             .navigationDestination(isPresented: $showTimerView) {

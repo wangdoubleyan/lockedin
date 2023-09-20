@@ -61,7 +61,7 @@ struct TimerView: View {
                 Circle()
                     .stroke(lineWidth: stroke)
                     .foregroundStyle(Color.theme.secondary)
-                    .opacity(0.2)
+                    .opacity(0.1)
                     .animation(.linear(duration: 1), value: stroke)
                 
                 Circle()
@@ -130,12 +130,14 @@ struct TimerView: View {
                 } label: {
                     if isTimerPaused {
                         Image(systemName: "play.fill")
-                            .font(.system(size: 40))
-                        
+                            .font(.system(size: 45))
+                            .symbolRenderingMode(.hierarchical)
                     } else {
                         Image(systemName: "pause.fill")
-                            .font(.system(size: 40))
+                            .font(.system(size: 45))
+                            .symbolRenderingMode(.hierarchical)
                     }
+                        
                 }
                 .position(x: geometry.size.width / 2, y: geometry.size.height * 0.83)
             }
@@ -144,18 +146,15 @@ struct TimerView: View {
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 } label: {
-                    HStack(spacing: 5) {
-                        Text(Image(systemName: "arrow.left"))
-                            .fontWeight(.bold)
-                        Text("Back")
-                            .font(.headline)
-
-                    }
+                    Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
+                        .font(.system(size: 35))
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(Color.theme.secondary.opacity(0.8))
                 }
             }
             ToolbarItem(placement: .principal) {
@@ -196,15 +195,17 @@ struct TimerView: View {
     
     func snapBack() {
         if Double(timeRemaining) > 0 {
-            DispatchQueue.main.async {
-                if settings.isSnapBackOn {
+            if settings.isSnapBackOn {
+                DispatchQueue.global(qos: .background).async {
                     SoundManager.instance.playSound(sound: "SnapBackSound")
-                    
-                    haptic()
-                    
+                }
+                
+                haptic()
+                
+                DispatchQueue.main.async {
                     flash = 1
                     
-                    withAnimation(.easeOut.delay(0.4)) {
+                    withAnimation(.easeOut.delay(0.5)) {
                         flash = 0.0
                     }
                 }
@@ -229,17 +230,23 @@ struct TimerView: View {
         opacity = 1
         UIApplication.shared.isIdleTimerDisabled = true
         start()
+        DispatchQueue.global(qos: .background).async {
+            SoundManager.instance.playSound(sound: "Sound")
+        }
     }
     
     func start() {
         vibrate()
+            SoundManager.instance.playSound(sound: "Sound")
     }
     
     func end() {
         if counter == 0 {
             counter += 1
             vibrate()
-            SoundManager.instance.playSound(sound: "EndSound")
+            DispatchQueue.global(qos: .background).async {
+                SoundManager.instance.playSound(sound: "Sound")
+            }
             healthKitManager.saveMindfulMinutes(minutes: totalTime)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {

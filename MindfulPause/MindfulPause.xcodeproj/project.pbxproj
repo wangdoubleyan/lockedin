@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		120D5D482AA629110024257F /* SnapBackSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 120D5D472AA629110024257F /* SnapBackSound.m4a */; };
-		120D5D4A2AA629350024257F /* EndSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 120D5D492AA629350024257F /* EndSound.m4a */; };
+		120D5D4A2AA629350024257F /* Sound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 120D5D492AA629350024257F /* Sound.m4a */; };
 		12820B032A99A8550054DBFF /* MindfulPauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B022A99A8550054DBFF /* MindfulPauseApp.swift */; };
 		12820B072A99A8570054DBFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B062A99A8570054DBFF /* Assets.xcassets */; };
 		12820B0A2A99A8570054DBFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B092A99A8570054DBFF /* Preview Assets.xcassets */; };
@@ -54,7 +54,7 @@
 		120D5D302AA595D90024257F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		120D5D322AA595D90024257F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		120D5D472AA629110024257F /* SnapBackSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnapBackSound.m4a; sourceTree = "<group>"; };
-		120D5D492AA629350024257F /* EndSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = EndSound.m4a; sourceTree = "<group>"; };
+		120D5D492AA629350024257F /* Sound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sound.m4a; sourceTree = "<group>"; };
 		12820AFF2A99A8550054DBFF /* MindfulPause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindfulPause.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12820B022A99A8550054DBFF /* MindfulPauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindfulPauseApp.swift; sourceTree = "<group>"; };
 		12820B062A99A8570054DBFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				120D5D472AA629110024257F /* SnapBackSound.m4a */,
-				120D5D492AA629350024257F /* EndSound.m4a */,
+				120D5D492AA629350024257F /* Sound.m4a */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12820B0A2A99A8570054DBFF /* Preview Assets.xcassets in Resources */,
-				120D5D4A2AA629350024257F /* EndSound.m4a in Resources */,
+				120D5D4A2AA629350024257F /* Sound.m4a in Resources */,
 				12820B072A99A8570054DBFF /* Assets.xcassets in Resources */,
 				120D5D482AA629110024257F /* SnapBackSound.m4a in Resources */,
 			);

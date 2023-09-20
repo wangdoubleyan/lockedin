@@ -52,15 +52,16 @@ struct SettingsView: View {
                                 .foregroundStyle(Color.theme.foreground)
                         }
                     }
-                    HStack {
-                        Image(systemName: "timer")
-                        if settings.isSnapBackOn {
-                            Picker(selection: $settings.interval) {
-                                ForEach(intervals, id: \.self) { interval in
-                                    Text("\(interval.formatted()) sec").tag(interval)
-                                }
-                            } label: {
+                    if settings.isSnapBackOn {
+                        Picker(selection: $settings.interval) {
+                            ForEach(intervals, id: \.self) { interval in
+                                Text("\(interval.formatted()) sec").tag(interval)
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: "timer")
                                 Text("Interval")
+
                                     .foregroundStyle(Color.theme.foreground)
                             }
                         }
@@ -72,7 +73,12 @@ struct SettingsView: View {
                     
                 }
 
-                .listRowBackground(Color.theme.surface)
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                        .fill(Color.theme.secondary.opacity(0.1))
+                        .padding(2)
+                )
+                .listRowSeparator(.hidden)
                 
                 Section {
                     HStack {
@@ -94,7 +100,11 @@ struct SettingsView: View {
                 } footer: {
                     Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > MindfulPause.")
                 }
-                .listRowBackground(Color.theme.surface)
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                        .fill(Color.theme.secondary.opacity(0.1))
+                        .padding(2)
+                )
                 
                 Section {
                     HStack {
@@ -131,7 +141,12 @@ struct SettingsView: View {
                 } footer: {
                     Text("You will be reminded to Pause daiy at \(selectedDate.formatted(.dateTime.hour().minute())).")
                 }
-                .listRowBackground(Color.theme.surface)
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                        .fill(Color.theme.secondary.opacity(0.1))
+                        .padding(2)
+                )
+                .listRowSeparator(.hidden)
                 
                 Section {
                     HStack {
@@ -147,8 +162,15 @@ struct SettingsView: View {
                 } header: {
                     Text("Legal")
                 }
-                .listRowBackground(Color.theme.surface)
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                        .fill(Color.theme.secondary.opacity(0.1))
+                        .padding(2)
+                     
+                )
+                .listRowSeparator(.hidden)
             }
+            .environment(\.defaultMinListRowHeight, 60)
             .tint(Color.theme.accent)
             .background(Color.theme.background)
             .foregroundStyle(Color.theme.secondary)
@@ -156,18 +178,15 @@ struct SettingsView: View {
             .navigationTitle("Settings")
             .navigationBarBackButtonHidden(true)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         presentationMode.wrappedValue.dismiss()
                         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     } label: {
-                        HStack(spacing: 5) {
-                            Text(Image(systemName: "arrow.left"))
-                                .fontWeight(.bold)
-                            Text("Back")
-                                .font(.headline)
-                            
-                        }
+                        Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
+                            .font(.system(size: 35))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(Color.theme.secondary.opacity(0.8))
                     }
                 }
                 ToolbarItem(placement: .principal) {
