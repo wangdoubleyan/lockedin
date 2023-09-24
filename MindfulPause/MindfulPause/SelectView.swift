@@ -23,6 +23,7 @@ extension UINavigationController: UIGestureRecognizerDelegate {
 class Time: ObservableObject {
     @AppStorage("hr") var hr = 0
     @AppStorage("min") var min = 1
+    @AppStorage("sec") var sec = 0
 }
 
 struct SelectView: View {
@@ -115,8 +116,32 @@ struct SelectView: View {
                             .padding(.vertical)
                         
                     }
+                    .simultaneousGesture(TapGesture().onEnded{
+                        time.sec = 0
+                    })
                     .background(Color.theme.accent)
                     .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                    
+                    NavigationLink {
+                        TimerView(time: time, settings: Settings())
+                    } label: {
+                        Text("30 sec Pause")
+                            .foregroundStyle(Color.theme.foreground)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .contentShape(Rectangle())
+                            .padding(.vertical)
+                    } 
+                    .simultaneousGesture(TapGesture().onEnded{
+                        time.hr = 0
+                        time.min = 0
+                        time.sec = 30
+                    })
+                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                            .stroke(Color.theme.accent, lineWidth: 2)
+                    )
                     
                     Spacer()
                 }
@@ -145,18 +170,10 @@ struct SelectView: View {
                 TimerView(time: time, settings: Settings())
             }
         }
-    
-        .onAppear {
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                if success {
-                    print("All set!")
-                } else if let error = error {
-                    print(error.localizedDescription)
-                }
-            }
-        }
         .onOpenURL { url in
-            time.min = 1
+            time.hr = 0
+            time.min = 0
+            time.sec = 30
             showTimerView = true
         }
     }

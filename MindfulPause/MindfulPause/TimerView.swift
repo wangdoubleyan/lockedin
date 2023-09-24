@@ -50,7 +50,7 @@ struct TimerView: View {
 
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var totalTime: Double {
-        Double(time.hr * 60 * 60 + time.min * 60)
+        Double(time.hr * 60 * 60 + time.min * 60 + time.sec)
     }
     
     var body: some View {
@@ -91,7 +91,16 @@ struct TimerView: View {
             }
             .frame(width: 250, height: 250)
             .onAppear {
+                if time.hr >= 1 || time.min >= 1 {
+                    time.sec = 0
+                } else if time.hr == 0 && time.min == 0 && time.sec == 0 {
+                    time.min = 1
+                }
+                print("\(time.hr) hours")
+                print("\(time.min) minutes")
+                print("\(time.sec) seconds")
                 appear()
+                
             }
             .onReceive(timer) { time in
                 if timeRemaining <= 0 {
@@ -169,8 +178,8 @@ struct TimerView: View {
     }
     
     
-    func calculateTimeRemaining(hours: Int, minutes: Int) {
-        timeRemaining = hours * 60 * 60 + minutes * 60
+    func calculateTimeRemaining(hours: Int, minutes: Int, seconds: Int) {
+        timeRemaining = hours * 60 * 60 + minutes * 60 + seconds
     }
         
     func formatTime(_ seconds: Int) -> (Int, Int, Int) {
@@ -222,22 +231,14 @@ struct TimerView: View {
     }
     
     func appear() {
-        if time.hr == 0 && time.min == 0 {
-            time.min = 1
-        }
-        calculateTimeRemaining(hours: time.hr, minutes: time.min)
+        calculateTimeRemaining(hours: time.hr, minutes: time.min, seconds: time.sec)
         stroke = 40.0
         opacity = 1
         UIApplication.shared.isIdleTimerDisabled = true
-        start()
+        vibrate()
         DispatchQueue.global(qos: .background).async {
             SoundManager.instance.playSound(sound: "Sound")
         }
-    }
-    
-    func start() {
-        vibrate()
-            SoundManager.instance.playSound(sound: "Sound")
     }
     
     func end() {
@@ -252,6 +253,7 @@ struct TimerView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             UIApplication.shared.isIdleTimerDisabled = false
             dismiss()
+            time.sec = 0
         }
         
     }

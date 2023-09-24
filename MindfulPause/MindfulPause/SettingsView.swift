@@ -26,7 +26,7 @@ class Settings: ObservableObject {
 
 struct SettingsView: View {
     @State private var isHealthAccessGranted = false
-    @State private var isNotificationAccessGrated = false
+    @State private var isNotificationAccessGranted = false
     
     @AppStorage("selectedDate") var selectedDate = Date()
     
@@ -36,9 +36,9 @@ struct SettingsView: View {
     @StateObject var settings = Settings()
     @State private var healthAuthorizationStatus: HKAuthorizationStatus = .notDetermined
     @State private var notificationAuthorizationStatus: UNAuthorizationStatus = .notDetermined
-    @ObservedObject private var healthKitManager = HealthKitManager()
+    @StateObject private var healthKitManager = HealthKitManager()
     
-    let intervals = [5.0, 10.0, 15.0, 20.0, 30.0, 60.0]
+    let intervals = [5.0, 10.0, 15.0, 30.0, 60.0]
     let notify = NotificationManager()
     
     var body: some View {
@@ -89,9 +89,7 @@ struct SettingsView: View {
                         }
                         .onChange(of: isHealthAccessGranted) { newValue in
                             if newValue == true {
-                                DispatchQueue.main.async {
-                                    healthKitManager.requestAuthorization()
-                                }
+                                healthKitManager.requestAuthorization()
                             }
                         }
                     }
@@ -109,18 +107,26 @@ struct SettingsView: View {
                 Section {
                     HStack {
                         Image(systemName: "bell.badge.fill")
-                        Toggle(isOn: $isNotificationAccessGrated) {
+                        Toggle(isOn: $isNotificationAccessGranted) {
                             Text("Daily Reminder")
                                 .foregroundStyle(Color.theme.foreground)
                         }
-                        .onChange(of: isNotificationAccessGrated) { newValue in
-                            if newValue == false {
+                        .onChange(of: isNotificationAccessGranted) { newValue in
+                            if newValue {
+                                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                                    if success {
+                                        print("All set!")
+                                    } else if let error = error {
+                                        print(error.localizedDescription)
+                                    }
+                                }
+                            } else {
                                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                                 UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                             }
                         }
                     }
-                    if isNotificationAccessGrated {
+                    if isNotificationAccessGranted {
                         HStack {
                             Image(systemName: "clock.arrow.circlepath")
                             DatePicker(selection: $selectedDate, displayedComponents: .hourAndMinute) {
@@ -139,7 +145,9 @@ struct SettingsView: View {
                 } header: {
                     Text("Notifications")
                 } footer: {
-                    Text("You will be reminded to Pause daiy at \(selectedDate.formatted(.dateTime.hour().minute())).")
+                    if isNotificationAccessGranted {
+                        Text("You will be reminded to Pause daiy at \(selectedDate.formatted(.dateTime.hour().minute())).")
+                    }
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
@@ -205,7 +213,6 @@ struct SettingsView: View {
             healthKitManager.checkAuthorizationStatus { status in
                 healthAuthorizationStatus = status
             }
-                        
             healthKitAuthorization()
             notificationAuthorization()
             
@@ -233,17 +240,17 @@ struct SettingsView: View {
             
             switch settings.authorizationStatus {
             case .notDetermined:
-                isNotificationAccessGrated = false
+                isNotificationAccessGranted = false
             case .authorized:
-                isNotificationAccessGrated = true
+                isNotificationAccessGranted = true
             case .denied:
-                isNotificationAccessGrated = false
+                isNotificationAccessGranted = false
             case .ephemeral:
-                isNotificationAccessGrated = true
+                isNotificationAccessGranted = true
             case .provisional:
-                isNotificationAccessGrated = true
+                isNotificationAccessGranted = true
             @unknown default:
-                isNotificationAccessGrated = false
+                isNotificationAccessGranted = false
             }
         }
         

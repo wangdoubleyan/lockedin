@@ -38,12 +38,23 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
 }
 
+extension View {
+    func widgetBackground(backgroundView: some View) -> some View {
+        if #available(iOSApplicationExtension 17.0, *) {
+            return containerBackground(for: .widget) {
+                backgroundView
+            }
+        } else {
+            return background(backgroundView)
+        }
+    }
+}
+
 struct MindfulPauseWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
         ZStack {
-            Color("WidgetBackground")
             ZStack {
                 HStack {
                     VStack(alignment: .leading) {
@@ -51,7 +62,7 @@ struct MindfulPauseWidgetEntryView : View {
                             .font(.largeTitle)
                             .foregroundStyle(.white)
                             .bold()
-                        Text("1 min")
+                        Text("30 sec")
                             .font(.headline)
                             .foregroundStyle(Color("DullGray"))
                             .bold()
@@ -68,7 +79,7 @@ struct MindfulPauseWidgetEntryView : View {
                     Circle()
                         .stroke(lineWidth: 40)
                         .foregroundStyle(Color("DullGray"))
-                        .opacity(0.2)
+                        .opacity(0.1)
                     
                     Circle()
                         .trim(from: 0.0, to: min(0.8, 1.0))
@@ -78,10 +89,12 @@ struct MindfulPauseWidgetEntryView : View {
                 .offset(x: 70, y: 70)
             }
             .widgetURL(URL(string: "widget://link0"))
-            .padding()
         }
+        .widgetBackground(backgroundView: Color("WidgetBackground"))
     }
 }
+
+
 
 struct MindfulPauseWidget: Widget {
     let kind: String = "MindfulPauseWidget"
@@ -91,7 +104,7 @@ struct MindfulPauseWidget: Widget {
             MindfulPauseWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Quick Start")
-        .description("Start a 1 minute Pause.")
+        .description("Start a 30 second Pause.")
     }
 }
 
