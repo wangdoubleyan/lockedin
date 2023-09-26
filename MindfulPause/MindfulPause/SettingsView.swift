@@ -51,7 +51,7 @@ struct SettingsView: View {
                 Section {
                     HStack {
                         Image(systemName: "music.note")
-                        Toggle(isOn: $settings.isSnapBackOn) {
+                        Toggle(isOn: $settings.isMusicOn) {
                             Text("Music")
                                 .foregroundStyle(Color.theme.foreground)
                         }

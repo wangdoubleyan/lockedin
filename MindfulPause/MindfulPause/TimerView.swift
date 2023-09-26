@@ -9,6 +9,7 @@ import SwiftUI
 import AVKit
 
 class SoundManager {
+    @ObservedObject var settings = Settings()
     static let instance = SoundManager()
     
     var player = AVAudioPlayer()
@@ -32,20 +33,22 @@ class SoundManager {
     }
     
     @IBAction func playMusic(music: String) {
-        guard let url = Bundle.main.url(forResource: music, withExtension: "mp3") else { return }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            try AVAudioSession.sharedInstance().setActive(true)
-            player1 = try AVAudioPlayer(contentsOf: url)
-            player1.numberOfLoops =  -1
-            player1.setVolume(0.0, fadeDuration: 0.0)
-            player1.play()
-            player1.setVolume(0.75, fadeDuration: 3.0)
-        } catch let error {
-            print("Error playing sound. \(error.localizedDescription)")
+        if settings.isMusicOn {
+            guard let url = Bundle.main.url(forResource: music, withExtension: "mp3") else { return }
+            
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+                try AVAudioSession.sharedInstance().setActive(true)
+                player1 = try AVAudioPlayer(contentsOf: url)
+                player1.numberOfLoops =  -1
+                player1.setVolume(0.0, fadeDuration: 0.0)
+                player1.play()
+                player1.setVolume(1, fadeDuration: 3.0)
+            } catch let error {
+                print("Error playing sound. \(error.localizedDescription)")
+            }
+            
         }
-        
     }
 }
 
@@ -147,21 +150,8 @@ struct TimerView: View {
             
             GeometryReader { geometry in
                 Button {
-                    if isTimerPaused {
-                        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-                        isTimerPaused.toggle()
-                        SoundManager.instance.player1.setVolume(0.0, fadeDuration: 0.0)
-                        SoundManager.instance.player1.play()
-                        SoundManager.instance.player1.setVolume(0.75, fadeDuration: 1.0)
-                    } else {
-                        self.timer.upstream.connect().cancel()
-                        isTimerPaused.toggle()
-                        SoundManager.instance.player1.setVolume(0, fadeDuration: 1.0)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-                            SoundManager.instance.player1.pause()
-                        }
-                    }
-                    
+                    isTimerPaused ? resumeTimer() : pauseTimer()
+
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 } label: {
                     if isTimerPaused {
@@ -186,7 +176,7 @@ struct TimerView: View {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                    fadeOut()
+                    fadeMusic(seconds: 3.0)
                 } label: {
                     Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
                         .font(.system(size: 35))
@@ -274,7 +264,7 @@ struct TimerView: View {
         if counter == 0 {
             counter += 1
             vibrate()
-            fadeOut()
+            fadeMusic(seconds: 3.0)
             DispatchQueue.global(qos: .background).async {
                 SoundManager.instance.playSound(sound: "Sound")
             }
@@ -288,15 +278,34 @@ struct TimerView: View {
         
     }
     
-    func fadeOut() {
+    func fadeMusic(seconds: Double) {
         DispatchQueue.global(qos: .background).async {
-            SoundManager.instance.player1.setVolume(0, fadeDuration: 3)
+            SoundManager.instance.player1.setVolume(0, fadeDuration: seconds)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(Int(seconds))) {
             SoundManager.instance.player1.pause()
         }
     }
+    
+    func pauseTimer() {
+        self.timer.upstream.connect().cancel()
+        isTimerPaused.toggle()
+        fadeMusic(seconds: 1.0)
+    }
+    
+    func resumeTimer() {
+        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        isTimerPaused.toggle()
+        
+        if settings.isMusicOn {
+            SoundManager.instance.player1.setVolume(0.0, fadeDuration: 0.0)
+            SoundManager.instance.player1.play()
+            SoundManager.instance.player1.setVolume(1, fadeDuration: 1.0)
+        }
+    }
+    
+    
 }
 
 struct TimerView_Previews: PreviewProvider {
