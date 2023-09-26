@@ -12,6 +12,7 @@ class SoundManager {
     static let instance = SoundManager()
     
     var player = AVAudioPlayer()
+    var player1 = AVAudioPlayer()
     
     @IBAction func playSound(sound: String) {
         guard let url = Bundle.main.url(forResource: sound, withExtension: "m4a") else { return }
@@ -20,8 +21,27 @@ class SoundManager {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
             
+            print(url)
+            player.volume = 2
             player = try AVAudioPlayer(contentsOf: url)
             player.play()
+        } catch let error {
+            print("Error playing sound. \(error.localizedDescription)")
+        }
+        
+    }
+    
+    @IBAction func playMusic(music: String) {
+        guard let url = Bundle.main.url(forResource: music, withExtension: "mp3") else { return }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            player1 = try AVAudioPlayer(contentsOf: url)
+            player1.numberOfLoops =  -1
+            player1.setVolume(0.0, fadeDuration: 0.0)
+            player1.play()
+            player1.setVolume(0.75, fadeDuration: 3.0)
         } catch let error {
             print("Error playing sound. \(error.localizedDescription)")
         }
@@ -130,9 +150,16 @@ struct TimerView: View {
                     if isTimerPaused {
                         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
                         isTimerPaused.toggle()
+                        SoundManager.instance.player1.setVolume(0.0, fadeDuration: 0.0)
+                        SoundManager.instance.player1.play()
+                        SoundManager.instance.player1.setVolume(0.75, fadeDuration: 1.0)
                     } else {
                         self.timer.upstream.connect().cancel()
                         isTimerPaused.toggle()
+                        SoundManager.instance.player1.setVolume(0, fadeDuration: 1.0)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                            SoundManager.instance.player1.pause()
+                        }
                     }
                     
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -159,6 +186,7 @@ struct TimerView: View {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    fadeOut()
                 } label: {
                     Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
                         .font(.system(size: 35))
@@ -238,6 +266,7 @@ struct TimerView: View {
         vibrate()
         DispatchQueue.global(qos: .background).async {
             SoundManager.instance.playSound(sound: "Sound")
+            SoundManager.instance.playMusic(music: settings.backgroundMusic)
         }
     }
     
@@ -245,6 +274,7 @@ struct TimerView: View {
         if counter == 0 {
             counter += 1
             vibrate()
+            fadeOut()
             DispatchQueue.global(qos: .background).async {
                 SoundManager.instance.playSound(sound: "Sound")
             }
@@ -256,6 +286,16 @@ struct TimerView: View {
             time.sec = 0
         }
         
+    }
+    
+    func fadeOut() {
+        DispatchQueue.global(qos: .background).async {
+            SoundManager.instance.player1.setVolume(0, fadeDuration: 3)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            SoundManager.instance.player1.pause()
+        }
     }
 }
 

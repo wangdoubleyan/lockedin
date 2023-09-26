@@ -21,12 +21,15 @@ extension Date: RawRepresentable {
 
 class Settings: ObservableObject {
     @AppStorage("isSnapBackOn") var isSnapBackOn = true
+    @AppStorage("isMusicOn") var isMusicOn = true
+    @AppStorage("backgroundMusic") var backgroundMusic = "Dream"
     @AppStorage("interval") var interval = 15.0
 }
 
 struct SettingsView: View {
     @State private var isHealthAccessGranted = false
     @State private var isNotificationAccessGranted = false
+    @State private var isNotificationSet = false
     
     @AppStorage("selectedDate") var selectedDate = Date()
     
@@ -39,11 +42,45 @@ struct SettingsView: View {
     @StateObject private var healthKitManager = HealthKitManager()
     
     let intervals = [5.0, 10.0, 15.0, 30.0, 60.0]
+    let backgroundMusicList = ["Campfire", "Dream", "Rain", "Stream"]
     let notify = NotificationManager()
     
     var body: some View {
         ZStack {
             List {
+                Section {
+                    HStack {
+                        Image(systemName: "music.note")
+                        Toggle(isOn: $settings.isSnapBackOn) {
+                            Text("Music")
+                                .foregroundStyle(Color.theme.foreground)
+                        }
+                    }
+                    if settings.isMusicOn {
+                        Picker(selection: $settings.backgroundMusic) {
+                            ForEach(backgroundMusicList, id: \.self) { list in
+                                Text(list).tag(list)
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: "play.circle.fill")
+                                Text("Track")
+
+                                    .foregroundStyle(Color.theme.foreground)
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Background").foregroundStyle(Color.theme.secondary)
+                }
+
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                        .fill(Color.theme.secondary.opacity(0.1))
+                        .padding(2)
+                )
+                .listRowSeparator(.hidden)
+
                 Section {
                     HStack {
                         Image(systemName: "alarm.fill")
@@ -59,7 +96,7 @@ struct SettingsView: View {
                             }
                         } label: {
                             HStack {
-                                Image(systemName: "timer")
+                                Image(systemName: "clock.fill")
                                 Text("Interval")
 
                                     .foregroundStyle(Color.theme.foreground)
@@ -123,29 +160,36 @@ struct SettingsView: View {
                             } else {
                                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                                 UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                                isNotificationSet = false
                             }
                         }
                     }
                     if isNotificationAccessGranted {
                         HStack {
-                            Image(systemName: "clock.arrow.circlepath")
+                            Image(systemName: "deskclock.fill")
                             DatePicker(selection: $selectedDate, displayedComponents: .hourAndMinute) {
-                                Text("When?")
+                                HStack {
+                                    Text("When?")
+                                        .foregroundStyle(Color.theme.foreground)
+                                    
+                                    Spacer()
+                                    Button("Set") {
+                                        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                                        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                                        notify.sendNotification(date: selectedDate, title: "⏸️ Time to Pause!", body: "How about a quick Pause right now?")
+                                        print(selectedDate)
+                                        isNotificationSet = true
+                                    }
                                     .foregroundStyle(Color.theme.foreground)
-                            }
-                            .onChange(of: selectedDate) { newValue in
-                                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-                                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-                                notify.sendNotification(date: selectedDate, title: "Time to Pause!", body: "Feeling stressed? Complete a short Pause right now.")
-                                print(selectedDate)
+                                    .buttonStyle(.borderedProminent)
+                                }
                             }
                         }
-                        
                     }
                 } header: {
                     Text("Notifications")
                 } footer: {
-                    if isNotificationAccessGranted {
+                    if isNotificationSet {
                         Text("You will be reminded to Pause daiy at \(selectedDate.formatted(.dateTime.hour().minute())).")
                     }
                 }
