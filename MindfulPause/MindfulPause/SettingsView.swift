@@ -180,7 +180,7 @@ struct SettingsView: View {
                                         print(selectedDate)
                                         isNotificationSet = true
                                     }
-                                    .foregroundStyle(Color.theme.foreground)
+                                    .foregroundStyle(Color.theme.background)
                                     .buttonStyle(.borderedProminent)
                                 }
                             }

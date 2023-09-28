@@ -110,7 +110,7 @@ struct TimerView: View {
                             .fontDesign(.rounded)
                     }
                 }
-            
+                
             }
             .frame(width: 250, height: 250)
             .onAppear {
@@ -148,35 +148,78 @@ struct TimerView: View {
                 .opacity(flash)
                 .animation(.easeInOut(duration: 1), value: flash)
             
-            GeometryReader { geometry in
-                Button {
-                    isTimerPaused ? resumeTimer() : pauseTimer()
-
-                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                } label: {
-                    if isTimerPaused {
-                        Image(systemName: "play.fill")
-                            .font(.system(size: 45))
-                            .symbolRenderingMode(.hierarchical)
-                    } else {
-                        Image(systemName: "pause.fill")
-                            .font(.system(size: 45))
-                            .symbolRenderingMode(.hierarchical)
+            VStack {
+                Spacer()
+                
+                
+                HStack {
+                    VStack {
+                        Button {
+                            settings.isMusicOn.toggle()
+                            if settings.isMusicOn {
+                                SoundManager.instance.playMusic(music: settings.backgroundMusic)
+                            } else {
+                                fadeMusic()
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: "music.note")
+                                Text("Music")
+                                    .strikethrough(settings.isMusicOn ? false : true, color: Color.theme.foreground)
+                            }
+                            .foregroundStyle(Color.theme.secondary)
+                            .font(.headline)
+                        }
                     }
-                        
+                    VStack {
+                        Button {
+                            isTimerPaused ? resumeTimer() : pauseTimer()
+                            
+                            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                        } label: {
+                            if isTimerPaused {
+                                Image(systemName: "play.fill")
+                                    .font(.system(size: 45))
+                                    .symbolRenderingMode(.hierarchical)
+                            } else {
+                                Image(systemName: "pause.fill")
+                                    .font(.system(size: 45))
+                                    .symbolRenderingMode(.hierarchical)
+                            }
+                            
+                        }
+                    }
+                    .foregroundStyle(Color.theme.foreground)
+                    .frame(width: 115, height: 60, alignment: .center)
+                    VStack {
+                        Button {
+                            settings.isSnapBackOn.toggle()
+                        } label: {
+                            HStack {
+                                Image(systemName: "alarm.fill")
+                                Text("Snaps")
+                                    .strikethrough(settings.isSnapBackOn ? false : true, color: Color.theme.foreground)
+                            }
+                            .foregroundStyle(Color.theme.secondary)
+                            .font(.headline)
+                        }
+                    }
                 }
-                .position(x: geometry.size.width / 2, y: geometry.size.height * 0.83)
+                .frame(maxWidth: .infinity)
+                .background(Color.theme.secondary.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
             }
-
+            .padding()
+            .padding(.vertical, 50)
         }
-        .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea()
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                    fadeMusic(seconds: 3.0)
+                    fadeMusic()
                 } label: {
                     Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
                         .font(.system(size: 35))
@@ -264,7 +307,7 @@ struct TimerView: View {
         if counter == 0 {
             counter += 1
             vibrate()
-            fadeMusic(seconds: 3.0)
+            fadeMusic()
             DispatchQueue.global(qos: .background).async {
                 SoundManager.instance.playSound(sound: "Sound")
             }
@@ -278,12 +321,12 @@ struct TimerView: View {
         
     }
     
-    func fadeMusic(seconds: Double) {
+    func fadeMusic() {
         DispatchQueue.global(qos: .background).async {
-            SoundManager.instance.player1.setVolume(0, fadeDuration: seconds)
+            SoundManager.instance.player1.setVolume(0, fadeDuration: 1)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(Int(seconds))) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             SoundManager.instance.player1.pause()
         }
     }
@@ -291,7 +334,7 @@ struct TimerView: View {
     func pauseTimer() {
         self.timer.upstream.connect().cancel()
         isTimerPaused.toggle()
-        fadeMusic(seconds: 1.0)
+        fadeMusic()
     }
     
     func resumeTimer() {

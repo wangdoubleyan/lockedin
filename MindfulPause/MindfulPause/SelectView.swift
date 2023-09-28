@@ -104,24 +104,6 @@ struct SelectView: View {
                     
                     Spacer()
                     
-                    
-                    NavigationLink {
-                        TimerView(time: time, settings: Settings())
-                    } label: {
-                        Text("Let's Pause")
-                            .foregroundStyle(Color.theme.foreground)
-                            .font(.headline)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .contentShape(Rectangle())
-                            .padding(.vertical)
-                        
-                    }
-                    .simultaneousGesture(TapGesture().onEnded{
-                        time.sec = 0
-                    })
-                    .background(Color.theme.accent)
-                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                    
                     NavigationLink {
                         TimerView(time: time, settings: Settings())
                     } label: {
@@ -130,23 +112,41 @@ struct SelectView: View {
                             .font(.headline)
                             .frame(maxWidth: .infinity, alignment: .center)
                             .contentShape(Rectangle())
-                            .padding(.vertical)
-                    } 
+                    }
                     .simultaneousGesture(TapGesture().onEnded{
                         time.hr = 0
                         time.min = 0
                         time.sec = 30
                     })
+                    .frame(height: 60)
                     .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
                     .overlay(
                         RoundedRectangle(cornerRadius: 20.0, style: .continuous)
                             .stroke(Color.theme.accent, lineWidth: 2)
                     )
                     
-                    Spacer()
+                    NavigationLink {
+                        TimerView(time: time, settings: Settings())
+                    } label: {
+                        Text("Let's Pause")
+                            .foregroundStyle(Color.theme
+                                .background)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .contentShape(Rectangle())
+                        
+                    }
+                    .simultaneousGesture(TapGesture().onEnded{
+                        time.sec = 0
+                    })
+                    .frame(height: 60)
+                    .background(Color.theme.accent)
+                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
                 }
                 .padding()
+                .padding(.vertical, 50)
             }
+            .ignoresSafeArea()
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink {
