@@ -1,6 +1,6 @@
 //
 //  HealthKitManager.swift
-//  MindfulPause
+//  Pausepone
 //
 //  Created by Matsvei Liapich on 8/31/23.
 //

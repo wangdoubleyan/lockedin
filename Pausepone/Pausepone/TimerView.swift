@@ -1,6 +1,6 @@
 //
 //  TimerView.swift
-//  MindfulPause
+//  Pausepone
 //
 //  Created by Matsvei Liapich on 8/25/23.
 //
@@ -142,7 +142,7 @@ struct TimerView: View {
                 progress += 1.0 / Double(totalTime)
                 
                 if intervalCounter == 0 {
-                    snapBack()
+                    snap()
                     intervalCounter = settings.interval - 1
                 } else if intervalCounter < 0 {
                     intervalCounter = settings.interval - 2
@@ -201,7 +201,7 @@ struct TimerView: View {
                     .frame(width: 115, height: 65, alignment: .center)
                     VStack {
                         Button {
-                            settings.isSnapBackOn.toggle()
+                            settings.isSnapOn.toggle()
                             
                             UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                         } label: {
@@ -210,7 +210,7 @@ struct TimerView: View {
                                 Text("Snaps")
 
                             }
-                            .foregroundStyle(settings.isSnapBackOn ? Color.theme.accent : Color.theme.secondary)
+                            .foregroundStyle(settings.isSnapOn ? Color.theme.accent : Color.theme.secondary)
                             .font(.headline)
                         }
                     }
@@ -278,10 +278,10 @@ struct TimerView: View {
     }
 
     
-    func snapBack() {
+    func snap() {
         if Double(timeRemaining) > 0 {
-            if settings.isSnapBackOn {
-                SoundManager.instance.playSound(sound: "SnapBackSound")
+            if settings.isSnapOn {
+                SoundManager.instance.playSound(sound: "SnapSound")
                 
                 haptic()
                 

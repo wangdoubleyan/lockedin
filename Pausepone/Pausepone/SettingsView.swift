@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  MindfulPause
+//  Pausepone
 //
 //  Created by Matsvei Liapich on 8/28/23.
 //
@@ -20,7 +20,7 @@ extension Date: RawRepresentable {
 }
 
 class Settings: ObservableObject {
-    @AppStorage("isSnapBackOn") var isSnapBackOn = true
+    @AppStorage("isSnapOn") var isSnapOn = false
     @AppStorage("isMusicOn") var isMusicOn = true
     @AppStorage("backgroundMusic") var backgroundMusic = "Dream"
     @AppStorage("interval") var interval = 15.0
@@ -84,12 +84,12 @@ struct SettingsView: View {
                 Section {
                     HStack {
                         Image(systemName: "alarm.fill")
-                        Toggle(isOn: $settings.isSnapBackOn) {
-                            Text("SnapBacks")
+                        Toggle(isOn: $settings.isSnapOn) {
+                            Text("Snaps")
                                 .foregroundStyle(Color.theme.foreground)
                         }
                     }
-                    if settings.isSnapBackOn {
+                    if settings.isSnapOn {
                         Picker(selection: $settings.interval) {
                             ForEach(intervals, id: \.self) { interval in
                                 Text("\(interval.formatted()) sec").tag(interval)
@@ -106,7 +106,7 @@ struct SettingsView: View {
                 } header: {
                     Text("Pause").foregroundStyle(Color.theme.secondary)
                 } footer: {
-                    Text("SnapBacks help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
+                    Text("Snaps help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
                     
                 }
 
@@ -133,7 +133,7 @@ struct SettingsView: View {
                 } header: {
                     Text("Connect")
                 } footer: {
-                    Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > MindfulPause.")
+                    Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > Pausepone.")
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)

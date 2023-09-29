@@ -1,6 +1,6 @@
 //
-//  MindfulPauseWidget.swift
-//  MindfulPauseWidget
+//  PauseponeWidget.swift
+//  PauseponeWidget
 //
 //  Created by Matsvei Liapich on 9/12/23.
 //
@@ -50,7 +50,7 @@ extension View {
     }
 }
 
-struct MindfulPauseWidgetEntryView : View {
+struct PauseponeWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -96,21 +96,21 @@ struct MindfulPauseWidgetEntryView : View {
 
 
 
-struct MindfulPauseWidget: Widget {
-    let kind: String = "MindfulPauseWidget"
+struct PauseponeWidget: Widget {
+    let kind: String = "PauseponeWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            MindfulPauseWidgetEntryView(entry: entry)
+            PauseponeWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Quick Start")
         .description("Start a 30 second Pause.")
     }
 }
 
-struct MindfulPauseWidget_Previews: PreviewProvider {
+struct PauseponeWidget_Previews: PreviewProvider {
     static var previews: some View {
-        MindfulPauseWidgetEntryView(entry: SimpleEntry(date: Date()))
+        PauseponeWidgetEntryView(entry: SimpleEntry(date: Date()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

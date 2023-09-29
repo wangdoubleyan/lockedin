@@ -1,6 +1,6 @@
 //
 //  Color.swift
-//  MindfulPause
+//  Pausepone
 //
 //  Created by Matsvei Liapich on 8/28/23.
 //

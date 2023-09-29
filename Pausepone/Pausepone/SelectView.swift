@@ -1,6 +1,6 @@
 //
 //  SelectView.swift
-//  MindfulPause
+//  Pausepone
 //
 //  Created by Matsvei Liapich on 8/25/23.
 //

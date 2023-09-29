@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		120D5D482AA629110024257F /* SnapBackSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 120D5D472AA629110024257F /* SnapBackSound.m4a */; };
+		120D5D482AA629110024257F /* SnapSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 120D5D472AA629110024257F /* SnapSound.m4a */; };
 		120D5D4A2AA629350024257F /* Sound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 120D5D492AA629350024257F /* Sound.m4a */; };
 		125B9C592AC5C15E00C914CC /* Campfire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 125B9C582AC5C15E00C914CC /* Campfire.mp3 */; };
 		125B9C5B2AC5C16A00C914CC /* Dream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 125B9C5A2AC5C16A00C914CC /* Dream.mp3 */; };
@@ -57,7 +57,7 @@
 /* Begin PBXFileReference section */
 		120D5D302AA595D90024257F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		120D5D322AA595D90024257F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		120D5D472AA629110024257F /* SnapBackSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnapBackSound.m4a; sourceTree = "<group>"; };
+		120D5D472AA629110024257F /* SnapSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnapSound.m4a; sourceTree = "<group>"; };
 		120D5D492AA629350024257F /* Sound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sound.m4a; sourceTree = "<group>"; };
 		125B9C582AC5C15E00C914CC /* Campfire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Campfire.mp3; sourceTree = "<group>"; };
 		125B9C5A2AC5C16A00C914CC /* Dream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dream.mp3; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 				125B9C5A2AC5C16A00C914CC /* Dream.mp3 */,
 				125B9C5C2AC5C16F00C914CC /* Rain.mp3 */,
 				125B9C5E2AC5C17600C914CC /* Stream.mp3 */,
-				120D5D472AA629110024257F /* SnapBackSound.m4a */,
+				120D5D472AA629110024257F /* SnapSound.m4a */,
 				120D5D492AA629350024257F /* Sound.m4a */,
 			);
 			path = Sounds;
@@ -269,7 +269,7 @@
 				125B9C5F2AC5C17600C914CC /* Stream.mp3 in Resources */,
 				125B9C592AC5C15E00C914CC /* Campfire.mp3 in Resources */,
 				12820B072A99A8570054DBFF /* Assets.xcassets in Resources */,
-				120D5D482AA629110024257F /* SnapBackSound.m4a in Resources */,
+				120D5D482AA629110024257F /* SnapSound.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

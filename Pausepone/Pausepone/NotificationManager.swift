@@ -1,6 +1,6 @@
 //
 //  NotificationManager.swift
-//  MindfulPause
+//  Pausepone
 //
 //  Created by Matsvei Liapich on 9/2/23.
 //
