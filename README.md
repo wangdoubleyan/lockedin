@@ -1,21 +1,21 @@
-# MindfulPause: Meditation Timer
-![show](https://github.com/matsveil/mindful-pause/assets/109008007/a697f95d-2e71-483c-b52b-30bed3f8747f)
+# Pausepone: Focus & Relax Timer
+![poster](https://github.com/matsveil/pausepone/assets/109008007/8569b927-eb76-4116-a546-558f605f07f2)
 
-## Features
-- 🔁 Set custom Pause interval
-- ⏰ Get a daily reminder to Pause
-- ❤️ Save your data to Apple Health
-- ⏩ Start a Pause session from your home screen
+## About
+Pausepone is a user-friendly timer that simplifies time management. Whether you need it for studying or taking a break, simply select the desired duration and begin.
 
-## Why?
-I've tried out pretty much every meditation app out there, but I could never stick with any of them for more than a few weeks. I just wanted something dead simple and easy on the eyes, you know? So, I went ahead and created MindfulPause. It's my first crack at making an app, and I'll admit, it's not perfect, but hey, it might just be what you need to bring more mindfulness into your life :)
+- Set Your Timer: Begin by choosing the duration for your pause—whether it's 30 seconds or 12 hours, Pausepone has you covered.
+- Stay Present: Once your timer is set, hit start. The app will gently alert you at regular intervals to help you stay grounded in the present moment.
+- Enjoy the Pause: Relax to soothing music that plays during your pause. Customize the music to your preference in the settings.
+- Customize Your Experience: Not a fan of reminders or music? No worries! Easily toggle these features on or off in the settings or directly in the timer.
+- Daily Reminders: Need a daily nudge to focus or relax? Pausepone can send you reminders at a time that suits you best, ensuring you never forget to pause.
+- Quick Start Widget: Need a moment to breathe during a stressful day? Add the Quick Start widget to your home screen for instant access to your pause.
+- Apple Health Integration: This app seamlessly integrates with Apple Health, saving your pause duration as Mindful Minutes for a holistic approach to your well-being.
 
-MindfulPause is all about keeping it simple. I made sure it's user-friendly and looks good, so it's easier for you to get into the mindfulness groove. And yeah, I know, it's not flawless, but I genuinely think it can help you be more mindful in your day-to-day.
-
-I'm really grateful for your support, and I hope MindfulPause can be a valuable addition to your mindfulness journey. If you give it a shot and have any thoughts or suggestions to make it better, please don't hold back! Your feedback means a lot as I keep tweaking and improving the app.
+In summary, Pausepone is designed to help you focus on what truly matters, be it your education or mental well-being. Give it a try!
 
 ## Roadmap
-- [ ] Add background sounds
+- [x] Add background sounds
 - [ ] Add dynamic island support
 - [ ] Add background playback
 - [ ] Add Breath timer
