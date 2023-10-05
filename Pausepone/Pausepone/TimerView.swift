@@ -25,7 +25,7 @@ class SoundManager {
             print(url)
             soundPlayer.stop()
             soundPlayer = try AVAudioPlayer(contentsOf: url)
-            soundPlayer.volume = 2
+            soundPlayer.volume = 1
             musicPlayer.prepareToPlay()
             soundPlayer.play()
         } catch let error {
@@ -85,13 +85,13 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-            Color.theme.background
-                .ignoresSafeArea()
+            Image("Mountain")
+                .resizable()
+                
             ZStack {
                 Circle()
                     .stroke(lineWidth: stroke)
-                    .foregroundStyle(Color.theme.secondary)
-                    .opacity(0.1)
+                    .foregroundStyle(.ultraThinMaterial)
                     .animation(.linear(duration: 1), value: stroke)
                 
                 Circle()
@@ -159,7 +159,7 @@ struct TimerView: View {
                 Spacer()
                 
                 HStack {
-                    VStack {
+                    HStack {
                         Button {
                             settings.isMusicOn.toggle()
                             if settings.isMusicOn {
@@ -172,15 +172,20 @@ struct TimerView: View {
                                 fadeMusic()
                             }
                         } label: {
+                            Image(systemName: settings.isMusicOn ? "speaker.wave.2.fill": "speaker.slash.fill")
+                                .frame(width: 25, height: 25)
+                                .id(settings.isMusicOn)
+                                .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
                             HStack {
-                                Image(systemName: "music.note")
                                 Text("Music")
                             }
-                            .foregroundStyle(settings.isMusicOn ? Color.theme.accent : Color.theme.secondary)
-                            .font(.headline)
                         }
+                        .foregroundStyle(settings.isMusicOn ? Color.theme.foreground : Color.theme.trinary)
+                        .font(.headline)
                     }
-                    VStack {
+                    .frame(width: 100, alignment: .leading)
+        
+                    HStack {
                         Button {
                             isTimerPaused ? resumeTimer() : pauseTimer()
                             
@@ -188,40 +193,49 @@ struct TimerView: View {
                         } label: {
                             if isTimerPaused {
                                 Image(systemName: "play.fill")
+                                    .id(isTimerPaused)
+                                    .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
                                     .font(.system(size: 35))
                                     
                             } else {
                                 Image(systemName: "pause.fill")
+                                    .id(isTimerPaused)
+                                    .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
                                     .font(.system(size: 35))
                             }
-                            
                         }
                     }
                     .foregroundStyle(Color.theme.foreground)
-                    .frame(width: 115, height: 65, alignment: .center)
-                    VStack {
+                    .frame(width: 65, height: 65, alignment: .center)
+                    
+                    HStack {
                         Button {
                             settings.isSnapOn.toggle()
                             
                             UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                         } label: {
+                            Image(systemName: settings.isSnapOn ? "bell.badge.waveform.fill" : "bell.slash.fill")
+                                .frame(width: 25, height: 25)
+                                .id(settings.isSnapOn)
+                                .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
                             HStack {
-                                Image(systemName: "alarm.fill")
                                 Text("Snaps")
-
                             }
-                            .foregroundStyle(settings.isSnapOn ? Color.theme.accent : Color.theme.secondary)
-                            .font(.headline)
                         }
+                        .foregroundStyle(settings.isSnapOn ? Color.theme.foreground : Color.theme.trinary)
+                        .font(.headline)
+                        .animation(.smooth, value: settings.isSnapOn)
                     }
+                    .frame(width: 100, alignment: .trailing)
                 }
                 .frame(maxWidth: .infinity)
-                .background(Color.theme.secondary.opacity(0.1))
+                .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
             }
             .padding()
             .padding(.vertical, 50)
         }
+        .toolbar(.hidden, for: .tabBar)
         .navigationBarBackButtonHidden(true)
         .ignoresSafeArea()
         .toolbar {
@@ -240,12 +254,12 @@ struct TimerView: View {
                     Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
                         .font(.system(size: 35))
                         .symbolRenderingMode(.hierarchical)
-                        .foregroundColor(Color.theme.secondary.opacity(0.8))
+                        .foregroundStyle(Color.theme.primary)
                 }
             }
             ToolbarItem(placement: .principal) {
                 VStack {
-                    Text("Pause")
+                    Text("Focus")
                         .bold()
                         .fontDesign(.rounded)
                         .font(.title2)
@@ -317,19 +331,19 @@ struct TimerView: View {
             counter += 1
             vibrate()
             SoundManager.instance.playSound(sound: "Sound")
+            fadeMusic()
             healthKitManager.saveMindfulMinutes(minutes: Double(totalTime))
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             UIApplication.shared.isIdleTimerDisabled = false
-            time.sec = 0
-            fadeMusic()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(fadeTime) * 1000)) {
-                SoundManager.instance.soundPlayer.stop()
-                SoundManager.instance.musicPlayer.stop()
-                dismiss()
-            }
+            time.sec = 0
+            
+            SoundManager.instance.soundPlayer.stop()
+            SoundManager.instance.musicPlayer.stop()
+            
+            dismiss()
         }
     }
     

@@ -12,7 +12,7 @@ struct PauseponeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SelectView()
+            ContentView()
                 .preferredColorScheme(.dark)
         }
     }

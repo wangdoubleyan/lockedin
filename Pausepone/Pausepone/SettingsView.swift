@@ -50,7 +50,10 @@ struct SettingsView: View {
             List {
                 Section {
                     HStack {
-                        Image(systemName: "music.note")
+                        Image(systemName: "speaker.wave.2.fill")
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(Color.theme.secondary)
+                            
                         Toggle(isOn: $settings.isMusicOn) {
                             Text("Music")
                                 .foregroundStyle(Color.theme.foreground)
@@ -63,9 +66,10 @@ struct SettingsView: View {
                             }
                         } label: {
                             HStack {
-                                Image(systemName: "play.circle.fill")
+                                Image(systemName: "music.note")
+                                    .frame(width: 25, height: 25)
+                                    .foregroundStyle(Color.theme.secondary)
                                 Text("Track")
-
                                     .foregroundStyle(Color.theme.foreground)
                             }
                         }
@@ -76,14 +80,16 @@ struct SettingsView: View {
 
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.secondary.opacity(0.1))
+                        .fill(Color.theme.surface)
                         .padding(2)
                 )
                 .listRowSeparator(.hidden)
 
                 Section {
                     HStack {
-                        Image(systemName: "alarm.fill")
+                        Image(systemName: "bell.badge.waveform.fill")
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(Color.theme.secondary)
                         Toggle(isOn: $settings.isSnapOn) {
                             Text("Snaps")
                                 .foregroundStyle(Color.theme.foreground)
@@ -96,7 +102,9 @@ struct SettingsView: View {
                             }
                         } label: {
                             HStack {
-                                Image(systemName: "clock.fill")
+                                Image(systemName: "clock.arrow.2.circlepath")
+                                    .frame(width: 25, height: 25)
+                                    .foregroundStyle(Color.theme.secondary)
                                 Text("Interval")
 
                                     .foregroundStyle(Color.theme.foreground)
@@ -104,7 +112,7 @@ struct SettingsView: View {
                         }
                     }
                 } header: {
-                    Text("Pause").foregroundStyle(Color.theme.secondary)
+                    Text("Focus").foregroundStyle(Color.theme.secondary)
                 } footer: {
                     Text("Snaps help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
                     
@@ -112,14 +120,17 @@ struct SettingsView: View {
 
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.secondary.opacity(0.1))
+                        .fill(Color.theme.surface)
                         .padding(2)
                 )
                 .listRowSeparator(.hidden)
                 
                 Section {
                     HStack {
-                        Image(systemName: "heart.text.square.fill")
+                        Image(systemName: "heart.fill")
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(Color.theme.secondary)
+
                         Toggle(isOn: $isHealthAccessGranted) {
                             Text("Apple Health")
                                 .foregroundStyle(Color.theme.foreground)
@@ -137,13 +148,16 @@ struct SettingsView: View {
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.secondary.opacity(0.1))
+                        .fill(Color.theme.surface)
                         .padding(2)
                 )
                 
                 Section {
                     HStack {
                         Image(systemName: "bell.badge.fill")
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(Color.theme.secondary)
+
                         Toggle(isOn: $isNotificationAccessGranted) {
                             Text("Daily Reminder")
                                 .foregroundStyle(Color.theme.foreground)
@@ -166,7 +180,10 @@ struct SettingsView: View {
                     }
                     if isNotificationAccessGranted {
                         HStack {
-                            Image(systemName: "deskclock.fill")
+                            Image(systemName: "clock.fill")
+                                .frame(width: 25, height: 25)
+                                .foregroundStyle(Color.theme.secondary)
+
                             DatePicker(selection: $selectedDate, displayedComponents: .hourAndMinute) {
                                 HStack {
                                     Text("When?")
@@ -180,7 +197,7 @@ struct SettingsView: View {
                                         print(selectedDate)
                                         isNotificationSet = true
                                     }
-                                    .foregroundStyle(Color.theme.foreground)
+                                    .foregroundStyle(Color.theme.background)
                                     .buttonStyle(.borderedProminent)
                                 }
                             }
@@ -195,20 +212,26 @@ struct SettingsView: View {
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.secondary.opacity(0.1))
+                        .fill(Color.theme.surface)
                         .padding(2)
                 )
                 .listRowSeparator(.hidden)
                 
                 Section {
                     HStack {
-                        Image(systemName: "info.circle.fill")
-                        Link("Credit", destination: URL(string: "https://github.com/matsveil/mindful-pause/blob/main/CREDIT.md")!)
+                        Image(systemName: "info")
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(Color.theme.secondary)
+
+                        Link("Credit", destination: URL(string: "https://github.com/matsveil/pausepone/blob/main/CREDIT.md")!)
                             .foregroundStyle(Color.theme.foreground)
                     }
                     HStack {
-                        Image(systemName: "curlybraces.square.fill")
-                        Link("Open Source", destination: URL(string: "https://github.com/matsveil/mindful-pause/blob/main/LICENSE")!)
+                        Image(systemName: "chevron.left.forwardslash.chevron.right")
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(Color.theme.secondary)
+                        
+                        Link("Open Source", destination: URL(string: "https://github.com/matsveil/pausepone/blob/main/LICENSE")!)
                             .foregroundStyle(Color.theme.foreground)
                     }
                 } header: {
@@ -216,18 +239,18 @@ struct SettingsView: View {
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.secondary.opacity(0.1))
+                        .fill(Color.theme.surface)
                         .padding(2)
                      
                 )
                 .listRowSeparator(.hidden)
             }
+            .toolbar(.hidden, for: .tabBar)
             .environment(\.defaultMinListRowHeight, 60)
             .tint(Color.theme.accent)
             .background(Color.theme.background)
             .foregroundStyle(Color.theme.secondary)
             .scrollContentBackground(.hidden)
-            .navigationTitle("Settings")
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -238,7 +261,7 @@ struct SettingsView: View {
                         Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
                             .font(.system(size: 35))
                             .symbolRenderingMode(.hierarchical)
-                            .foregroundColor(Color.theme.secondary.opacity(0.8))
+                            .foregroundStyle(Color.theme.primary)
                     }
                 }
                 ToolbarItem(placement: .principal) {
