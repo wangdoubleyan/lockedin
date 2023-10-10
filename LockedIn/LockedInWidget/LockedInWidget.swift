@@ -1,6 +1,6 @@
 //
-//  PauseponeWidget.swift
-//  PauseponeWidget
+//  LockedInWidget.swift
+//  LockedInWidget
 //
 //  Created by Matsvei Liapich on 10/9/23.
 //
@@ -51,7 +51,7 @@ extension View {
     }
 }
 
-struct PauseponeWidgetEntryView : View {
+struct LockedInWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -87,7 +87,7 @@ struct PauseponeWidgetEntryView : View {
     }
 }
 
-struct PauseponeWidgetEntry2View : View {
+struct LockedInWidgetEntry2View : View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -123,15 +123,15 @@ struct PauseponeWidgetEntry2View : View {
     }
 }
 
-struct PauseponeWidget: Widget {
-    let kind: String = "PauseponeWidget"
+struct LockedInWidget: Widget {
+    let kind: String = "LockedInWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(iOS 17.0, *) {
-                PauseponeWidgetEntryView(entry: entry)
+                LockedInWidgetEntryView(entry: entry)
             } else {
-                PauseponeWidgetEntryView(entry: entry)
+                LockedInWidgetEntryView(entry: entry)
                     .background()
             }
         }
@@ -140,15 +140,15 @@ struct PauseponeWidget: Widget {
     }
 }
 
-struct PauseponeWidget2: Widget {
-    let kind: String = "PauseponeWidget2"
+struct LockedInWidget2: Widget {
+    let kind: String = "LockedInWidget2"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(iOS 17.0, *) {
-                PauseponeWidgetEntry2View(entry: entry)
+                LockedInWidgetEntry2View(entry: entry)
             } else {
-                PauseponeWidgetEntry2View(entry: entry)
+                LockedInWidgetEntry2View(entry: entry)
                     .background()
             }
         }
@@ -158,7 +158,7 @@ struct PauseponeWidget2: Widget {
 }
 
 #Preview(as: .systemSmall) {
-    PauseponeWidget()
+    LockedInWidget()
 } timeline: {
     SimpleEntry(date: .now, emoji: "😀")
     SimpleEntry(date: .now, emoji: "🤩")

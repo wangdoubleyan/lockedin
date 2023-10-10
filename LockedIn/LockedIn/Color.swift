@@ -1,6 +1,6 @@
 //
 //  Color.swift
-//  Pausepone
+//  LockedIn
 //
 //  Created by Matsvei Liapich on 8/28/23.
 //

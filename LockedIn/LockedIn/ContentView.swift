@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Pausepone
+//  LockedIn
 //
 //  Created by Matsvei Liapich on 9/30/23.
 //

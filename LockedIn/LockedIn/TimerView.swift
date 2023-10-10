@@ -1,6 +1,6 @@
 //
 //  TimerView.swift
-//  Pausepone
+//  LockedIn
 //
 //  Created by Matsvei Liapich on 8/25/23.
 //

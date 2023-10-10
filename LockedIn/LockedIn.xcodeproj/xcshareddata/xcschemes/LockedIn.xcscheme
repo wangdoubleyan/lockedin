@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "12820AFE2A99A8550054DBFF"
-               BuildableName = "Pausepone.app"
-               BlueprintName = "Pausepone"
-               ReferencedContainer = "container:Pausepone.xcodeproj">
+               BuildableName = "LockedIn.app"
+               BlueprintName = "LockedIn"
+               ReferencedContainer = "container:LockedIn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "12820AFE2A99A8550054DBFF"
-            BuildableName = "Pausepone.app"
-            BlueprintName = "Pausepone"
-            ReferencedContainer = "container:Pausepone.xcodeproj">
+            BuildableName = "LockedIn.app"
+            BlueprintName = "LockedIn"
+            ReferencedContainer = "container:LockedIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,9 +61,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "12820AFE2A99A8550054DBFF"
-            BuildableName = "Pausepone.app"
-            BlueprintName = "Pausepone"
-            ReferencedContainer = "container:Pausepone.xcodeproj">
+            BuildableName = "LockedIn.app"
+            BlueprintName = "LockedIn"
+            ReferencedContainer = "container:LockedIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

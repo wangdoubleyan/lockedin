@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "12D961372AD491D100CD25D5"
-               BuildableName = "PauseponeWidgetExtension.appex"
-               BlueprintName = "PauseponeWidgetExtension"
-               ReferencedContainer = "container:Pausepone.xcodeproj">
+               BuildableName = "LockedInWidgetExtension.appex"
+               BlueprintName = "LockedInWidgetExtension"
+               ReferencedContainer = "container:LockedIn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -30,9 +30,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "12820AFE2A99A8550054DBFF"
-               BuildableName = "Pausepone.app"
-               BlueprintName = "Pausepone"
-               ReferencedContainer = "container:Pausepone.xcodeproj">
+               BuildableName = "LockedIn.app"
+               BlueprintName = "LockedIn"
+               ReferencedContainer = "container:LockedIn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -62,18 +62,18 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "12D961372AD491D100CD25D5"
-            BuildableName = "PauseponeWidgetExtension.appex"
-            BlueprintName = "PauseponeWidgetExtension"
-            ReferencedContainer = "container:Pausepone.xcodeproj">
+            BuildableName = "LockedInWidgetExtension.appex"
+            BlueprintName = "LockedInWidgetExtension"
+            ReferencedContainer = "container:LockedIn.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "12820AFE2A99A8550054DBFF"
-            BuildableName = "Pausepone.app"
-            BlueprintName = "Pausepone"
-            ReferencedContainer = "container:Pausepone.xcodeproj">
+            BuildableName = "LockedIn.app"
+            BlueprintName = "LockedIn"
+            ReferencedContainer = "container:LockedIn.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <EnvironmentVariables>
@@ -107,9 +107,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "12820AFE2A99A8550054DBFF"
-            BuildableName = "Pausepone.app"
-            BlueprintName = "Pausepone"
-            ReferencedContainer = "container:Pausepone.xcodeproj">
+            BuildableName = "LockedIn.app"
+            BlueprintName = "LockedIn"
+            ReferencedContainer = "container:LockedIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

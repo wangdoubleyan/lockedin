@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  Pausepone
+//  LockedIn
 //
 //  Created by Matsvei Liapich on 8/28/23.
 //
@@ -176,7 +176,7 @@ struct SettingsView: View {
                     Text("Connect")
                         .captionTextStyle()
                 } footer: {
-                    Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > Pausepone.")
+                    Text("Enable Mindful Minutes by going to Settings > Health > Data Access & Devices > LockedIn.")
                         .captionTextStyle()
                 }
                 .listRowBackground(
@@ -263,7 +263,7 @@ struct SettingsView: View {
                             .foregroundStyle(Color.theme.secondary)
                             .font(.title3)
 
-                        Link("Credit", destination: URL(string: "https://github.com/matsveil/pausepone/blob/main/CREDIT.md")!)
+                        Link("Credit", destination: URL(string: "https://github.com/matsveil/lockedin/blob/main/CREDIT.md")!)
                             .foregroundColor(Color.theme.foreground)
                             .font(.title3)
                             .bold()
@@ -275,7 +275,7 @@ struct SettingsView: View {
                             .foregroundStyle(Color.theme.secondary)
                             .font(.title3)
                         
-                        Link("Open Source", destination: URL(string: "https://github.com/matsveil/pausepone/blob/main/LICENSE")!)
+                        Link("Open Source", destination: URL(string: "https://github.com/matsveil/lockedin/blob/main/LICENSE")!)
                             .foregroundColor(Color.theme.foreground)
                             .font(.title3)
                             .bold()

@@ -1,6 +1,6 @@
 //
-//  PauseponeApp.swift
-//  Pausepone
+//  LockedInApp.swift
+//  LockedIn
 //
 //  Created by Matsvei Liapich on 8/25/23.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct PauseponeApp: App {
+struct LockedInApp: App {
     
     var body: some Scene {
         WindowGroup {
