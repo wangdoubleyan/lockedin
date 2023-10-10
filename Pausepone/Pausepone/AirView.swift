@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import CoreHaptics
 
 struct AirView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
+    
+    @State private var engine: CHHapticEngine?
     
     @State private var isBreathingIn = true
     @State private var height = 0.0
@@ -26,59 +29,124 @@ struct AirView: View {
         ZStack {
             Image("Sea")
             
-            VStack {
-                Text("\(Int(breathesRemaining)) left")
-                    .foregroundStyle(Color.theme.foreground)
-                    .font(.headline)
+            ZStack {
+                Capsule()
+                    .offset(y: 500)
+                    .fill(Color.theme.primary.opacity(0.75))
+                    .frame(width: 700, height: height)
+                    .animation(.easeInOut(duration: 5.0), value: height)
+                Capsule()
+                    .offset(y: 500)
+                    .fill(Color.theme.primary.opacity(0.75))
+                    .frame(width: 700, height: height)
+                    .animation(.easeInOut(duration: 5.0).delay(0.25), value: height)
+                Capsule()
+                    .offset(y: 500)
+                    .fill(Color.theme.primary.opacity(0.75))
+                    .frame(width: 700, height: height)
+                    .animation(.easeInOut(duration: 5.0).delay(0.5), value: height)
+                
+                VStack(spacing: 0) {
+                    Text(isBreathingIn ? "in" : "out")
+                        .foregroundStyle(Color.theme.foreground)
+                        .font(.system(size: 75))
+                        .fontDesign(.rounded)
+                        .bold()
+                    
+                    HStack(spacing : 10) {
+                        Button {
+                            settings.isMusicOn.toggle()
+                            if settings.isMusicOn {
+                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                                SoundManager.instance.musicPlayer.setVolume(0.0, fadeDuration: 0.0)
+                                SoundManager.instance.playMusic(music: settings.backgroundMusic)
+                                SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: fadeTime)
+                            } else {
+                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                                fadeMusic()
+                            }
+                        } label: {
+                            Image(systemName: settings.isMusicOn ? "speaker.wave.2.fill": "speaker.slash.fill")
+                                .frame(width: 25, height: 25)
+                                .id(settings.isMusicOn)
+                                .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
+                        }
+                        .foregroundStyle(settings.isMusicOn ? Color.theme.foreground : Color.theme.trinary)
+                        .font(.headline)
+                        
+                        Text("\(breathesRemaining) left")
+                            .foregroundStyle(Color.theme.foreground)
+                            .font(.headline)
+                            .bold()
+                            .fontDesign(.rounded)
+            
+                        Button {
+                            settings.isBreathOn.toggle()
+                            
+                            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                        } label: {
+                            Image(systemName: settings.isBreathOn ? "lungs.fill" : "lungs")
+                                .frame(width: 25, height: 25)
+                                .id(settings.isBreathOn)
+                                .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
+                        
+                        }
+                        .foregroundStyle(settings.isBreathOn ? Color.theme.foreground : Color.theme.trinary)
+                        .font(.headline)
+                        .animation(.smooth, value: settings.isBreathOn)
+                        
+                    }
                     .padding()
                     .background(.ultraThinMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                
-                Text(isBreathingIn ? "Breathe In" : "Breathe Out")
-                    .foregroundStyle(Color.theme.foreground)
-                    .font(.largeTitle)
-                    .fontDesign(.rounded)
-                    .bold()
+     
+                }
+                .offset(y: -250)
             }
-            .zIndex(5)
-            .offset(y: -250)
-
             
-            Capsule()
-                .offset(y: 500)
-                .fill(Color.theme.primary.opacity(0.25))
-                .frame(width: 700, height: height)
-                .animation(.easeInOut(duration: 5.0), value: height)
-            Capsule()
-                .offset(y: 500)
-                .fill(Color.theme.primary.opacity(0.5))
-                .frame(width: 700, height: height)
-                .animation(.easeInOut(duration: 5.0).delay(0.25), value: height)
-            Capsule()
-                .offset(y: 500)
-                .fill(Color.theme.primary.opacity(0.75))
-                .frame(width: 700, height: height)
-                .animation(.easeInOut(duration: 5.0).delay(0.5), value: height)
-        }
-        .onReceive(timer) { time in
-            isBreathingIn.toggle()
-            isBreathingIn ? (height = 1300) : (height = 0)
-        }
-        .onReceive(counter) { time in
-            if breathesRemaining > 0 {
-                breathesRemaining -= 1
+            
+            .onReceive(timer) { time in
+                isBreathingIn.toggle()
+                isBreathingIn ? (height = 1200) : (height = 0)
+                if settings.isBreathOn {
+                    SoundManager.instance.playSound(sound: isBreathingIn ? "BreatheIn" : "BreatheOut")
+                    complexSuccess()
+                }
+                
             }
-        }
-        .onAppear {
-            breathesRemaining = breath.breaths
-            height = 1300
-            UIApplication.shared.isIdleTimerDisabled = true
-            vibrate()
-            SoundManager.instance.playMusic(music: settings.backgroundMusic)
+            .onReceive(counter) { time in
+                if breathesRemaining > 1 {
+                    breathesRemaining -= 1
+                } else {
+                    vibrate()
+                    fadeMusic()
+                    
+                    SoundManager.instance.soundPlayer.stop()
+                    SoundManager.instance.musicPlayer.stop()
+                    
+                    dismiss()
+                    
+                }
+            }
+            .onAppear {
+                UIApplication.shared.isIdleTimerDisabled = true
+                vibrate()
+                prepareHaptics()
+                breathesRemaining = breath.breaths
+                height = 1200
+                complexSuccess()
+                
+                if settings.isMusicOn {
+                    SoundManager.instance.playMusic(music: settings.backgroundMusic)
+                }
+                
+                if settings.isBreathOn {
+                    SoundManager.instance.playSound(sound: "BreatheIn")
+                }
+            }
         }
         .toolbar(.hidden, for: .tabBar)
         .navigationBarBackButtonHidden(true)
-        .ignoresSafeArea()
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -94,15 +162,12 @@ struct AirView: View {
                     Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
                         .font(.system(size: 35))
                         .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(Color.theme.primary)
                 }
             }
             ToolbarItem(placement: .principal) {
                 VStack {
-                    Text("Focus")
-                        .bold()
-                        .fontDesign(.rounded)
-                        .font(.title2)
+                    Text("Breathe")
+                        .mediumTitleTextStyle()
                 }
             }
         }
@@ -115,8 +180,51 @@ struct AirView: View {
             SoundManager.instance.musicPlayer.pause()
         }
     }
+    
     func vibrate() {
         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+    }
+    
+    func prepareHaptics() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+
+        do {
+            engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print("There was an error creating the engine: \(error.localizedDescription)")
+        }
+    }
+    
+    func complexSuccess() {
+        // make sure that the device supports haptics
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        var events = [CHHapticEvent]()
+        
+        if isBreathingIn {
+            for i in stride(from: 0, to: 3, by: 0.1) {
+                let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(0 + i))
+                let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(0 + i))
+                let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 1 + i)
+                events.append(event)
+            }
+        } else {
+            for i in stride(from: 0, to: 3, by: 0.1) {
+                let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(3 - i))
+                let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(3 - i))
+                let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 1 + i)
+                events.append(event)
+            }
+        }
+
+        // convert those events into a pattern and play it immediately
+        do {
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print("Failed to play pattern: \(error.localizedDescription).")
+        }
     }
 }
 

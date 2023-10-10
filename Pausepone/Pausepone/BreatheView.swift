@@ -13,6 +13,7 @@ class Breath: ObservableObject {
 
 struct BreatheView: View {
     @StateObject var breath = Breath()
+    @State private var showAirView = false
     let hour = Calendar.current.component(.hour, from: Date())
     
     var body: some View {
@@ -32,112 +33,99 @@ struct BreatheView: View {
                             startPoint: .top, endPoint: .bottom))
                     Spacer()
                 }
+                
                 VStack(alignment: .leading) {
                     Spacer()
                     Spacer()
+                    Spacer()
+                    Spacer()
                     
-                    if hour <= 12 {
-                        Text("Good morning,")
-                            .foregroundStyle(Color.theme.secondary)
-                            .font(.title)
-                            .fontDesign(.rounded)
-                            .bold()
-                    }
-                    else if hour <= 17 {
-                        Text("Good afternoon,")
-                            .foregroundStyle(Color.theme.secondary)
-                            .font(.title)
-                            .fontDesign(.rounded)
-                            .bold()
-                    }
-                    else if hour <= 21 {
-                        Text("Good evening,")
-                            .foregroundStyle(Color.theme.secondary)
-                            .font(.title)
-                            .fontDesign(.rounded)
-                            .bold()
-                    } else {
-                        Text("Good night,")
-                            .foregroundStyle(Color.theme.secondary)
-                            .font(.title)
-                            .fontDesign(.rounded)
-                            .bold()
-                    }
+                    Text("Take a Breath")
+                        .largeTitleTextStyle()
+                    Text("Select how many Breaths you want to take.")
+                        .headlineTextStyle()
+                        .padding(.bottom)
                     
-                    Text("How many Breaths do you want to take?")
-                        .foregroundStyle(Color.theme.foreground)
-                        .font(.title)
-                        .fontDesign(.rounded)
-                        .bold()
-                    
-                    
-                    VStack {
-                        
+                    VStack(spacing: 10) {
                         HStack {
-                            Spacer()
-                            Text("Breaths")
-                                .frame(width: 150, height: 100)
                             Picker("Select breaths", selection: breath.$breaths) {
-                                ForEach(1..<61, id: \.self) { i in
-                                    Text("\(i)").tag(i)
+                                Text("1 breath")
+                                    .titleTextStyle()
+                                    .tag(1)
+                                                                
+                                ForEach(2..<61, id: \.self) { i in
+                                    Text("\(i) breaths")
+                                        .titleTextStyle()
+                                        .tag(i)
                                 }
                             }
-                            .frame(width: 150, height: 100)
-                            .foregroundStyle(Color.theme.foreground)
-                            .font(.title)
-                            .fontDesign(.rounded)
-                            .bold()
+                            .frame(height: 100)
                             .pickerStyle(.wheel)
-                            Spacer()
                         }
-                        .foregroundStyle(Color.theme.foreground)
-                        .font(.title)
-                        .fontDesign(.rounded)
-                        .bold()
                         
-                        NavigationLink {
-                            AirView()
-                        } label: {
-                            HStack {
-                                Image(systemName: "plus")
-                                    .foregroundStyle(Color.theme.primary)
-                                    .bold()
-                                Text("Breathe Preset")
-                                    .foregroundStyle(Color.theme.foreground)
-                                    .font(.headline)
+                        HStack(spacing: 10) {
+                            NavigationLink {
+                                AirView()
+                            } label: {
+                                HStack {
+                                    Text("1 breath")
+                                        .smallTitleTextStyle()
+                                }
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .contentShape(Rectangle())
                             }
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .contentShape(Rectangle())
+                            .frame(height: 60)
+                            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                                    .stroke(Color.theme.primary, lineWidth: 3)
+                            )
+                            .simultaneousGesture(TapGesture().onEnded {
+                                breath.breaths = 1
+                            })
+                            
+                            NavigationLink {
+                                AirView()
+                            } label: {
+                                HStack {
+                                    Text("5 breaths")
+                                        .smallTitleTextStyle()
+                                }
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .contentShape(Rectangle())
+                            }
+                            .frame(height: 60)
+                            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                                    .stroke(Color.theme.primary, lineWidth: 3)
+                            )
+                            .simultaneousGesture(TapGesture().onEnded {
+                                breath.breaths = 5
+                            })
                         }
-                        .frame(height: 60)
-                        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                                .stroke(Color.theme.primary, lineWidth: 3)
-                        )
-                        
                         
                         NavigationLink {
                             AirView()
                         } label: {
                             Text("Let's Breathe")
-                                .foregroundStyle(Color.theme
-                                    .background)
-                                .font(.headline)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .contentShape(Rectangle())
-                            
+                                .foregroundStyle(Color.theme.background)
+                                .font(.title3)
+                                .bold()
+                                .fontDesign(.rounded)
+                                
                         }
+                        .frame(maxWidth: .infinity, alignment: .center)
                         .frame(height: 60)
                         .background(Color.theme.primary)
                         .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
                     }
                     .padding()
                     .background(Color.theme.surface)
-                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                    .clipShape(RoundedRectangle(cornerRadius: 30.0, style: .continuous))
+                    Spacer()
                 }
                 .padding()
-                .padding(.vertical, 100)
             }
             .ignoresSafeArea()
             
@@ -149,10 +137,9 @@ struct BreatheView: View {
     }
 }
 
-struct BreatheView_Previews: PreviewProvider {
-    static var previews: some View {
-        BreatheView()
-    }
+#Preview {
+    BreatheView()
 }
+
 
 

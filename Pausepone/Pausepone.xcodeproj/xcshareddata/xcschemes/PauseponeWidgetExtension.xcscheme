@@ -15,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "12E088C82AB16ABE000FCEC8"
+               BlueprintIdentifier = "12D961372AD491D100CD25D5"
                BuildableName = "PauseponeWidgetExtension.appex"
                BlueprintName = "PauseponeWidgetExtension"
                ReferencedContainer = "container:Pausepone.xcodeproj">
@@ -61,7 +61,7 @@
          BundleIdentifier = "com.apple.springboard">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "12E088C82AB16ABE000FCEC8"
+            BlueprintIdentifier = "12D961372AD491D100CD25D5"
             BuildableName = "PauseponeWidgetExtension.appex"
             BlueprintName = "PauseponeWidgetExtension"
             ReferencedContainer = "container:Pausepone.xcodeproj">

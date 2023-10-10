@@ -2,7 +2,7 @@
 //  PauseponeWidget.swift
 //  PauseponeWidget
 //
-//  Created by Matsvei Liapich on 9/12/23.
+//  Created by Matsvei Liapich on 10/9/23.
 //
 
 import WidgetKit
@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+        SimpleEntry(date: Date(), emoji: "😀")
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
+        let entry = SimpleEntry(date: Date(), emoji: "😀")
         completion(entry)
     }
 
@@ -25,7 +25,7 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
+            let entry = SimpleEntry(date: entryDate, emoji: "😀")
             entries.append(entry)
         }
 
@@ -36,6 +36,7 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let emoji: String
 }
 
 extension View {
@@ -54,63 +55,111 @@ struct PauseponeWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        ZStack {
-            ZStack {
+        HStack {
+            VStack(alignment: .leading, spacing: 5) {
+                Image(systemName: "brain.head.profile.fill")
+                    .foregroundStyle(.white)
+                    .font(.title)
+                Spacer()
+                
+                Text("Focus")
+                    .font(.title)
+                    .foregroundStyle(.white)
+                    .fontDesign(.rounded)
+                    .bold()
+                
                 HStack {
-                    VStack(alignment: .leading) {
-                        Text("Pause")
-                            .font(.largeTitle)
-                            .foregroundStyle(.white)
-                            .bold()
-                        Text("30 sec")
-                            .font(.headline)
-                            .foregroundStyle(Color("DullGray"))
-                            .bold()
-                        Spacer()
-                        
-                        Image(systemName: "play.fill")
-                            .foregroundStyle(Color("AccentColor"))
-                            .font(.largeTitle)
-                    }
-                    Spacer()
+                    Image(systemName: "play.fill")
+                    Text("25 min")
                 }
-                .padding(5)
-                ZStack {
-                    Circle()
-                        .stroke(lineWidth: 40)
-                        .foregroundStyle(Color("DullGray"))
-                        .opacity(0.1)
-                    
-                    Circle()
-                        .trim(from: 0.0, to: min(0.8, 1.0))
-                        .stroke(Color("Fawn"), style: StrokeStyle(lineWidth: 25.0, lineCap: .round, lineJoin: .round))
-                        .rotationEffect(Angle(degrees: 270))
-                }
-                .offset(x: 70, y: 70)
+                .font(.headline)
+                .foregroundStyle(.white)
+                .fontDesign(.rounded)
+                .bold()
+                .padding(10)
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 15.0, style: .continuous))
             }
-            .widgetURL(URL(string: "widget://link0"))
+            Spacer()
         }
-        .widgetBackground(backgroundView: Color("WidgetBackground"))
+        .widgetBackground(backgroundView: Image("Stream").resizable().aspectRatio(contentMode: .fill))
+        .widgetURL(URL(string: "widget://link0"))
     }
 }
 
+struct PauseponeWidgetEntry2View : View {
+    var entry: Provider.Entry
 
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 5) {
+                Image(systemName: "wind")
+                    .foregroundStyle(.white)
+                    .font(.title)
+                Spacer()
+                
+                Text("Breathe")
+                    .font(.title)
+                    .foregroundStyle(.white)
+                    .fontDesign(.rounded)
+                    .bold()
+                
+                HStack {
+                    Image(systemName: "lungs.fill")
+                    Text("5 breaths")
+                }
+                .font(.caption)
+                .foregroundStyle(.white)
+                .fontDesign(.rounded)
+                .bold()
+                .padding(10)
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 15.0, style: .continuous))
+            }
+            Spacer()
+        }
+        .widgetBackground(backgroundView: Image("Beach").resizable().aspectRatio(contentMode: .fill))
+        .widgetURL(URL(string: "widget://link1"))
+    }
+}
 
 struct PauseponeWidget: Widget {
     let kind: String = "PauseponeWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            PauseponeWidgetEntryView(entry: entry)
+            if #available(iOS 17.0, *) {
+                PauseponeWidgetEntryView(entry: entry)
+            } else {
+                PauseponeWidgetEntryView(entry: entry)
+                    .background()
+            }
         }
-        .configurationDisplayName("Quick Start")
-        .description("Start a 30 second Pause.")
+        .configurationDisplayName("Focus")
+        .description("Focus for 25 minutes.")
     }
 }
 
-struct PauseponeWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        PauseponeWidgetEntryView(entry: SimpleEntry(date: Date()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+struct PauseponeWidget2: Widget {
+    let kind: String = "PauseponeWidget2"
+
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            if #available(iOS 17.0, *) {
+                PauseponeWidgetEntry2View(entry: entry)
+            } else {
+                PauseponeWidgetEntry2View(entry: entry)
+                    .background()
+            }
+        }
+        .configurationDisplayName("Breathe")
+        .description("Take 5 breaths.")
     }
+}
+
+#Preview(as: .systemSmall) {
+    PauseponeWidget()
+} timeline: {
+    SimpleEntry(date: .now, emoji: "😀")
+    SimpleEntry(date: .now, emoji: "🤩")
 }

@@ -63,8 +63,8 @@ struct TimerView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var time: Time
-    @ObservedObject var settings: Settings
+    @ObservedObject var time = Time()
+    @ObservedObject var settings = Settings()
     
     @State private var progress = 0.0
     @State private var timeRemaining = 0
@@ -80,7 +80,7 @@ struct TimerView: View {
     let fadeTime = 0.5
     
     var totalTime: Int {
-        time.hr * 60 * 60 + time.min * 60 + time.sec
+        time.hr * 60 * 60 + time.min * 60
     }
     
     var body: some View {
@@ -104,33 +104,21 @@ struct TimerView: View {
                 VStack {
                     if timeRemaining > 0 {
                         Text("\(printFormattedTime(timeRemaining))")
-                            .foregroundStyle(Color.theme.foreground)
-                            .font(.largeTitle)
-                            .bold()
-                            .fontDesign(.rounded)
+                            .largeTitleTextStyle()
                             .multilineTextAlignment(.center)
                     } else {
                         Text("Done!")
-                            .foregroundStyle(Color.theme.foreground)
-                            .font(.largeTitle)
-                            .bold()
-                            .fontDesign(.rounded)
+                            .largeTitleTextStyle()
                     }
                 }
                 
             }
             .frame(width: 250, height: 250)
             .onAppear {
-                if time.hr >= 1 || time.min >= 1 {
-                    time.sec = 0
-                } else if time.hr == 0 && time.min == 0 && time.sec == 0 {
+                if time.hr == 0 && time.min == 0 {
                     time.min = 1
                 }
-                print("\(time.hr) hours")
-                print("\(time.min) minutes")
-                print("\(time.sec) seconds")
                 appear()
-                
             }
             .onReceive(timer) { time in
                 if timeRemaining <= 0 {
@@ -165,7 +153,7 @@ struct TimerView: View {
                             if settings.isMusicOn {
                                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                                 SoundManager.instance.musicPlayer.setVolume(0.0, fadeDuration: 0.0)
-                                SoundManager.instance.musicPlayer.play()
+                                SoundManager.instance.playMusic(music: settings.backgroundMusic)
                                 SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: fadeTime)
                             } else {
                                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -182,6 +170,8 @@ struct TimerView: View {
                         }
                         .foregroundStyle(settings.isMusicOn ? Color.theme.foreground : Color.theme.trinary)
                         .font(.headline)
+                        .fontDesign(.rounded)
+                        .bold()
                     }
                     .frame(width: 100, alignment: .leading)
         
@@ -224,7 +214,8 @@ struct TimerView: View {
                         }
                         .foregroundStyle(settings.isSnapOn ? Color.theme.foreground : Color.theme.trinary)
                         .font(.headline)
-                        .animation(.smooth, value: settings.isSnapOn)
+                        .fontDesign(.rounded)
+                        .bold()
                     }
                     .frame(width: 100, alignment: .trailing)
                 }
@@ -242,7 +233,6 @@ struct TimerView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     UIApplication.shared.isIdleTimerDisabled = false
-                    time.sec = 0
                     fadeMusic()
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(fadeTime * 1000))) {
                         SoundManager.instance.soundPlayer.stop()
@@ -260,16 +250,14 @@ struct TimerView: View {
             ToolbarItem(placement: .principal) {
                 VStack {
                     Text("Focus")
-                        .bold()
-                        .fontDesign(.rounded)
-                        .font(.title2)
+                        .mediumTitleTextStyle()
                 }
             }
         }
     }
     
-    func calculateTimeRemaining(hours: Int, minutes: Int, seconds: Int) {
-        timeRemaining = hours * 60 * 60 + minutes * 60 + seconds
+    func calculateTimeRemaining(hours: Int, minutes: Int) {
+        timeRemaining = hours * 60 * 60 + minutes * 60
     }
         
     func formatTime(_ seconds: Int) -> (Int, Int, Int) {
@@ -318,7 +306,7 @@ struct TimerView: View {
     
     func appear() {
         UIApplication.shared.isIdleTimerDisabled = true
-        calculateTimeRemaining(hours: time.hr, minutes: time.min, seconds: time.sec)
+        calculateTimeRemaining(hours: time.hr, minutes: time.min)
         vibrate()
         stroke = 40.0
         opacity = 1
@@ -337,9 +325,7 @@ struct TimerView: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             UIApplication.shared.isIdleTimerDisabled = false
-            
-            time.sec = 0
-            
+                        
             SoundManager.instance.soundPlayer.stop()
             SoundManager.instance.musicPlayer.stop()
             
@@ -367,14 +353,13 @@ struct TimerView: View {
             
         if settings.isMusicOn {
             SoundManager.instance.musicPlayer.setVolume(0.0, fadeDuration: 0.0)
-            SoundManager.instance.musicPlayer.play()
+            SoundManager.instance.playMusic(music: settings.backgroundMusic)
             SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: fadeTime)
         }
     }
 }
 
-struct TimerView_Previews: PreviewProvider {
-    static var previews: some View {
-        TimerView(time: Time(), settings: Settings())
-    }
+#Preview {
+    TimerView()
 }
+

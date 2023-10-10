@@ -22,6 +22,7 @@ extension Date: RawRepresentable {
 class Settings: ObservableObject {
     @AppStorage("isSnapOn") var isSnapOn = false
     @AppStorage("isMusicOn") var isMusicOn = true
+    @AppStorage("isBreathOn") var isBreathOn = true
     @AppStorage("backgroundMusic") var backgroundMusic = "Dream"
     @AppStorage("interval") var interval = 15.0
 }
@@ -51,31 +52,34 @@ struct SettingsView: View {
                 Section {
                     HStack {
                         Image(systemName: "speaker.wave.2.fill")
-                            .frame(width: 25, height: 25)
-                            .foregroundStyle(Color.theme.secondary)
+                            .frame(width: 30, height: 30)
+                            .font(.title3)
                             
                         Toggle(isOn: $settings.isMusicOn) {
                             Text("Music")
-                                .foregroundStyle(Color.theme.foreground)
+                                .smallTitleTextStyle()
                         }
                     }
                     if settings.isMusicOn {
                         Picker(selection: $settings.backgroundMusic) {
                             ForEach(backgroundMusicList, id: \.self) { list in
-                                Text(list).tag(list)
+                                Text(list)
+                                    .tag(list)
                             }
                         } label: {
                             HStack {
                                 Image(systemName: "music.note")
-                                    .frame(width: 25, height: 25)
+                                    .frame(width: 30, height: 30)
                                     .foregroundStyle(Color.theme.secondary)
+                                    .font(.title3)
                                 Text("Track")
-                                    .foregroundStyle(Color.theme.foreground)
+                                    .smallTitleTextStyle()
                             }
                         }
                     }
                 } header: {
-                    Text("Background").foregroundStyle(Color.theme.secondary)
+                    Text("Background")
+                        .captionTextStyle()
                 }
 
                 .listRowBackground(
@@ -88,34 +92,60 @@ struct SettingsView: View {
                 Section {
                     HStack {
                         Image(systemName: "bell.badge.waveform.fill")
-                            .frame(width: 25, height: 25)
+                            .frame(width: 30, height: 30)
                             .foregroundStyle(Color.theme.secondary)
+                            .font(.title3)
                         Toggle(isOn: $settings.isSnapOn) {
                             Text("Snaps")
-                                .foregroundStyle(Color.theme.foreground)
+                                .smallTitleTextStyle()
                         }
                     }
                     if settings.isSnapOn {
                         Picker(selection: $settings.interval) {
                             ForEach(intervals, id: \.self) { interval in
-                                Text("\(interval.formatted()) sec").tag(interval)
+                                Text("\(interval.formatted()) sec")
+                                    .tag(interval)
                             }
                         } label: {
                             HStack {
                                 Image(systemName: "clock.arrow.2.circlepath")
-                                    .frame(width: 25, height: 25)
+                                    .frame(width: 30, height: 30)
                                     .foregroundStyle(Color.theme.secondary)
+                                    .font(.title3)
                                 Text("Interval")
-
-                                    .foregroundStyle(Color.theme.foreground)
+                                    .smallTitleTextStyle()
                             }
                         }
                     }
                 } header: {
-                    Text("Focus").foregroundStyle(Color.theme.secondary)
+                    Text("Focus")
+                        .captionTextStyle()
                 } footer: {
                     Text("Snaps help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
+                        .captionTextStyle()
                     
+                }
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                        .fill(Color.theme.surface)
+                        .padding(2)
+                )
+                .listRowSeparator(.hidden)
+                
+                Section {
+                    HStack {
+                        Image(systemName: "lungs.fill")
+                            .frame(width: 30, height: 30)
+                            .foregroundStyle(Color.theme.secondary)
+                            .font(.title3)
+                        Toggle(isOn: $settings.isBreathOn) {
+                            Text("Breathing")
+                                .smallTitleTextStyle()
+                        }
+                    }
+                } header: {
+                    Text("Breathe")
+                        .captionTextStyle()
                 }
 
                 .listRowBackground(
@@ -128,12 +158,13 @@ struct SettingsView: View {
                 Section {
                     HStack {
                         Image(systemName: "heart.fill")
-                            .frame(width: 25, height: 25)
+                            .frame(width: 30, height: 30)
                             .foregroundStyle(Color.theme.secondary)
+                            .font(.title3)
 
                         Toggle(isOn: $isHealthAccessGranted) {
                             Text("Apple Health")
-                                .foregroundStyle(Color.theme.foreground)
+                                .smallTitleTextStyle()
                         }
                         .onChange(of: isHealthAccessGranted) { newValue in
                             if newValue == true {
@@ -143,8 +174,10 @@ struct SettingsView: View {
                     }
                 } header: {
                     Text("Connect")
+                        .captionTextStyle()
                 } footer: {
                     Text("Enable Mindful Moments by going to Settings > Health > Data Access & Devices > Pausepone.")
+                        .captionTextStyle()
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
@@ -155,12 +188,13 @@ struct SettingsView: View {
                 Section {
                     HStack {
                         Image(systemName: "bell.badge.fill")
-                            .frame(width: 25, height: 25)
+                            .frame(width: 30, height: 30)
                             .foregroundStyle(Color.theme.secondary)
+                            .font(.title3)
 
                         Toggle(isOn: $isNotificationAccessGranted) {
                             Text("Daily Reminder")
-                                .foregroundStyle(Color.theme.foreground)
+                                .smallTitleTextStyle()
                         }
                         .onChange(of: isNotificationAccessGranted) { newValue in
                             if newValue {
@@ -181,23 +215,26 @@ struct SettingsView: View {
                     if isNotificationAccessGranted {
                         HStack {
                             Image(systemName: "clock.fill")
-                                .frame(width: 25, height: 25)
+                                .frame(width: 30, height: 30)
                                 .foregroundStyle(Color.theme.secondary)
+                                .font(.title3)
 
                             DatePicker(selection: $selectedDate, displayedComponents: .hourAndMinute) {
                                 HStack {
                                     Text("When?")
-                                        .foregroundStyle(Color.theme.foreground)
+                                        .smallTitleTextStyle()
                                     
                                     Spacer()
-                                    Button("Set") {
+                                    Button {
                                         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                                         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                                         notify.sendNotification(date: selectedDate, title: "⏸️ Time to Pause!", body: "How about a quick Pause right now?")
                                         print(selectedDate)
                                         isNotificationSet = true
+                                    } label: {
+                                        Text("Set")
+                                            .foregroundStyle(Color.theme.background)
                                     }
-                                    .foregroundStyle(Color.theme.background)
                                     .buttonStyle(.borderedProminent)
                                 }
                             }
@@ -205,9 +242,11 @@ struct SettingsView: View {
                     }
                 } header: {
                     Text("Notifications")
+                        .captionTextStyle()
                 } footer: {
                     if isNotificationSet {
                         Text("You will be reminded to Pause daiy at \(selectedDate.formatted(.dateTime.hour().minute())).")
+                            .captionTextStyle()
                     }
                 }
                 .listRowBackground(
@@ -219,29 +258,37 @@ struct SettingsView: View {
                 
                 Section {
                     HStack {
-                        Image(systemName: "info")
-                            .frame(width: 25, height: 25)
+                        Image(systemName: "quote.opening")
+                            .frame(width: 30, height: 30)
                             .foregroundStyle(Color.theme.secondary)
+                            .font(.title3)
 
                         Link("Credit", destination: URL(string: "https://github.com/matsveil/pausepone/blob/main/CREDIT.md")!)
-                            .foregroundStyle(Color.theme.foreground)
+                            .foregroundColor(Color.theme.foreground)
+                            .font(.title3)
+                            .bold()
+                            .fontDesign(.rounded)
                     }
                     HStack {
-                        Image(systemName: "chevron.left.forwardslash.chevron.right")
-                            .frame(width: 25, height: 25)
+                        Image(systemName: "lock.open.fill")
+                            .frame(width: 30, height: 30)
                             .foregroundStyle(Color.theme.secondary)
+                            .font(.title3)
                         
                         Link("Open Source", destination: URL(string: "https://github.com/matsveil/pausepone/blob/main/LICENSE")!)
-                            .foregroundStyle(Color.theme.foreground)
+                            .foregroundColor(Color.theme.foreground)
+                            .font(.title3)
+                            .bold()
+                            .fontDesign(.rounded)
                     }
                 } header: {
                     Text("Legal")
+                        .captionTextStyle()
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
                         .fill(Color.theme.surface)
                         .padding(2)
-                     
                 )
                 .listRowSeparator(.hidden)
             }
@@ -261,15 +308,12 @@ struct SettingsView: View {
                         Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
                             .font(.system(size: 35))
                             .symbolRenderingMode(.hierarchical)
-                            .foregroundStyle(Color.theme.primary)
                     }
                 }
                 ToolbarItem(placement: .principal) {
                     VStack {
                         Text("Settings")
-                            .fontDesign(.rounded)
-                            .font(.title2)
-                            .bold()
+                            .mediumTitleTextStyle()
                     }
                 }
                 
@@ -324,8 +368,7 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
+#Preview {
+    SettingsView()
 }
+
