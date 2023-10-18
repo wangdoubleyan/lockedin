@@ -1,21 +1,27 @@
-# Pausepone: Focus & Relax Timer
-![poster](https://github.com/matsveil/pausepone/assets/109008007/8569b927-eb76-4116-a546-558f605f07f2)
+# LockedIn - Focus & Breathe
+![Group 2](https://github.com/matsveil/lockedin/assets/109008007/51c9f3ee-89d0-4092-93fc-99d4b4272213)
 
 ## About
-Pausepone is a user-friendly timer that simplifies time management. Whether you need it for studying or taking a break, simply select the desired duration and begin.
+Welcome to the world of LockedIn - Focus & Breathe—an app designed with your success and serenity in mind.
 
-- Set Your Timer: Begin by choosing the duration for your pause—whether it's 30 seconds or 12 hours, Pausepone has you covered.
-- Stay Present: Once your timer is set, hit start. The app will gently alert you at regular intervals to help you stay grounded in the present moment.
-- Enjoy the Pause: Relax to soothing music that plays during your pause. Customize the music to your preference in the settings.
-- Customize Your Experience: Not a fan of reminders or music? No worries! Easily toggle these features on or off in the settings or directly in the timer.
-- Daily Reminders: Need a daily nudge to focus or relax? Pausepone can send you reminders at a time that suits you best, ensuring you never forget to pause.
-- Quick Start Widget: Need a moment to breathe during a stressful day? Add the Quick Start widget to your home screen for instant access to your pause.
-- Apple Health Integration: This app seamlessly integrates with Apple Health, saving your pause duration as Mindful Minutes for a holistic approach to your well-being.
+Picture this: Your journey towards unlocking your full potential begins with just a few taps. Whether you're diving into focused study sessions or seeking a tranquil moment of meditation, Pausepone is here to guide you.
 
-In summary, Pausepone is designed to help you focus on what truly matters, be it your education or mental well-being. Give it a try!
+First off, we have the Focus Timer—an absolute game-changer. Break down your tasks into manageable intervals and watch how your productivity soars. Commit to your goals and let each session propel you forward.
 
-## Roadmap
-- [x] Add background sounds
-- [ ] Add dynamic island support
-- [ ] Add background playback
-- [ ] Add Breath timer
+Then, there's Breathe—an oasis of calm. Immerse yourself in soothing breath exercises. Let the breath counter gently lead your breath promoting relaxation and releasing any lingering stress.
+
+Personalize your study or meditation sanctuary with our curated Background Music. Choose tunes that resonate with you and let them enhance your focus and relaxation. It's all about creating an environment that works for you.
+
+And those gentle Focus Reminders, or "snaps"? They're here to keep you present during meditation, nudging you with sensory cues. Stay centered and make the most of your practice.
+
+Notifications are your trusty companions, always guiding you through your planned sessions and breaks. Customize them to sync perfectly with your routine, ensuring you stay on track effortlessly.
+
+Accessing the app is a breeze with our Beautiful Quick Start Widgets. They're right on your iOS device's home screen, ready to lead you into a realm of focus and calm at a moment's notice.
+
+Oh, and let's not forget about our Apple Health Integration. Your well-being is a holistic journey, and Pausepone seamlessly integrates with Apple Health, saving your Focus Timer durations as Mindful Minutes. It's all about that beautiful balance.
+
+So, dear friend, with LockedIn - Focus & Pause, your potential knows no bounds. Enhance your focus, ease your mind, and achieve your dreams—all from the palm of your hand. Are you ready to take this journey of mindfulness and productivity? Download the app today, and let's embark on this exciting adventure together!
+
+Here's to a focused, relaxed, and successful you!
+
+Stay locked in!
