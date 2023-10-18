@@ -118,12 +118,12 @@ struct AirView: View {
                 if breathesRemaining > 1 {
                     breathesRemaining -= 1
                 } else {
+                    UIApplication.shared.isIdleTimerDisabled = false
                     vibrate()
                     fadeMusic()
                     
                     SoundManager.instance.soundPlayer.stop()
                     SoundManager.instance.musicPlayer.stop()
-                    
                     dismiss()
                     
                 }
@@ -217,7 +217,6 @@ struct AirView: View {
             }
         }
 
-        // convert those events into a pattern and play it immediately
         do {
             let pattern = try CHHapticPattern(events: events, parameters: [])
             let player = try engine?.makePlayer(with: pattern)

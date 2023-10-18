@@ -30,9 +30,9 @@
 		12D961412AD491D300CD25D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12D961402AD491D300CD25D5 /* Assets.xcassets */; };
 		12D961452AD491D300CD25D5 /* LockedInWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 12D961382AD491D100CD25D5 /* LockedInWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		12DC4F0F2AA31064001AF2C5 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */; };
-		12EE756F2AD0916000521CFA /* BreatheOut.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12EE756E2AD0916000521CFA /* BreatheOut.m4a */; };
-		12EE75712AD0981C00521CFA /* BreatheIn.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12EE75702AD0981C00521CFA /* BreatheIn.m4a */; };
 		12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1D9602A9DA38600E047AF /* SettingsView.swift */; };
+		12F960672AD66060004FD46A /* BreatheOut.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12F960662AD66060004FD46A /* BreatheOut.m4a */; };
+		12F960692AD66069004FD46A /* BreatheIn.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12F960682AD66069004FD46A /* BreatheIn.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,9 +87,9 @@
 		12D961402AD491D300CD25D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12D961422AD491D300CD25D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = LockedIn/NotificationManager.swift; sourceTree = "<group>"; };
-		12EE756E2AD0916000521CFA /* BreatheOut.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = BreatheOut.m4a; path = ../../../../../Downloads/BreatheOut.m4a; sourceTree = "<group>"; };
-		12EE75702AD0981C00521CFA /* BreatheIn.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = BreatheIn.m4a; path = ../../../../../Downloads/BreatheIn.m4a; sourceTree = "<group>"; };
 		12F1D9602A9DA38600E047AF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = LockedIn/SettingsView.swift; sourceTree = "<group>"; };
+		12F960662AD66060004FD46A /* BreatheOut.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreatheOut.m4a; sourceTree = "<group>"; };
+		12F960682AD66069004FD46A /* BreatheIn.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreatheIn.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,8 +173,8 @@
 		12943F8D2A9FAEDB0035C146 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				12EE756E2AD0916000521CFA /* BreatheOut.m4a */,
-				12EE75702AD0981C00521CFA /* BreatheIn.m4a */,
+				12F960682AD66069004FD46A /* BreatheIn.m4a */,
+				12F960662AD66060004FD46A /* BreatheOut.m4a */,
 				125B9C582AC5C15E00C914CC /* Campfire.mp3 */,
 				125B9C5A2AC5C16A00C914CC /* Dream.mp3 */,
 				125B9C5C2AC5C16F00C914CC /* Rain.mp3 */,
@@ -279,15 +279,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				12820B0A2A99A8570054DBFF /* Preview Assets.xcassets in Resources */,
-				12EE75712AD0981C00521CFA /* BreatheIn.m4a in Resources */,
 				120D5D4A2AA629350024257F /* Sound.m4a in Resources */,
 				125B9C5D2AC5C16F00C914CC /* Rain.mp3 in Resources */,
+				12F960692AD66069004FD46A /* BreatheIn.m4a in Resources */,
 				125B9C5B2AC5C16A00C914CC /* Dream.mp3 in Resources */,
 				125B9C5F2AC5C17600C914CC /* Stream.mp3 in Resources */,
 				125B9C592AC5C15E00C914CC /* Campfire.mp3 in Resources */,
+				12F960672AD66060004FD46A /* BreatheOut.m4a in Resources */,
 				12820B072A99A8570054DBFF /* Assets.xcassets in Resources */,
 				120D5D482AA629110024257F /* SnapSound.m4a in Resources */,
-				12EE756F2AD0916000521CFA /* BreatheOut.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,7 +473,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LockedIn/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LockedIn;
+				INFOPLIST_KEY_CFBundleDisplayName = "Fúss";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let LockedIn to save your Pause duration to Mindful Minutes in Apple Health.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "LockedIn will save the duration of your Pause to Mindful Minutes in Apple Health.";
@@ -491,6 +491,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MindfulPause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -512,7 +514,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LockedIn/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LockedIn;
+				INFOPLIST_KEY_CFBundleDisplayName = "Fúss";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let LockedIn to save your Pause duration to Mindful Minutes in Apple Health.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "LockedIn will save the duration of your Pause to Mindful Minutes in Apple Health.";
@@ -530,6 +532,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MindfulPause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -559,9 +563,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MindfulPause.LockedInWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -588,9 +594,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MindfulPause.LockedInWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

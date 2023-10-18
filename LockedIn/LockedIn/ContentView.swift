@@ -83,7 +83,7 @@ struct ContentView: View {
                     Image("Logo")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 30)
+                        .frame(width: 35)
                 }
             }
         }

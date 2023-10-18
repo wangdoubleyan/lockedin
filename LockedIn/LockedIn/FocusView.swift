@@ -168,7 +168,7 @@ struct FocusView: View {
                 time.hr = 0
                 time.min = 25
                 showTimerView = true
-            } else {
+            } else if url.absoluteString == "widget://link1" {
                 breath.breaths = 5
                 showAirView = true
             }
