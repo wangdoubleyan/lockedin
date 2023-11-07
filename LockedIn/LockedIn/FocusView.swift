@@ -25,6 +25,10 @@ class Time: ObservableObject {
     @AppStorage("min") var min = 1
 }
 
+class Review: ObservableObject {
+    @AppStorage("cycleCount") var cycleCount = 0
+}
+
 struct FocusView: View {
     @StateObject private var healthKitManager = HealthKitManager()
     @StateObject var time = Time()

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVKit
+import StoreKit
 
 class SoundManager {
     @ObservedObject var settings = Settings()
@@ -62,9 +63,11 @@ struct TimerView: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.requestReview) var requestReview
     
     @ObservedObject var time = Time()
     @ObservedObject var settings = Settings()
+    @ObservedObject var review = Review()
     
     @State private var progress = 0.0
     @State private var timeRemaining = 0
@@ -330,6 +333,11 @@ struct TimerView: View {
             SoundManager.instance.musicPlayer.stop()
             
             dismiss()
+            
+            review.cycleCount += 1
+            if review.cycleCount % 30 == 0 {
+                requestReview()
+            }
         }
     }
     
