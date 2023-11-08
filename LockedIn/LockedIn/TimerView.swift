@@ -333,11 +333,11 @@ struct TimerView: View {
             SoundManager.instance.musicPlayer.stop()
             
             dismiss()
-            
-            review.cycleCount += 1
-            if review.cycleCount % 30 == 0 {
-                requestReview()
-            }
+        }
+        
+        review.cycleCount += 1
+        if review.cycleCount % 2 == 0 {
+            requestReview()
         }
     }
     
