@@ -77,14 +77,17 @@ struct TimerView: View {
     @State private var counter = 0
     @State private var isTimerPaused = false
     @State private var intervalCounter = -1.0
+    
+    @State private var timerCounter = "1:00"
+    
+    
+    @State private var initialTime = 0
+    @State private var totalTime = 0.0
+    @State private var endDate = Date()
 
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     let fadeTime = 0.5
-    
-    var totalTime: Int {
-        time.hr * 60 * 60 + time.min * 60
-    }
     
     var body: some View {
         ZStack {
@@ -106,7 +109,7 @@ struct TimerView: View {
                 
                 VStack {
                     if timeRemaining > 0 {
-                        Text("\(printFormattedTime(timeRemaining))")
+                        Text("\(timerCounter)")
                             .largeTitleTextStyle()
                             .multilineTextAlignment(.center)
                     } else {
@@ -121,7 +124,7 @@ struct TimerView: View {
                 if time.hr == 0 && time.min == 0 {
                     time.min = 1
                 }
-                appear()
+                start(hours: time.hr, minutes: time.min)
             }
             .onReceive(timer) { time in
                 if timeRemaining <= 0 {
@@ -129,6 +132,7 @@ struct TimerView: View {
                     return
                 }
                 
+                updateCountdown()
                 timeRemaining -= 1
                 progress += 1.0 / Double(totalTime)
                 
@@ -259,28 +263,28 @@ struct TimerView: View {
         }
     }
     
-    func calculateTimeRemaining(hours: Int, minutes: Int) {
-        timeRemaining = hours * 60 * 60 + minutes * 60
-    }
+//    func calculateTimeRemaining(hours: Int, minutes: Int) {
+//        timeRemaining = hours * 60 * 60 + minutes * 60
+//    }
         
-    func formatTime(_ seconds: Int) -> (Int, Int, Int) {
-        let hours = seconds / 3600
-        let minutes = (seconds % 3600) / 60
-        let remainingSeconds = (seconds % 3600) % 60
-        return (hours, minutes, remainingSeconds)
-    }
-
-    func printFormattedTime(_ seconds: Int) -> String {
-        let (h, m, s) = formatTime(seconds)
-        
-        var timeComponents: [String] = []
-        
-        if h > 0 { timeComponents.append("\(h) hr") }
-        if m > 0 { timeComponents.append("\(m) min") }
-        if s > 0 { timeComponents.append("\(s) sec") }
-        
-        return timeComponents.joined(separator: "\n")
-    }
+//    func formatTime(_ seconds: Int) -> (Int, Int, Int) {
+//        let hours = seconds / 3600
+//        let minutes = (seconds % 3600) / 60
+//        let remainingSeconds = (seconds % 3600) % 60
+//        return (hours, minutes, remainingSeconds)
+//    }
+//
+//    func printFormattedTime(_ seconds: Int) -> String {
+//        let (h, m, s) = formatTime(seconds)
+//        
+//        var timeComponents: [String] = []
+//        
+//        if h > 0 { timeComponents.append("\(h) hr") }
+//        if m > 0 { timeComponents.append("\(m) min") }
+//        if s > 0 { timeComponents.append("\(s) sec") }
+//        
+//        return timeComponents.joined(separator: "\n")
+//    }
 
     
     func snap() {
@@ -307,9 +311,13 @@ struct TimerView: View {
         UINotificationFeedbackGenerator().notificationOccurred(.warning)
     }
     
-    func appear() {
+    func start(hours: Int, minutes: Int) {
+        self.initialTime = hours * 60 + minutes
+        self.endDate = Date()
+        self.endDate = Calendar.current.date(byAdding: .minute, value: initialTime, to: endDate)!
+        print(endDate)
         UIApplication.shared.isIdleTimerDisabled = true
-        calculateTimeRemaining(hours: time.hr, minutes: time.min)
+//        calculateTimeRemaining(hours: time.hr, minutes: time.min)
         vibrate()
         stroke = 40.0
         opacity = 1
@@ -317,6 +325,18 @@ struct TimerView: View {
         SoundManager.instance.playMusic(music: settings.backgroundMusic)
     }
     
+    func updateCountdown() {
+    let now = Date()
+    let diff = endDate.timeIntervalSince(now)
+    
+    let hours = Int(diff / 3600)
+    let minutes = Int((diff / 60).truncatingRemainder(dividingBy: 60))
+    let seconds = Int(diff.truncatingRemainder(dividingBy: 60))
+        
+    self.initialTime = initialTime
+    self.timerCounter = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+}
+
     func end() {
         if counter == 0 {
             counter += 1
