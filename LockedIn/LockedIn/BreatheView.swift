@@ -112,7 +112,6 @@ struct BreatheView: View {
                                 .foregroundStyle(Color.theme.background)
                                 .font(.title3)
                                 .bold()
-                                .fontDesign(.rounded)
                                 
                         }
                         .frame(maxWidth: .infinity, alignment: .center)

@@ -13,42 +13,36 @@ extension Text {
         self.foregroundColor(Color.theme.foreground)
             .font(.largeTitle)
             .bold()
-            .fontDesign(.rounded)
     }
     
     func titleTextStyle() -> some View {
         self.foregroundColor(Color.theme.foreground)
             .font(.title)
             .bold()
-            .fontDesign(.rounded)
     }
     
     func mediumTitleTextStyle() -> some View {
         self.foregroundColor(Color.theme.foreground)
             .font(.title2)
             .bold()
-            .fontDesign(.rounded)
     }
     
     func smallTitleTextStyle() -> some View {
         self.foregroundColor(Color.theme.foreground)
             .font(.title3)
             .bold()
-            .fontDesign(.rounded)
     }
     
     func headlineTextStyle() -> some View {
         self.foregroundColor(Color.theme.secondary)
             .font(.headline)
             .bold()
-            .fontDesign(.rounded)
     }
     
     func captionTextStyle() -> some View {
         self.foregroundColor(Color.theme.secondary)
             .font(.caption)
             .bold()
-            .fontDesign(.rounded)
     }
 }
 

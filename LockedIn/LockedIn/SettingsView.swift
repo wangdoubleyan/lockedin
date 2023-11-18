@@ -267,7 +267,6 @@ struct SettingsView: View {
                             .foregroundColor(Color.theme.foreground)
                             .font(.title3)
                             .bold()
-                            .fontDesign(.rounded)
                     }
                     HStack {
                         Image(systemName: "lock.open.fill")
@@ -279,7 +278,6 @@ struct SettingsView: View {
                             .foregroundColor(Color.theme.foreground)
                             .font(.title3)
                             .bold()
-                            .fontDesign(.rounded)
                     }
                 } header: {
                     Text("Legal")

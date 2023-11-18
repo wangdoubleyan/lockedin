@@ -145,7 +145,6 @@ struct FocusView: View {
                                 .foregroundColor(Color.theme.background)
                                 .font(.title3)
                                 .bold()
-                                .fontDesign(.rounded)
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
                         .frame(height: 60)

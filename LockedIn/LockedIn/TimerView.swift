@@ -108,43 +108,21 @@ struct TimerView: View {
                     .animation(.linear(duration: 1), value: progress)
                 
                 VStack {
-                    if timeRemaining > 0 {
-                        Text("\(timerCounter)")
-                            .largeTitleTextStyle()
-                            .multilineTextAlignment(.center)
-                    } else {
-                        Text("Done!")
-                            .largeTitleTextStyle()
-                    }
+                    Text("\(timerCounter)")
+                        .largeTitleTextStyle()
+                        .frame(width: 100, height: 100)
                 }
                 
             }
             .frame(width: 250, height: 250)
             .onAppear {
-                if time.hr == 0 && time.min == 0 {
-                    time.min = 1
-                }
                 start(hours: time.hr, minutes: time.min)
             }
+            
             .onReceive(timer) { time in
-                if timeRemaining <= 0 {
-                    end()
-                    return
-                }
-                
                 updateCountdown()
-                timeRemaining -= 1
-                progress += 1.0 / Double(totalTime)
-                
-                if intervalCounter == 0 {
-                    snap()
-                    intervalCounter = settings.interval - 1
-                } else if intervalCounter < 0 {
-                    intervalCounter = settings.interval - 2
-                } else {
-                    intervalCounter -= 1
-                }
             }
+            
             Color.theme.secondary
                 .ignoresSafeArea()
                 .opacity(flash)
@@ -177,7 +155,6 @@ struct TimerView: View {
                         }
                         .foregroundStyle(settings.isMusicOn ? Color.theme.foreground : Color.theme.trinary)
                         .font(.headline)
-                        .fontDesign(.rounded)
                         .bold()
                     }
                     .frame(width: 100, alignment: .leading)
@@ -221,7 +198,6 @@ struct TimerView: View {
                         }
                         .foregroundStyle(settings.isSnapOn ? Color.theme.foreground : Color.theme.trinary)
                         .font(.headline)
-                        .fontDesign(.rounded)
                         .bold()
                     }
                     .frame(width: 100, alignment: .trailing)
@@ -240,11 +216,14 @@ struct TimerView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     UIApplication.shared.isIdleTimerDisabled = false
+                    
                     fadeMusic()
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(fadeTime * 1000))) {
                         SoundManager.instance.soundPlayer.stop()
                         SoundManager.instance.musicPlayer.stop()
                     }
+                    
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     presentationMode.wrappedValue.dismiss()
                 } label: {
@@ -262,45 +241,20 @@ struct TimerView: View {
             }
         }
     }
-    
-//    func calculateTimeRemaining(hours: Int, minutes: Int) {
-//        timeRemaining = hours * 60 * 60 + minutes * 60
-//    }
-        
-//    func formatTime(_ seconds: Int) -> (Int, Int, Int) {
-//        let hours = seconds / 3600
-//        let minutes = (seconds % 3600) / 60
-//        let remainingSeconds = (seconds % 3600) % 60
-//        return (hours, minutes, remainingSeconds)
-//    }
-//
-//    func printFormattedTime(_ seconds: Int) -> String {
-//        let (h, m, s) = formatTime(seconds)
-//        
-//        var timeComponents: [String] = []
-//        
-//        if h > 0 { timeComponents.append("\(h) hr") }
-//        if m > 0 { timeComponents.append("\(m) min") }
-//        if s > 0 { timeComponents.append("\(s) sec") }
-//        
-//        return timeComponents.joined(separator: "\n")
-//    }
 
-    
     func snap() {
-        if Double(timeRemaining) > 0 {
-            if settings.isSnapOn {
-                SoundManager.instance.playSound(sound: "SnapSound")
-                
-                haptic()
-                
-                flash = 1
-                
-                withAnimation(.easeOut.delay(0.5)) {
-                    flash = 0.0
-                }
+        if settings.isSnapOn {
+            SoundManager.instance.playSound(sound: "SnapSound")
+            
+            haptic()
+            
+            flash = 1
+            
+            withAnimation(.easeOut.delay(0.5)) {
+                flash = 0.0
             }
         }
+        
     }
     
     func vibrate() {
@@ -312,12 +266,15 @@ struct TimerView: View {
     }
     
     func start(hours: Int, minutes: Int) {
+        if time.hr == 0 && time.min == 0 {
+            time.min = 1
+        }
+        
         self.initialTime = hours * 60 + minutes
         self.endDate = Date()
         self.endDate = Calendar.current.date(byAdding: .minute, value: initialTime, to: endDate)!
         print(endDate)
         UIApplication.shared.isIdleTimerDisabled = true
-//        calculateTimeRemaining(hours: time.hr, minutes: time.min)
         vibrate()
         stroke = 40.0
         opacity = 1
@@ -326,16 +283,30 @@ struct TimerView: View {
     }
     
     func updateCountdown() {
-    let now = Date()
-    let diff = endDate.timeIntervalSince(now)
-    
-    let hours = Int(diff / 3600)
-    let minutes = Int((diff / 60).truncatingRemainder(dividingBy: 60))
-    let seconds = Int(diff.truncatingRemainder(dividingBy: 60))
+        let now = Date()
+        let diff = endDate.timeIntervalSince(now)
         
-    self.initialTime = initialTime
-    self.timerCounter = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-}
+        if diff <= 0 {
+            end()
+        }
+        
+        progress += 1.0 / Double(initialTime * 60)
+        
+        let hours = Int(diff / 3600)
+        let minutes = Int((diff / 60).truncatingRemainder(dividingBy: 60))
+        let seconds = Int(diff.truncatingRemainder(dividingBy: 60))
+        
+        self.initialTime = initialTime
+        
+        if hours == 0 && minutes == 0 {
+            self.timerCounter = String(format: "%02d", seconds)
+        } else if hours == 0 {
+            self.timerCounter = String(format: "%d:%02d", minutes, seconds)
+        } else {
+            self.timerCounter = String(format: "%d:%d:%02d", hours, minutes, seconds)
+        }
+        
+    }
 
     func end() {
         if counter == 0 {
@@ -356,7 +327,7 @@ struct TimerView: View {
         }
         
         review.cycleCount += 1
-        if review.cycleCount % 2 == 0 {
+        if review.cycleCount % 20 == 0 {
             requestReview()
         }
     }

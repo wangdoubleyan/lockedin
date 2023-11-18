@@ -50,7 +50,6 @@ struct AirView: View {
                     Text(isBreathingIn ? "in" : "out")
                         .foregroundStyle(Color.theme.foreground)
                         .font(.system(size: 75))
-                        .fontDesign(.rounded)
                         .bold()
                     
                     HStack(spacing : 10) {
@@ -78,7 +77,6 @@ struct AirView: View {
                             .foregroundStyle(Color.theme.foreground)
                             .font(.headline)
                             .bold()
-                            .fontDesign(.rounded)
             
                         Button {
                             settings.isBreathOn.toggle()
