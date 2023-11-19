@@ -33,6 +33,7 @@ struct FocusView: View {
     @StateObject private var healthKitManager = HealthKitManager()
     @StateObject var time = Time()
     @StateObject var breath = Breath()
+    @StateObject var settings = Settings()
     @State private var showAirView = false
     @State private var showTimerView = false
     let hour = Calendar.current.component(.hour, from: Date())
@@ -71,7 +72,7 @@ struct FocusView: View {
                         .padding(.bottom)
                     
                     
-                    VStack(spacing: 10) {
+                    VStack {
                         HStack {
                             Picker("Select hours", selection: $time.hr) {
                                 ForEach(0..<13, id: \.self) { i in
@@ -94,26 +95,24 @@ struct FocusView: View {
                             .frame(height: 100)
                         }
                         
-                            
                         HStack {
-                            HStack {
+                            Button {
+                                settings.isPomodoroOn.toggle()
+                            } label: {
                                 HStack {
+                                    Image(systemName: settings.isPomodoroOn ? "checkmark.circle.fill" : "circle")
                                     Text("Pomodoro")
-                                        .smallTitleTextStyle()
-                                    Image(systemName: "slider.horizontal.3")
-                                        .frame(width: 30, height: 30)
-                                        .font(.title3)
                                 }
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .contentShape(Rectangle())
+                                .padding()
+                                .font(.headline)
                             }
-                            .frame(height: 60)
-                            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                                    .stroke(Color.theme.primary, lineWidth: 3)
-                            )
+                            .frame(height: 30)
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 100))
+                            
+                            Spacer()
                         }
+                        .padding(.bottom, 10)
                         
                         NavigationLink {
                             TimerView()
