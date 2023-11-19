@@ -94,42 +94,19 @@ struct FocusView: View {
                             .frame(height: 100)
                         }
                         
-                        HStack(spacing: 10) {
-                            NavigationLink {
-                                TimerView()
-                            } label: {
-                                HStack {
-                                    Text("5 min")
-                                        .smallTitleTextStyle()
-                                }
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .contentShape(Rectangle())
-                            }
-                            .simultaneousGesture(TapGesture().onEnded {
-                                time.hr = 0
-                                time.min = 5
-                            })
-                            .frame(height: 60)
-                            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                                    .stroke(Color.theme.primary, lineWidth: 3)
-                            )
                             
-                            NavigationLink {
-                                TimerView()
-                            } label: {
+                        HStack {
+                            HStack {
                                 HStack {
-                                    Text("25 min")
+                                    Text("Pomodoro")
                                         .smallTitleTextStyle()
+                                    Image(systemName: "slider.horizontal.3")
+                                        .frame(width: 30, height: 30)
+                                        .font(.title3)
                                 }
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .contentShape(Rectangle())
                             }
-                            .simultaneousGesture(TapGesture().onEnded {
-                                time.hr = 0
-                                time.min = 25
-                            })
                             .frame(height: 60)
                             .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
                             .overlay(
@@ -141,7 +118,7 @@ struct FocusView: View {
                         NavigationLink {
                             TimerView()
                         } label: {
-                            Text("Let's Focus")
+                            Text("Start Session")
                                 .foregroundColor(Color.theme.background)
                                 .font(.title3)
                                 .bold()

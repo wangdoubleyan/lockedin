@@ -107,14 +107,15 @@ struct TimerView: View {
                     .animation(.easeIn(duration: 3), value: opacity)
                     .animation(.linear(duration: 1), value: progress)
                 
-                VStack {
+                HStack {
                     Text("\(timerCounter)")
                         .largeTitleTextStyle()
-                        .frame(width: 100, height: 100)
+                        .contentTransition(.numericText())
+                        .fontDesign(.monospaced)
+
                 }
-                
             }
-            .frame(width: 250, height: 250)
+            .padding(40)
             .onAppear {
                 start(hours: time.hr, minutes: time.min)
             }
@@ -298,12 +299,14 @@ struct TimerView: View {
         
         self.initialTime = initialTime
         
-        if hours == 0 && minutes == 0 {
-            self.timerCounter = String(format: "%02d", seconds)
-        } else if hours == 0 {
-            self.timerCounter = String(format: "%d:%02d", minutes, seconds)
-        } else {
-            self.timerCounter = String(format: "%d:%d:%02d", hours, minutes, seconds)
+        withAnimation {
+            if hours == 0 && minutes == 0 {
+                self.timerCounter = String(format: "%02d", seconds)
+            } else if hours == 0 {
+                self.timerCounter = String(format: "%d:%02d", minutes, seconds)
+            } else {
+                self.timerCounter = String(format: "%d:%d:%02d", hours, minutes, seconds)
+            }
         }
         
     }

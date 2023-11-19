@@ -36,13 +36,11 @@ extension Text {
     func headlineTextStyle() -> some View {
         self.foregroundColor(Color.theme.secondary)
             .font(.headline)
-            .bold()
     }
     
     func captionTextStyle() -> some View {
         self.foregroundColor(Color.theme.secondary)
             .font(.caption)
-            .bold()
     }
 }
 
