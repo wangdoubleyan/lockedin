@@ -25,6 +25,7 @@ class Settings: ObservableObject {
     @AppStorage("isBreathOn") var isBreathOn = true
     @AppStorage("isPomodoroOn") var isPomodoroOn = false
     @AppStorage("backgroundMusic") var backgroundMusic = "Dream"
+    @AppStorage("selectedItem") var selectedItem = "Simple"
     @AppStorage("interval") var interval = 15.0
 }
 

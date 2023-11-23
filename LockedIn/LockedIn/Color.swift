@@ -20,5 +20,6 @@ struct ColorTheme {
     let secondary = Color("SecondColor")
     let trinary = Color("ThirdColor")
     let surface = Color("SurfaceColor")
+    let sky = Color("SkyColor")
     
 }

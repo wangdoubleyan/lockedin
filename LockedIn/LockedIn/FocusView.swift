@@ -23,6 +23,8 @@ extension UINavigationController: UIGestureRecognizerDelegate {
 class Time: ObservableObject {
     @AppStorage("hr") var hr = 0
     @AppStorage("min") var min = 1
+    @AppStorage("pomodoroWork") var pomodoroWork = 25
+    @AppStorage("pomodoroBreak") var pomodoroBreak = 5
 }
 
 class Review: ObservableObject {
@@ -36,6 +38,7 @@ struct FocusView: View {
     @StateObject var settings = Settings()
     @State private var showAirView = false
     @State private var showTimerView = false
+    @State private var modes = ["Simple", "Pomodoro"]
     let hour = Calendar.current.component(.hour, from: Date())
     
     var body: some View {
@@ -73,45 +76,82 @@ struct FocusView: View {
                     
                     
                     VStack {
-                        HStack {
-                            Picker("Select hours", selection: $time.hr) {
-                                ForEach(0..<13, id: \.self) { i in
-                                    Text("\(i) hr")
-                                        .titleTextStyle()
-                                        .tag(i)
+                        if settings.selectedItem == "Simple" {
+                            HStack {
+                                Picker("Select hours", selection: $time.hr) {
+                                    ForEach(0..<13, id: \.self) { i in
+                                        Text("\(i) hr")
+                                            .titleTextStyle()
+                                            .tag(i)
+                                    }
+                                }
+                                .pickerStyle(.wheel)
+                                .frame(height: 100)
+                                
+                                Picker("Select minutes", selection: $time.min) {
+                                    ForEach((time.hr > 0 ? 0 : 1)..<60, id: \.self) { i in
+                                        Text("\(i) min")
+                                            .titleTextStyle()
+                                            .tag(i)
+                                    }
+                                }
+                                .pickerStyle(.wheel)
+                                .frame(height: 100)
+                            }
+                        } else if settings.selectedItem == "Pomodoro" {
+                            HStack {
+                                VStack {
+                                    Text("WORK")
+                                        .captionTextStyle()
+                                    Picker("Select minutes", selection: $time.pomodoroWork) {
+                                        ForEach((time.pomodoroWork > 0 ? 0 : 1)..<60, id: \.self) { i in
+                                            Text("\(i) min")
+                                                .titleTextStyle()
+                                                .tag(i)
+                                        }
+                                    }
+                                    .pickerStyle(.wheel)
+                                    .frame(height: 100)
+                                }
+                                VStack {
+                                    Text("BREAK")
+                                        .captionTextStyle()
+                                    Picker("Select minutes", selection: $time.pomodoroBreak) {
+                                        ForEach((time.pomodoroBreak > 0 ? 0 : 1)..<60, id: \.self) { i in
+                                            Text("\(i) min")
+                                                .titleTextStyle()
+                                                .tag(i)
+                                        }
+                                    }
+                                    .pickerStyle(.wheel)
+                                    .frame(height: 100)
                                 }
                             }
-                            .pickerStyle(.wheel)
-                            .frame(height: 100)
-                            
-                            Picker("Select minutes", selection: $time.min) {
-                                ForEach((time.hr > 0 ? 0 : 1)..<60, id: \.self) { i in
-                                    Text("\(i) min")
-                                        .titleTextStyle()
-                                        .tag(i)
-                                }
-                            }
-                            .pickerStyle(.wheel)
-                            .frame(height: 100)
                         }
                         
-                        HStack {
-                            Button {
-                                settings.isPomodoroOn.toggle()
-                            } label: {
-                                HStack {
-                                    Image(systemName: settings.isPomodoroOn ? "checkmark.circle.fill" : "circle")
-                                    Text("Pomodoro")
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(modes, id: \.self) { mode in
+                                    Button {
+                                        withAnimation {
+                                            settings.selectedItem = mode
+                                        }
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: settings.selectedItem == mode ? "checkmark.circle.fill" : "circle")
+                                            Text(mode)
+                                        }
+                                        .foregroundStyle(settings.selectedItem == mode ? Color.theme.background : Color.theme.secondary)
+                                        .padding()
+                                        .font(.headline)
+                                    }
+                                    .frame(height: 30)
+                                    .background(settings.selectedItem == mode ? Color.theme.primary : Color.theme.sky)
+                                    .clipShape(RoundedRectangle(cornerRadius: 100))
                                 }
-                                .padding()
-                                .font(.headline)
                             }
-                            .frame(height: 30)
-                            .background(.ultraThinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 100))
-                            
-                            Spacer()
                         }
+
                         .padding(.bottom, 10)
                         
                         NavigationLink {
