@@ -15,6 +15,7 @@
 		125B9C5B2AC5C16A00C914CC /* Dream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 125B9C5A2AC5C16A00C914CC /* Dream.mp3 */; };
 		125B9C5D2AC5C16F00C914CC /* Rain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 125B9C5C2AC5C16F00C914CC /* Rain.mp3 */; };
 		125B9C5F2AC5C17600C914CC /* Stream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 125B9C5E2AC5C17600C914CC /* Stream.mp3 */; };
+		1276D0BB2B14660100F35B31 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1276D0BA2B14660100F35B31 /* GradientView.swift */; };
 		12820B032A99A8550054DBFF /* LockedInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B022A99A8550054DBFF /* LockedInApp.swift */; };
 		12820B072A99A8570054DBFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B062A99A8570054DBFF /* Assets.xcassets */; };
 		12820B0A2A99A8570054DBFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B092A99A8570054DBFF /* Preview Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		125B9C5A2AC5C16A00C914CC /* Dream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dream.mp3; sourceTree = "<group>"; };
 		125B9C5C2AC5C16F00C914CC /* Rain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Rain.mp3; sourceTree = "<group>"; };
 		125B9C5E2AC5C17600C914CC /* Stream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Stream.mp3; sourceTree = "<group>"; };
+		1276D0BA2B14660100F35B31 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		12820AFF2A99A8550054DBFF /* LockedIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LockedIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12820B022A99A8550054DBFF /* LockedInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LockedInApp.swift; path = LockedIn/LockedInApp.swift; sourceTree = "<group>"; };
 		12820B062A99A8570054DBFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = LockedIn/Assets.xcassets; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				12943FA02AA05FFE0035C146 /* Info.plist */,
 				12943F9A2AA055420035C146 /* LockedIn.entitlements */,
 				12820B022A99A8550054DBFF /* LockedInApp.swift */,
+				1276D0BA2B14660100F35B31 /* GradientView.swift */,
 				1237D2DA2AC887C800C80F6B /* ContentView.swift */,
 				12820B102A99A8A60054DBFF /* FocusView.swift */,
 				1295D65D2AC8802300034049 /* BreatheView.swift */,
@@ -308,6 +311,7 @@
 			files = (
 				12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */,
 				12820B032A99A8550054DBFF /* LockedInApp.swift in Sources */,
+				1276D0BB2B14660100F35B31 /* GradientView.swift in Sources */,
 				1295D65E2AC8802300034049 /* BreatheView.swift in Sources */,
 				12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */,
 				12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */,

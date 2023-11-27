@@ -8,11 +8,10 @@
 import SwiftUI
 
 extension Text {
-
     func largeTitleTextStyle() -> some View {
         self.foregroundColor(Color.theme.foreground)
-            .font(.largeTitle)
-            .bold()
+            .font(.system(size: 40))
+            .fontWeight(.heavy)
     }
     
     func titleTextStyle() -> some View {

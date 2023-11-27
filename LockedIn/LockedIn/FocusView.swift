@@ -31,6 +31,12 @@ class Review: ObservableObject {
     @AppStorage("cycleCount") var cycleCount = 0
 }
 
+struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+}
+
 struct FocusView: View {
     @StateObject private var healthKitManager = HealthKitManager()
     @StateObject var time = Time()
@@ -44,21 +50,20 @@ struct FocusView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.theme.background
-                    .ignoresSafeArea()
-                
-                VStack {
-                    
-                    Image("Stream")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .ignoresSafeArea()
-                        .mask(LinearGradient(gradient: Gradient(stops: [
-                            .init(color: Color.theme.background, location: 0),
-                            .init(color: .clear, location: 1), ]),
-                            startPoint: .top, endPoint: .bottom))
-                    Spacer()
-                }
+                GradientView()
+               
+//                VStack {
+//                    
+//                    Image("Sunrise")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .ignoresSafeArea()
+//                        .mask(LinearGradient(gradient: Gradient(stops: [
+//                            .init(color: Color.theme.background, location: 0),
+//                            .init(color: .clear, location: 1), ]),
+//                            startPoint: .top, endPoint: .bottom))
+//                    Spacer()
+//                }
                 
                 
                 VStack(alignment: .leading) {
@@ -132,22 +137,41 @@ struct FocusView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(modes, id: \.self) { mode in
-                                    Button {
-                                        withAnimation {
-                                            settings.selectedItem = mode
+                                    if settings.selectedItem == mode {
+                                        Button {
+                                            withAnimation {
+                                                settings.selectedItem = mode
+                                            }
+                                        } label: {
+                                            HStack {
+                                                Image(systemName: settings.selectedItem == mode ? "checkmark.circle.fill" : "circle")
+                                                Text(mode)
+                                            }
+                                            .foregroundStyle(Color.theme.background)
+                                            .padding()
+                                            .font(.headline)
                                         }
-                                    } label: {
-                                        HStack {
-                                            Image(systemName: settings.selectedItem == mode ? "checkmark.circle.fill" : "circle")
-                                            Text(mode)
+                                        .frame(height: 30)
+                                        .background(Color.theme.primary)
+                                        .clipShape(RoundedRectangle(cornerRadius: 100))
+                                    } else {
+                                        Button {
+                                            withAnimation {
+                                                settings.selectedItem = mode
+                                            }
+                                        } label: {
+                                            HStack {
+                                                Image(systemName: settings.selectedItem == mode ? "checkmark.circle.fill" : "circle")
+                                                Text(mode)
+                                            }
+                                            .foregroundStyle(Color.theme.secondary)
+                                            .padding()
+                                            .font(.headline)
                                         }
-                                        .foregroundStyle(settings.selectedItem == mode ? Color.theme.background : Color.theme.secondary)
-                                        .padding()
-                                        .font(.headline)
+                                        .frame(height: 30)
+                                        .background(.ultraThinMaterial)
+                                        .clipShape(RoundedRectangle(cornerRadius: 100))
                                     }
-                                    .frame(height: 30)
-                                    .background(settings.selectedItem == mode ? Color.theme.primary : Color.theme.sky)
-                                    .clipShape(RoundedRectangle(cornerRadius: 100))
                                 }
                             }
                         }
@@ -168,7 +192,7 @@ struct FocusView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     }
                     .padding()
-                    .background(Color.theme.surface)
+                    .background(.ultraThinMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: 30.0, style: .continuous))
                     Spacer()
                 }

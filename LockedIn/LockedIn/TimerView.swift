@@ -77,10 +77,7 @@ struct TimerView: View {
     @State private var counter = 0
     @State private var isTimerPaused = false
     @State private var intervalCounter = -1.0
-    
-    @State private var timerCounter = "1:00"
-    
-    
+    @State private var timerCounter = "Start"
     @State private var initialTime = 0
     @State private var totalTime = 0.0
     @State private var endDate = Date()
@@ -91,8 +88,10 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-            Image("Mountain")
-                .resizable()
+//            Image("Sunrise")
+//                .resizable()
+            
+           GradientView()
                 
             ZStack {
                 Circle()
@@ -107,12 +106,27 @@ struct TimerView: View {
                     .animation(.easeIn(duration: 3), value: opacity)
                     .animation(.linear(duration: 1), value: progress)
                 
+                
+                VStack {
+                    HStack(spacing: 5) {
+                        Image(systemName: "forward.fill")
+                        Text("Break")
+
+                    }
+                    .foregroundStyle(Color.theme.background)
+                    .font(.headline)
+                    .bold()
+                    .padding(10)
+                    .background(Color.theme.primary)
+                    .clipShape(RoundedRectangle(cornerRadius: 100))
+                }
+                .padding(.bottom, 115)
+                
                 HStack {
                     Text("\(timerCounter)")
                         .largeTitleTextStyle()
                         .contentTransition(.numericText())
                         .fontDesign(.monospaced)
-
                 }
             }
             .padding(40)
