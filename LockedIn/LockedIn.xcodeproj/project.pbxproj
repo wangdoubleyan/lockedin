@@ -34,6 +34,8 @@
 		12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1D9602A9DA38600E047AF /* SettingsView.swift */; };
 		12F960672AD66060004FD46A /* BreatheOut.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12F960662AD66060004FD46A /* BreatheOut.m4a */; };
 		12F960692AD66069004FD46A /* BreatheIn.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12F960682AD66069004FD46A /* BreatheIn.m4a */; };
+		12FBB8522B353D3700D27C96 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBB8512B353D3700D27C96 /* AppStorage.swift */; };
+		12FBB8542B353DC000D27C96 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBB8532B353DC000D27C96 /* SoundManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,33 +67,35 @@
 		120D5D322AA595D90024257F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		120D5D472AA629110024257F /* SnapSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = SnapSound.m4a; sourceTree = "<group>"; };
 		120D5D492AA629350024257F /* Sound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sound.m4a; sourceTree = "<group>"; };
-		121D2E022ACE492B00398390 /* AirView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AirView.swift; path = LockedIn/AirView.swift; sourceTree = "<group>"; };
-		1237D2DA2AC887C800C80F6B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = LockedIn/ContentView.swift; sourceTree = "<group>"; };
+		121D2E022ACE492B00398390 /* AirView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirView.swift; sourceTree = "<group>"; };
+		1237D2DA2AC887C800C80F6B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		125B9C582AC5C15E00C914CC /* Campfire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Campfire.mp3; sourceTree = "<group>"; };
 		125B9C5A2AC5C16A00C914CC /* Dream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dream.mp3; sourceTree = "<group>"; };
 		125B9C5C2AC5C16F00C914CC /* Rain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Rain.mp3; sourceTree = "<group>"; };
 		125B9C5E2AC5C17600C914CC /* Stream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Stream.mp3; sourceTree = "<group>"; };
 		1276D0BA2B14660100F35B31 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		12820AFF2A99A8550054DBFF /* LockedIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LockedIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		12820B022A99A8550054DBFF /* LockedInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LockedInApp.swift; path = LockedIn/LockedInApp.swift; sourceTree = "<group>"; };
-		12820B062A99A8570054DBFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = LockedIn/Assets.xcassets; sourceTree = "<group>"; };
+		12820B022A99A8550054DBFF /* LockedInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedInApp.swift; sourceTree = "<group>"; };
+		12820B062A99A8570054DBFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12820B092A99A8570054DBFF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Preview Assets.xcassets"; path = "LockedIn/Preview Content/Preview Assets.xcassets"; sourceTree = "<group>"; };
-		12820B102A99A8A60054DBFF /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FocusView.swift; path = LockedIn/FocusView.swift; sourceTree = "<group>"; };
-		12820B122A99A8AF0054DBFF /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerView.swift; path = LockedIn/TimerView.swift; sourceTree = "<group>"; };
-		12943F9A2AA055420035C146 /* LockedIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = LockedIn.entitlements; path = LockedIn/LockedIn.entitlements; sourceTree = "<group>"; };
-		12943F9B2AA05AD30035C146 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HealthKitManager.swift; path = LockedIn/HealthKitManager.swift; sourceTree = "<group>"; };
-		12943FA02AA05FFE0035C146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = LockedIn/Info.plist; sourceTree = "<group>"; };
-		1295D65D2AC8802300034049 /* BreatheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BreatheView.swift; path = LockedIn/BreatheView.swift; sourceTree = "<group>"; };
-		12A2640A2A9C5A1F00CE0FDD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Color.swift; path = LockedIn/Color.swift; sourceTree = "<group>"; };
+		12820B102A99A8A60054DBFF /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
+		12820B122A99A8AF0054DBFF /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		12943F9A2AA055420035C146 /* LockedIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LockedIn.entitlements; sourceTree = "<group>"; };
+		12943F9B2AA05AD30035C146 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		12943FA02AA05FFE0035C146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1295D65D2AC8802300034049 /* BreatheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreatheView.swift; sourceTree = "<group>"; };
+		12A2640A2A9C5A1F00CE0FDD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		12D961382AD491D100CD25D5 /* LockedInWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LockedInWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		12D9613C2AD491D100CD25D5 /* LockedInWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedInWidgetBundle.swift; sourceTree = "<group>"; };
 		12D9613E2AD491D100CD25D5 /* LockedInWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedInWidget.swift; sourceTree = "<group>"; };
 		12D961402AD491D300CD25D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12D961422AD491D300CD25D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = LockedIn/NotificationManager.swift; sourceTree = "<group>"; };
-		12F1D9602A9DA38600E047AF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = LockedIn/SettingsView.swift; sourceTree = "<group>"; };
+		12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		12F1D9602A9DA38600E047AF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		12F960662AD66060004FD46A /* BreatheOut.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreatheOut.m4a; sourceTree = "<group>"; };
 		12F960682AD66069004FD46A /* BreatheIn.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreatheIn.m4a; sourceTree = "<group>"; };
+		12FBB8512B353D3700D27C96 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
+		12FBB8532B353DC000D27C96 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,21 +149,9 @@
 		12820B012A99A8550054DBFF /* LockedIn */ = {
 			isa = PBXGroup;
 			children = (
-				12943FA02AA05FFE0035C146 /* Info.plist */,
-				12943F9A2AA055420035C146 /* LockedIn.entitlements */,
-				12820B022A99A8550054DBFF /* LockedInApp.swift */,
-				1276D0BA2B14660100F35B31 /* GradientView.swift */,
-				1237D2DA2AC887C800C80F6B /* ContentView.swift */,
-				12820B102A99A8A60054DBFF /* FocusView.swift */,
-				1295D65D2AC8802300034049 /* BreatheView.swift */,
-				121D2E022ACE492B00398390 /* AirView.swift */,
-				12820B122A99A8AF0054DBFF /* TimerView.swift */,
-				12F1D9602A9DA38600E047AF /* SettingsView.swift */,
-				12943F9B2AA05AD30035C146 /* HealthKitManager.swift */,
-				12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */,
-				12A2640A2A9C5A1F00CE0FDD /* Color.swift */,
-				12820B062A99A8570054DBFF /* Assets.xcassets */,
-				12943F8D2A9FAEDB0035C146 /* Sounds */,
+				12FBB8552B353F3F00D27C96 /* Views */,
+				12FBB8562B353FED00D27C96 /* Utilities */,
+				12FBB8572B3540A300D27C96 /* Media */,
 				12820B082A99A8570054DBFF /* Preview Content */,
 			);
 			name = LockedIn;
@@ -185,8 +177,7 @@
 				120D5D472AA629110024257F /* SnapSound.m4a */,
 				120D5D492AA629350024257F /* Sound.m4a */,
 			);
-			name = Sounds;
-			path = LockedIn/Sounds;
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		12D9613B2AD491D100CD25D5 /* LockedInWidget */ = {
@@ -198,6 +189,44 @@
 				12D961422AD491D300CD25D5 /* Info.plist */,
 			);
 			path = LockedInWidget;
+			sourceTree = "<group>";
+		};
+		12FBB8552B353F3F00D27C96 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				12820B022A99A8550054DBFF /* LockedInApp.swift */,
+				1237D2DA2AC887C800C80F6B /* ContentView.swift */,
+				12820B102A99A8A60054DBFF /* FocusView.swift */,
+				12820B122A99A8AF0054DBFF /* TimerView.swift */,
+				1295D65D2AC8802300034049 /* BreatheView.swift */,
+				121D2E022ACE492B00398390 /* AirView.swift */,
+				12F1D9602A9DA38600E047AF /* SettingsView.swift */,
+				1276D0BA2B14660100F35B31 /* GradientView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		12FBB8562B353FED00D27C96 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				12943FA02AA05FFE0035C146 /* Info.plist */,
+				12943F9A2AA055420035C146 /* LockedIn.entitlements */,
+				12FBB8512B353D3700D27C96 /* AppStorage.swift */,
+				12FBB8532B353DC000D27C96 /* SoundManager.swift */,
+				12943F9B2AA05AD30035C146 /* HealthKitManager.swift */,
+				12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */,
+				12A2640A2A9C5A1F00CE0FDD /* Color.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		12FBB8572B3540A300D27C96 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				12820B062A99A8570054DBFF /* Assets.xcassets */,
+				12943F8D2A9FAEDB0035C146 /* Sounds */,
+			);
+			path = Media;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,11 +342,13 @@
 				12820B032A99A8550054DBFF /* LockedInApp.swift in Sources */,
 				1276D0BB2B14660100F35B31 /* GradientView.swift in Sources */,
 				1295D65E2AC8802300034049 /* BreatheView.swift in Sources */,
+				12FBB8542B353DC000D27C96 /* SoundManager.swift in Sources */,
 				12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */,
 				12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */,
 				121D2E032ACE492B00398390 /* AirView.swift in Sources */,
 				1237D2DB2AC887C800C80F6B /* ContentView.swift in Sources */,
 				12DC4F0F2AA31064001AF2C5 /* NotificationManager.swift in Sources */,
+				12FBB8522B353D3700D27C96 /* AppStorage.swift in Sources */,
 				12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */,
 				12820B112A99A8A60054DBFF /* FocusView.swift in Sources */,
 			);

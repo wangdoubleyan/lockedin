@@ -20,17 +20,6 @@ extension UINavigationController: UIGestureRecognizerDelegate {
     }
 }
 
-class Time: ObservableObject {
-    @AppStorage("hr") var hr = 0
-    @AppStorage("min") var min = 1
-    @AppStorage("pomodoroWork") var pomodoroWork = 25
-    @AppStorage("pomodoroBreak") var pomodoroBreak = 5
-}
-
-class Review: ObservableObject {
-    @AppStorage("cycleCount") var cycleCount = 0
-}
-
 struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
     func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }

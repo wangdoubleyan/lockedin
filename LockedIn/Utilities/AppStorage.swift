@@ -1,0 +1,24 @@
+//
+//  AppStorage.swift
+//  LockedIn
+//
+//  Created by Matsvei Liapich on 12/21/23.
+//
+
+import Foundation
+import SwiftUI
+
+class Time: ObservableObject {
+    @AppStorage("hr") var hr = 0
+    @AppStorage("min") var min = 1
+    @AppStorage("pomodoroWork") var pomodoroWork = 25
+    @AppStorage("pomodoroBreak") var pomodoroBreak = 5
+}
+
+class Review: ObservableObject {
+    @AppStorage("cycleCount") var cycleCount = 0
+}
+
+class Breath: ObservableObject {
+    @AppStorage("breaths") var breaths = 5
+}

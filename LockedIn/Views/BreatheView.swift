@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-class Breath: ObservableObject {
-    @AppStorage("breaths") var breaths = 5
-}
-
 struct BreatheView: View {
     @StateObject var breath = Breath()
     @State private var showAirView = false
