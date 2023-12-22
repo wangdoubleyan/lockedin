@@ -22,3 +22,13 @@ class Review: ObservableObject {
 class Breath: ObservableObject {
     @AppStorage("breaths") var breaths = 5
 }
+
+class Settings: ObservableObject {
+    @AppStorage("isSnapOn") var isSnapOn = false
+    @AppStorage("isMusicOn") var isMusicOn = true
+    @AppStorage("isBreathOn") var isBreathOn = true
+    @AppStorage("isPomodoroOn") var isPomodoroOn = false
+    @AppStorage("backgroundMusic") var backgroundMusic = "Dream"
+    @AppStorage("selectedItem") var selectedItem = "Simple"
+    @AppStorage("interval") var interval = 15.0
+}

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct GradientView: View {
     @State var start = UnitPoint(x: 0, y: -2)
     @State var end = UnitPoint(x: 4, y: 0)

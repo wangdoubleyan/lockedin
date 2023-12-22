@@ -9,26 +9,6 @@ import SwiftUI
 import HealthKit
 import UserNotifications
 
-extension Date: RawRepresentable {
-    public var rawValue: String {
-        self.timeIntervalSinceReferenceDate.description
-    }
-    
-    public init?(rawValue: String) {
-        self = Date(timeIntervalSinceReferenceDate: Double(rawValue) ?? 0.0)
-    }
-}
-
-class Settings: ObservableObject {
-    @AppStorage("isSnapOn") var isSnapOn = false
-    @AppStorage("isMusicOn") var isMusicOn = true
-    @AppStorage("isBreathOn") var isBreathOn = true
-    @AppStorage("isPomodoroOn") var isPomodoroOn = false
-    @AppStorage("backgroundMusic") var backgroundMusic = "Dream"
-    @AppStorage("selectedItem") var selectedItem = "Simple"
-    @AppStorage("interval") var interval = 15.0
-}
-
 struct SettingsView: View {
     @State private var isHealthAccessGranted = false
     @State private var isNotificationAccessGranted = false
