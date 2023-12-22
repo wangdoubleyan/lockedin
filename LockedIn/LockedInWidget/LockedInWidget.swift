@@ -156,10 +156,3 @@ struct LockedInWidget2: Widget {
         .description("Take 5 breaths.")
     }
 }
-
-#Preview(as: .systemSmall) {
-    LockedInWidget()
-} timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
-}
