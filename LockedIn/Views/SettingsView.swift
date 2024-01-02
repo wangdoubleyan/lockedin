@@ -272,10 +272,10 @@ struct SettingsView: View {
                 )
                 .listRowSeparator(.hidden)
             }
+            .background(Color.theme.background)
             .toolbar(.hidden, for: .tabBar)
             .environment(\.defaultMinListRowHeight, 60)
             .tint(Color.theme.accent)
-            .background(Color.theme.background)
             .foregroundStyle(Color.theme.secondary)
             .scrollContentBackground(.hidden)
             .navigationBarBackButtonHidden(true)

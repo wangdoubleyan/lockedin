@@ -28,7 +28,7 @@ struct AirView: View {
     var body: some View {
         ZStack {
             Image("Sea")
-            
+
             ZStack {
                 Capsule()
                     .offset(y: 500)
@@ -104,11 +104,13 @@ struct AirView: View {
             
             
             .onReceive(timer) { time in
-                isBreathingIn.toggle()
-                isBreathingIn ? (height = 1200) : (height = 0)
-                if settings.isBreathOn {
-                    SoundManager.instance.playSound(sound: isBreathingIn ? "BreatheIn" : "BreatheOut")
-                    complexSuccess()
+                DispatchQueue.global(qos: .userInteractive).async {
+                    isBreathingIn.toggle()
+                    isBreathingIn ? (height = 1200) : (height = 0)
+                    if settings.isBreathOn {
+                        SoundManager.instance.playSound(sound: isBreathingIn ? "BreatheIn" : "BreatheOut")
+                        complexSuccess()
+                    }
                 }
                 
             }
@@ -195,7 +197,6 @@ struct AirView: View {
     }
     
     func complexSuccess() {
-        // make sure that the device supports haptics
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         var events = [CHHapticEvent]()
         

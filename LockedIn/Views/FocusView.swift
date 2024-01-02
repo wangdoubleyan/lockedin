@@ -28,26 +28,19 @@ struct FocusView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                GradientView()
-               
-//                VStack {
-//                    
-//                    Image("Sunrise")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .ignoresSafeArea()
-//                        .mask(LinearGradient(gradient: Gradient(stops: [
-//                            .init(color: Color.theme.background, location: 0),
-//                            .init(color: .clear, location: 1), ]),
-//                            startPoint: .top, endPoint: .bottom))
-//                    Spacer()
-//                }
-                
+                VStack {
+                    Image("Mountain")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .ignoresSafeArea()
+                        .mask(LinearGradient(gradient: Gradient(stops: [
+                            .init(color: Color.theme.background, location: 0),
+                            .init(color: .clear, location: 1), ]),
+                            startPoint: .top, endPoint: .bottom))
+                    Spacer()
+                }
                 
                 VStack(alignment: .leading) {
-                    Spacer()
-                    Spacer()
-                    Spacer()
                     Spacer()
                     
                     Text("Time to Focus")
@@ -172,7 +165,7 @@ struct FocusView: View {
                     .padding()
                     .background(.ultraThinMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: 30.0, style: .continuous))
-                    Spacer()
+                    .padding(.bottom, 100)
                 }
                 .padding()
             }

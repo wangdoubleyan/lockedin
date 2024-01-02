@@ -38,11 +38,9 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-//            Image("Sunrise")
-//                .resizable()
-            
-           GradientView()
-                
+            Image("Mountain")
+                .resizable()
+
             ZStack {
                 Circle()
                     .stroke(lineWidth: stroke)
@@ -86,6 +84,7 @@ struct TimerView: View {
             
             .onReceive(timer) { time in
                 updateCountdown()
+                print(time)
             }
             
             Color.theme.secondary
@@ -243,8 +242,10 @@ struct TimerView: View {
         vibrate()
         stroke = 40.0
         opacity = 1
-        SoundManager.instance.playSound(sound: "Sound")
-        SoundManager.instance.playMusic(music: settings.backgroundMusic)
+        DispatchQueue.global(qos: .userInteractive).async {
+            SoundManager.instance.playSound(sound: "Sound")
+            SoundManager.instance.playMusic(music: settings.backgroundMusic)
+        }
     }
     
     func updateCountdown() {
@@ -252,43 +253,41 @@ struct TimerView: View {
         let diff = endDate.timeIntervalSince(now)
         
         if diff <= 0 {
+            self.timer.upstream.connect().cancel()
             end()
-        }
-        
-        progress += 1.0 / Double(initialTime * 60)
-        
-        let hours = Int(diff / 3600)
-        let minutes = Int((diff / 60).truncatingRemainder(dividingBy: 60))
-        let seconds = Int(diff.truncatingRemainder(dividingBy: 60))
-        
-        self.initialTime = initialTime
-        
-        withAnimation {
-            if hours == 0 && minutes == 0 {
-                self.timerCounter = String(format: "%02d", seconds)
-            } else if hours == 0 {
-                self.timerCounter = String(format: "%d:%02d", minutes, seconds)
-            } else {
-                self.timerCounter = String(format: "%d:%d:%02d", hours, minutes, seconds)
+        } else {
+            progress += 1.0 / Double(initialTime * 60)
+            
+            let hours = Int(diff / 3600)
+            let minutes = Int((diff / 60).truncatingRemainder(dividingBy: 60))
+            let seconds = Int(diff.truncatingRemainder(dividingBy: 60))
+            
+            self.initialTime = initialTime
+            
+            withAnimation {
+                if hours == 0 && minutes == 0 {
+                    self.timerCounter = String(format: "%02d", seconds)
+                } else if hours == 0 {
+                    self.timerCounter = String(format: "%d:%02d", minutes, seconds)
+                } else {
+                    self.timerCounter = String(format: "%d:%d:%02d", hours, minutes, seconds)
+                }
             }
         }
         
     }
 
     func end() {
-        if counter == 0 {
-            counter += 1
-            vibrate()
-            SoundManager.instance.playSound(sound: "Sound")
-            fadeMusic()
-            healthKitManager.saveMindfulMinutes(minutes: Double(totalTime))
-        }
+        timerCounter = "Finish"
+        SoundManager.instance.playSound(sound: "Sound")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             UIApplication.shared.isIdleTimerDisabled = false
                         
             SoundManager.instance.soundPlayer.stop()
             SoundManager.instance.musicPlayer.stop()
+            
+            healthKitManager.saveMindfulMinutes(minutes: Double(totalTime))
             
             dismiss()
         }

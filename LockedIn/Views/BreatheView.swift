@@ -15,11 +15,8 @@ struct BreatheView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.theme.background
-                    .ignoresSafeArea()
-                
                 VStack {
-                    Image("Beach")
+                    Image("Sea")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .ignoresSafeArea()
@@ -32,17 +29,16 @@ struct BreatheView: View {
                 
                 VStack(alignment: .leading) {
                     Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
                     
                     Text("Take a Breath")
                         .largeTitleTextStyle()
+                    
                     Text("Select how many Breaths you want to take.")
                         .headlineTextStyle()
                         .padding(.bottom)
                     
-                    VStack(spacing: 10) {
+                    
+                    VStack {
                         HStack {
                             Picker("Select breaths", selection: breath.$breaths) {
                                 Text("1 breath")
@@ -58,67 +54,26 @@ struct BreatheView: View {
                             .frame(height: 100)
                             .pickerStyle(.wheel)
                         }
-                        
-                        HStack(spacing: 10) {
-                            NavigationLink {
-                                AirView()
-                            } label: {
-                                HStack {
-                                    Text("1 breath")
-                                        .smallTitleTextStyle()
-                                }
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .contentShape(Rectangle())
-                            }
-                            .frame(height: 60)
-                            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                                    .stroke(Color.theme.primary, lineWidth: 3)
-                            )
-                            .simultaneousGesture(TapGesture().onEnded {
-                                breath.breaths = 1
-                            })
-                            
-                            NavigationLink {
-                                AirView()
-                            } label: {
-                                HStack {
-                                    Text("5 breaths")
-                                        .smallTitleTextStyle()
-                                }
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .contentShape(Rectangle())
-                            }
-                            .frame(height: 60)
-                            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                                    .stroke(Color.theme.primary, lineWidth: 3)
-                            )
-                            .simultaneousGesture(TapGesture().onEnded {
-                                breath.breaths = 5
-                            })
-                        }
+
+                        .padding(.bottom, 10)
                         
                         NavigationLink {
                             AirView()
                         } label: {
-                            Text("Let's Breathe")
-                                .foregroundStyle(Color.theme.background)
+                            Text("Start Session")
+                                .foregroundColor(Color.theme.background)
                                 .font(.title3)
                                 .bold()
-                                
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
                         .frame(height: 60)
                         .background(Color.theme.primary)
-                        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     }
                     .padding()
-                    .background(Color.theme.surface)
+                    .background(.ultraThinMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: 30.0, style: .continuous))
-                    Spacer()
+                    .padding(.bottom, 100)
                 }
                 .padding()
             }
