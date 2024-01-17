@@ -80,7 +80,7 @@ struct FocusView: View {
                                     Text("WORK")
                                         .captionTextStyle()
                                     Picker("Select minutes", selection: $time.pomodoroWork) {
-                                        ForEach((time.pomodoroWork > 0 ? 0 : 1)..<60, id: \.self) { i in
+                                        ForEach(1..<60, id: \.self) { i in
                                             Text("\(i) min")
                                                 .titleTextStyle()
                                                 .tag(i)
@@ -93,7 +93,7 @@ struct FocusView: View {
                                     Text("BREAK")
                                         .captionTextStyle()
                                     Picker("Select minutes", selection: $time.pomodoroBreak) {
-                                        ForEach((time.pomodoroBreak > 0 ? 0 : 1)..<60, id: \.self) { i in
+                                        ForEach(1..<60, id: \.self) { i in
                                             Text("\(i) min")
                                                 .titleTextStyle()
                                                 .tag(i)

@@ -18,7 +18,6 @@ struct TimerView: View {
     @ObservedObject var time = Time()
     @ObservedObject var settings = Settings()
     @ObservedObject var review = Review()
-    
     @State private var progress = 0.0
     @State private var timeRemaining = 0
     @State private var stroke = 0.0
@@ -31,6 +30,7 @@ struct TimerView: View {
     @State private var initialTime = 0
     @State private var totalTime = 0.0
     @State private var endDate = Date()
+    @State private var isWorkOn = true
 
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -58,7 +58,7 @@ struct TimerView: View {
                 VStack {
                     HStack(spacing: 5) {
                         Image(systemName: "forward.fill")
-                        Text("Break")
+                        Text(isWorkOn ? "Work" : "Break")
 
                     }
                     .foregroundStyle(Color.theme.background)
@@ -253,8 +253,18 @@ struct TimerView: View {
         let diff = endDate.timeIntervalSince(now)
         
         if diff <= 0 {
-            self.timer.upstream.connect().cancel()
-            end()
+            if settings.selectedItem == "Simple" {
+                self.timer.upstream.connect().cancel()
+                end()
+            } else {
+                if isWorkOn {
+                    start(hours: 0, minutes: time.pomodoroBreak)
+                    isWorkOn.toggle()
+                } else {
+                    start(hours: 0, minutes: time.pomodoroWork)
+                    isWorkOn.toggle()
+                }
+            }
         } else {
             progress += 1.0 / Double(initialTime * 60)
             
