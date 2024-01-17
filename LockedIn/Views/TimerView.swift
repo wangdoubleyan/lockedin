@@ -79,7 +79,7 @@ struct TimerView: View {
             }
             .padding(40)
             .onAppear {
-                start(hours: time.hr, minutes: time.min)
+                settings.selectedItem == "Simple" ? start(hours: time.hr, minutes: time.min) : start(hours: 0, minutes: time.pomodoroWork)
             }
             
             .onReceive(timer) { time in
