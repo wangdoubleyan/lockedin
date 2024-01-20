@@ -9,12 +9,6 @@ import SwiftUI
 import HealthKit
 import UserNotifications
 
-struct VisualEffectView: UIViewRepresentable {
-    var effect: UIVisualEffect?
-    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
-    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
-}
-
 struct FocusView: View {
     @StateObject private var healthKitManager = HealthKitManager()
     @StateObject var time = Time()
@@ -33,6 +27,8 @@ struct FocusView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .ignoresSafeArea()
+                    
+//                    Darkens botton of the background
                         .mask(LinearGradient(gradient: Gradient(stops: [
                             .init(color: Color.theme.background, location: 0),
                             .init(color: .clear, location: 1), ]),
@@ -177,6 +173,8 @@ struct FocusView: View {
                 AirView()
             }
         }
+        
+//        Opens screen from widget or link
         .onOpenURL { url in
             if url.absoluteString == "widget://link0" {
                 time.hr = 0
@@ -187,6 +185,8 @@ struct FocusView: View {
                 showAirView = true
             }
         }
+        
+//        Reduces the lag when playing music in TimerView and AirView (maybe)
         .onAppear() {
             SoundManager.instance.musicPlayer.prepareToPlay()
             SoundManager.instance.soundPlayer.prepareToPlay()

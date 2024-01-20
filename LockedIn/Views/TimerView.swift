@@ -34,7 +34,7 @@ struct TimerView: View {
 
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    let fadeTime = 0.5
+    let musicFadeTime = 0.5
     
     var body: some View {
         ZStack {
@@ -48,6 +48,8 @@ struct TimerView: View {
                     .animation(.linear(duration: 1), value: stroke)
                 
                 Circle()
+                
+//                FIXME: Reset progress when pomodoro is on and work/break ends
                     .trim(from: 0.0, to: min(progress, 1.0))
                     .stroke(Color.theme.primary.opacity(opacity), style: StrokeStyle(lineWidth: 30.0, lineCap: .round, lineJoin: .round))
                     .rotationEffect(Angle(degrees: 270))
@@ -103,7 +105,7 @@ struct TimerView: View {
                                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                                 SoundManager.instance.musicPlayer.setVolume(0.0, fadeDuration: 0.0)
                                 SoundManager.instance.playMusic(music: settings.backgroundMusic)
-                                SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: fadeTime)
+                                SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: musicFadeTime)
                             } else {
                                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                                 fadeMusic()
@@ -183,7 +185,7 @@ struct TimerView: View {
                     
                     fadeMusic()
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(fadeTime * 1000))) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(musicFadeTime * 1000))) {
                         SoundManager.instance.soundPlayer.stop()
                         SoundManager.instance.musicPlayer.stop()
                     }
@@ -258,9 +260,11 @@ struct TimerView: View {
                 end()
             } else {
                 if isWorkOn {
+                    progress = 0.0
                     start(hours: 0, minutes: time.pomodoroBreak)
                     isWorkOn.toggle()
                 } else {
+                    progress = 0.0
                     start(hours: 0, minutes: time.pomodoroWork)
                     isWorkOn.toggle()
                 }
@@ -309,9 +313,9 @@ struct TimerView: View {
     }
     
     func fadeMusic() {
-        SoundManager.instance.musicPlayer.setVolume(0, fadeDuration: fadeTime)
+        SoundManager.instance.musicPlayer.setVolume(0, fadeDuration: musicFadeTime)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(fadeTime) * 1000)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(musicFadeTime) * 1000)) {
             SoundManager.instance.musicPlayer.pause()
         }
     }
@@ -329,7 +333,7 @@ struct TimerView: View {
         if settings.isMusicOn {
             SoundManager.instance.musicPlayer.setVolume(0.0, fadeDuration: 0.0)
             SoundManager.instance.playMusic(music: settings.backgroundMusic)
-            SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: fadeTime)
+            SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: musicFadeTime)
         }
     }
 }
