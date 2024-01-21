@@ -31,6 +31,7 @@ struct TimerView: View {
     @State private var totalTime = 0.0
     @State private var endDate = Date()
     @State private var isWorkOn = true
+    @State private var pauseTime = Date()
 
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -48,8 +49,6 @@ struct TimerView: View {
                     .animation(.linear(duration: 1), value: stroke)
                 
                 Circle()
-                
-//                FIXME: Reset progress when pomodoro is on and work/break ends
                     .trim(from: 0.0, to: min(progress, 1.0))
                     .stroke(Color.theme.primary.opacity(opacity), style: StrokeStyle(lineWidth: 30.0, lineCap: .round, lineJoin: .round))
                     .rotationEffect(Angle(degrees: 270))
@@ -321,12 +320,15 @@ struct TimerView: View {
     }
     
     func pauseTimer() {
+        pauseTime = Date()
         self.timer.upstream.connect().cancel()
         isTimerPaused.toggle()
         fadeMusic()
     }
     
     func resumeTimer() {
+        let elapsedTime = Date().timeIntervalSince(pauseTime)
+        endDate = endDate + elapsedTime + 1
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         isTimerPaused.toggle()
             
