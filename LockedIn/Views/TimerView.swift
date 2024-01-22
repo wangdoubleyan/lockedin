@@ -18,18 +18,27 @@ struct TimerView: View {
     @ObservedObject var time = Time()
     @ObservedObject var settings = Settings()
     @ObservedObject var review = Review()
+    
+//    Timer ring progress
     @State private var progress = 0.0
-    @State private var timeRemaining = 0
+    
+//    Used for animation
     @State private var stroke = 0.0
     @State private var opacity = 0.0
+    
     @State private var flash = 0.0
-    @State private var counter = 0
     @State private var isTimerPaused = false
-    @State private var intervalCounter = -1.0
     @State private var timerCounter = "Start"
     @State private var initialTime = 0
-    @State private var totalTime = 0.0
-    @State private var endDate = Date()
+    
+    @State private var startDate = Date()
+    
+//    Calculated when user starts timer
+    @State private var expectedEndDate = Date()
+    
+//    Calculated when user exits timer
+    @State private var actualEndDate = Date()
+    
     @State private var isWorkOn = true
     @State private var pauseTime = Date()
 
@@ -57,17 +66,29 @@ struct TimerView: View {
                 
                 
                 VStack {
-                    HStack(spacing: 5) {
-                        Image(systemName: "forward.fill")
-                        Text(isWorkOn ? "Work" : "Break")
-
+                    if settings.selectedItem == "Pomodoro" {
+                        Button {
+                            progress = 0
+                            if isWorkOn {
+                                progress = 0.0
+                                start(hours: 0, minutes: time.pomodoroBreak)
+                                isWorkOn.toggle()
+                            } else {
+                                progress = 0.0
+                                start(hours: 0, minutes: time.pomodoroWork)
+                                isWorkOn.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "forward.fill")
+                            Text(isWorkOn ? "Work" : "Break")
+                        }
+                        .foregroundStyle(Color.theme.background)
+                        .font(.headline)
+                        .bold()
+                        .padding(10)
+                        .background(Color.theme.primary)
+                        .clipShape(RoundedRectangle(cornerRadius: 100))
                     }
-                    .foregroundStyle(Color.theme.background)
-                    .font(.headline)
-                    .bold()
-                    .padding(10)
-                    .background(Color.theme.primary)
-                    .clipShape(RoundedRectangle(cornerRadius: 100))
                 }
                 .padding(.bottom, 115)
                 
@@ -80,6 +101,10 @@ struct TimerView: View {
             }
             .padding(40)
             .onAppear {
+//            Makes sure that a timer of 0 is not possible
+            if time.hr == 0 && time.min == 0 {
+                time.min = 1
+            }
                 settings.selectedItem == "Simple" ? start(hours: time.hr, minutes: time.min) : start(hours: 0, minutes: time.pomodoroWork)
             }
             
@@ -230,15 +255,15 @@ struct TimerView: View {
         UINotificationFeedbackGenerator().notificationOccurred(.warning)
     }
     
+    
+//    Calculates the timer duration
     func start(hours: Int, minutes: Int) {
-        if time.hr == 0 && time.min == 0 {
-            time.min = 1
-        }
+        startDate = Date()
         
-        self.initialTime = hours * 60 + minutes
-        self.endDate = Date()
-        self.endDate = Calendar.current.date(byAdding: .minute, value: initialTime, to: endDate)!
-        print(endDate)
+        initialTime = hours * 60 + minutes
+        expectedEndDate = Date()
+        expectedEndDate = Calendar.current.date(byAdding: .minute, value: initialTime, to: expectedEndDate)!
+        print(expectedEndDate)
         UIApplication.shared.isIdleTimerDisabled = true
         vibrate()
         stroke = 40.0
@@ -251,7 +276,7 @@ struct TimerView: View {
     
     func updateCountdown() {
         let now = Date()
-        let diff = endDate.timeIntervalSince(now)
+        let diff = expectedEndDate.timeIntervalSince(now)
         
         if diff <= 0 {
             if settings.selectedItem == "Simple" {
@@ -274,16 +299,14 @@ struct TimerView: View {
             let hours = Int(diff / 3600)
             let minutes = Int((diff / 60).truncatingRemainder(dividingBy: 60))
             let seconds = Int(diff.truncatingRemainder(dividingBy: 60))
-            
-            self.initialTime = initialTime
-            
+                        
             withAnimation {
                 if hours == 0 && minutes == 0 {
-                    self.timerCounter = String(format: "%02d", seconds)
+                    timerCounter = String(format: "%02d", seconds)
                 } else if hours == 0 {
-                    self.timerCounter = String(format: "%d:%02d", minutes, seconds)
+                    timerCounter = String(format: "%d:%02d", minutes, seconds)
                 } else {
-                    self.timerCounter = String(format: "%d:%d:%02d", hours, minutes, seconds)
+                    timerCounter = String(format: "%d:%d:%02d", hours, minutes, seconds)
                 }
             }
         }
@@ -291,6 +314,7 @@ struct TimerView: View {
     }
 
     func end() {
+        actualEndDate = Date()
         timerCounter = "Finish"
         SoundManager.instance.playSound(sound: "Sound")
         
@@ -300,13 +324,13 @@ struct TimerView: View {
             SoundManager.instance.soundPlayer.stop()
             SoundManager.instance.musicPlayer.stop()
             
-            healthKitManager.saveMindfulMinutes(minutes: Double(totalTime))
+            healthKitManager.saveMindfulMinutes(start: startDate, end: actualEndDate)
             
             dismiss()
         }
         
         review.cycleCount += 1
-        if review.cycleCount % 20 == 0 {
+        if review.cycleCount % 50 == 0 {
             requestReview()
         }
     }
@@ -328,7 +352,9 @@ struct TimerView: View {
     
     func resumeTimer() {
         let elapsedTime = Date().timeIntervalSince(pauseTime)
-        endDate = endDate + elapsedTime + 1
+        
+//        1.5 added seconds are necessary to account for a lost second if paused at the end of a second
+        expectedEndDate = expectedEndDate + elapsedTime + 1.5
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         isTimerPaused.toggle()
             

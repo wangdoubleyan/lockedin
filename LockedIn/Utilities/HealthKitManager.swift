@@ -13,24 +13,24 @@ class HealthKitManager: ObservableObject {
 
     func requestAuthorization() {
         let typesToWrite: Set<HKSampleType> = [HKObjectType.categoryType(forIdentifier: .mindfulSession)!]
-
-        healthStore.requestAuthorization(toShare: typesToWrite, read: nil) { success, error in
-            if success {
-                print("Authorization granted!")
-                
-            } else {
-                if let error = error {
-                    print("Authorization failed: \(error.localizedDescription)")
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.healthStore.requestAuthorization(toShare: typesToWrite, read: nil) { success, error in
+                if success {
+                    print("Authorization granted!")
+                    
+                } else {
+                    if let error = error {
+                        print("Authorization failed: \(error.localizedDescription)")
+                    }
                 }
             }
         }
     }
 
-    func saveMindfulMinutes(minutes: Double) {
+    func saveMindfulMinutes(start: Date, end: Date) {
         let mindfulType = HKObjectType.categoryType(forIdentifier: .mindfulSession)!
-        let startTime = Date()
-        let endTime = startTime.addingTimeInterval(minutes)
-        let mindfulSample = HKCategorySample(type: mindfulType, value: 0, start: startTime, end: endTime)
+        let mindfulSample = HKCategorySample(type: mindfulType, value: 0, start: start, end: end)
 
         healthStore.save(mindfulSample) { success, error in
             if success {

@@ -28,7 +28,7 @@ struct FocusView: View {
                         .aspectRatio(contentMode: .fit)
                         .ignoresSafeArea()
                     
-//                    Darkens botton of the background
+//                    Darkens bottom of the background
                         .mask(LinearGradient(gradient: Gradient(stops: [
                             .init(color: Color.theme.background, location: 0),
                             .init(color: .clear, location: 1), ]),
