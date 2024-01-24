@@ -142,8 +142,7 @@ struct FocusView: View {
                                 }
                             }
                         }
-
-                        .padding(.bottom, 10)
+                        .padding(.bottom)
                         
                         NavigationLink {
                             TimerView()

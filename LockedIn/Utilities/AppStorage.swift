@@ -13,6 +13,7 @@ class Time: ObservableObject {
     @AppStorage("min") var min = 1
     @AppStorage("pomodoroWork") var pomodoroWork = 25
     @AppStorage("pomodoroBreak") var pomodoroBreak = 5
+    @AppStorage("pomodoroNumberOfSessions") var pomodoroNumberOfIntervals = 3
 }
 
 class Review: ObservableObject {
@@ -30,5 +31,5 @@ class Settings: ObservableObject {
     @AppStorage("isPomodoroOn") var isPomodoroOn = false
     @AppStorage("backgroundMusic") var backgroundMusic = "Dream"
     @AppStorage("selectedItem") var selectedItem = "Simple"
-    @AppStorage("interval") var interval = 15.0
+    @AppStorage("snapInterval") var snapInterval = 15.0
 }

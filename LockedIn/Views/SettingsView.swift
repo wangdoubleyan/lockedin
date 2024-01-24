@@ -20,6 +20,7 @@ struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject var settings = Settings()
+    @ObservedObject var time = Time()
     @State private var healthAuthorizationStatus: HKAuthorizationStatus = .notDetermined
     @State private var notificationAuthorizationStatus: UNAuthorizationStatus = .notDetermined
     @StateObject private var healthKitManager = HealthKitManager()
@@ -83,7 +84,7 @@ struct SettingsView: View {
                         }
                     }
                     if settings.isSnapOn {
-                        Picker(selection: $settings.interval) {
+                        Picker(selection: $settings.snapInterval) {
                             ForEach(intervals, id: \.self) { interval in
                                 Text("\(interval.formatted()) sec")
                                     .tag(interval)
@@ -106,6 +107,36 @@ struct SettingsView: View {
                     Text("Snaps help you focus on the present moment by nudging you with visual, audio, and sensory stimuli.")
                         .captionTextStyle()
                     
+                }
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20.0, style: .continuous)
+                        .fill(Color.theme.surface)
+                        .padding(2)
+                )
+                .listRowSeparator(.hidden)
+                
+                Section {
+                    HStack {
+                        Picker(selection: $time.pomodoroNumberOfIntervals) {
+                            ForEach(2...4, id: \.self) { i in
+                                Text("\(i)")
+                                    .tag(i)
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: "timer")
+                                    .frame(width: 30, height: 30)
+                                    .foregroundStyle(Color.theme.secondary)
+                                    .font(.title3)
+                                Text("Number of Intervals")
+                                    .smallTitleTextStyle()
+                            }
+                        }
+                        
+                    }
+                } header: {
+                    Text("Pomodoro")
+                        .captionTextStyle()
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
@@ -210,7 +241,7 @@ struct SettingsView: View {
                                     Button {
                                         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                                         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-                                        notify.sendNotification(date: selectedDate, title: "⏸️ Time to Pause!", body: "How about a quick Pause right now?")
+                                        notify.sendNotification(date: selectedDate, title: "Start Focus Session Now", body: "It's time to do what needs to be done!")
                                         print(selectedDate)
                                         isNotificationSet = true
                                     } label: {
@@ -227,7 +258,7 @@ struct SettingsView: View {
                         .captionTextStyle()
                 } footer: {
                     if isNotificationSet {
-                        Text("You will be reminded to Pause daiy at \(selectedDate.formatted(.dateTime.hour().minute())).")
+                        Text("You will be reminded to focus daiy at \(selectedDate.formatted(.dateTime.hour().minute())).")
                             .captionTextStyle()
                     }
                 }

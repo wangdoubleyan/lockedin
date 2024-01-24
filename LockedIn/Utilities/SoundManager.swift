@@ -16,7 +16,7 @@ class SoundManager {
     var soundPlayer = AVAudioPlayer()
     var musicPlayer = AVAudioPlayer()
     
-    @IBAction func playSound(sound: String) {
+    func playSound(sound: String) {
         guard let url = Bundle.main.url(forResource: sound, withExtension: "m4a") else { return }
         
         do {
@@ -35,7 +35,7 @@ class SoundManager {
         
     }
     
-    @IBAction func playMusic(music: String) {
+    func playMusic(music: String) {
         if settings.isMusicOn {
             guard let url = Bundle.main.url(forResource: music, withExtension: "mp3") else { return }
             

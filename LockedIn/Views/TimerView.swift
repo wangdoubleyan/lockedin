@@ -30,6 +30,7 @@ struct TimerView: View {
     @State private var isTimerPaused = false
     @State private var timerCounter = "Start"
     @State private var initialTime = 0
+    @State private var pomodoroIntervalCounter = 0
     
     @State private var startDate = Date()
     
@@ -68,16 +69,7 @@ struct TimerView: View {
                 VStack {
                     if settings.selectedItem == "Pomodoro" {
                         Button {
-                            progress = 0
-                            if isWorkOn {
-                                progress = 0.0
-                                start(hours: 0, minutes: time.pomodoroBreak)
-                                isWorkOn.toggle()
-                            } else {
-                                progress = 0.0
-                                start(hours: 0, minutes: time.pomodoroWork)
-                                isWorkOn.toggle()
-                            }
+                            switchPomodoroModes()
                         } label: {
                             Image(systemName: "forward.fill")
                             Text(isWorkOn ? "Work" : "Break")
@@ -101,16 +93,18 @@ struct TimerView: View {
             }
             .padding(40)
             .onAppear {
+                startDate = Date()
+                
 //            Makes sure that a timer of 0 is not possible
-            if time.hr == 0 && time.min == 0 {
-                time.min = 1
-            }
+                if time.hr == 0 && time.min == 0 {
+                    time.min = 1
+                }
+  
                 settings.selectedItem == "Simple" ? start(hours: time.hr, minutes: time.min) : start(hours: 0, minutes: time.pomodoroWork)
             }
             
             .onReceive(timer) { time in
                 updateCountdown()
-                print(time)
             }
             
             Color.theme.secondary
@@ -258,12 +252,9 @@ struct TimerView: View {
     
 //    Calculates the timer duration
     func start(hours: Int, minutes: Int) {
-        startDate = Date()
-        
         initialTime = hours * 60 + minutes
         expectedEndDate = Date()
         expectedEndDate = Calendar.current.date(byAdding: .minute, value: initialTime, to: expectedEndDate)!
-        print(expectedEndDate)
         UIApplication.shared.isIdleTimerDisabled = true
         vibrate()
         stroke = 40.0
@@ -274,6 +265,7 @@ struct TimerView: View {
         }
     }
     
+    
     func updateCountdown() {
         let now = Date()
         let diff = expectedEndDate.timeIntervalSince(now)
@@ -283,15 +275,7 @@ struct TimerView: View {
                 self.timer.upstream.connect().cancel()
                 end()
             } else {
-                if isWorkOn {
-                    progress = 0.0
-                    start(hours: 0, minutes: time.pomodoroBreak)
-                    isWorkOn.toggle()
-                } else {
-                    progress = 0.0
-                    start(hours: 0, minutes: time.pomodoroWork)
-                    isWorkOn.toggle()
-                }
+                switchPomodoroModes()
             }
         } else {
             progress += 1.0 / Double(initialTime * 60)
@@ -362,6 +346,25 @@ struct TimerView: View {
             SoundManager.instance.musicPlayer.setVolume(0.0, fadeDuration: 0.0)
             SoundManager.instance.playMusic(music: settings.backgroundMusic)
             SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: musicFadeTime)
+        }
+    }
+    
+    func switchPomodoroModes() {
+        pomodoroIntervalCounter += 1
+        print(pomodoroIntervalCounter)
+        
+        if pomodoroIntervalCounter == time.pomodoroNumberOfIntervals {
+            end()
+        }
+        
+        if isWorkOn {
+            progress = 0.0
+            start(hours: 0, minutes: time.pomodoroBreak)
+            isWorkOn.toggle()
+        } else {
+            progress = 0.0
+            start(hours: 0, minutes: time.pomodoroWork)
+            isWorkOn.toggle()
         }
     }
 }

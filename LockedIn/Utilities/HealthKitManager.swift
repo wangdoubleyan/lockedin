@@ -14,15 +14,13 @@ class HealthKitManager: ObservableObject {
     func requestAuthorization() {
         let typesToWrite: Set<HKSampleType> = [HKObjectType.categoryType(forIdentifier: .mindfulSession)!]
         
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.healthStore.requestAuthorization(toShare: typesToWrite, read: nil) { success, error in
-                if success {
-                    print("Authorization granted!")
-                    
-                } else {
-                    if let error = error {
-                        print("Authorization failed: \(error.localizedDescription)")
-                    }
+        healthStore.requestAuthorization(toShare: typesToWrite, read: nil) { success, error in
+            if success {
+                print("Authorization granted!")
+                
+            } else {
+                if let error = error {
+                    print("Authorization failed: \(error.localizedDescription)")
                 }
             }
         }
