@@ -56,10 +56,12 @@ struct AirView: View {
                         Button {
                             settings.isMusicOn.toggle()
                             if settings.isMusicOn {
-                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                                SoundManager.instance.musicPlayer.setVolume(0.0, fadeDuration: 0.0)
-                                SoundManager.instance.playMusic(music: settings.backgroundMusic)
-                                SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: fadeTime)
+                                DispatchQueue.global(qos: .userInteractive).async {
+                                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                                    SoundManager.instance.musicPlayer.setVolume(0.0, fadeDuration: 0.0)
+                                    SoundManager.instance.playMusic(music: settings.backgroundMusic)
+                                    SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: fadeTime)
+                                }
                             } else {
                                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                                 fadeMusic()
@@ -102,31 +104,37 @@ struct AirView: View {
                 .offset(y: -250)
             }
             
-            
+            .onReceive(counter) { time in
+                if breathesRemaining > 1 {
+                    breathesRemaining -= 1
+                    print(breathesRemaining)
+                } else {
+                    SoundManager.instance.soundPlayer.stop()
+                    SoundManager.instance.musicPlayer.stop()
+                    
+                    timer.upstream.connect().cancel()
+                    counter.upstream.connect().cancel()
+                    
+                    vibrate()
+                    fadeMusic()
+                    
+                    UIApplication.shared.isIdleTimerDisabled = false
+                    dismiss()
+                    
+                }
+            }
             .onReceive(timer) { time in
                 DispatchQueue.global(qos: .userInteractive).async {
                     isBreathingIn.toggle()
                     isBreathingIn ? (height = 1200) : (height = 0)
                     if settings.isBreathOn {
-                        SoundManager.instance.playSound(sound: isBreathingIn ? "BreatheIn" : "BreatheOut")
+                        DispatchQueue.global(qos: .userInteractive).async {
+                                SoundManager.instance.playSound(sound: isBreathingIn ? "BreatheIn" : "BreatheOut")
+                        }
                         complexSuccess()
                     }
                 }
                 
-            }
-            .onReceive(counter) { time in
-                if breathesRemaining > 1 {
-                    breathesRemaining -= 1
-                } else {
-                    UIApplication.shared.isIdleTimerDisabled = false
-                    vibrate()
-                    fadeMusic()
-                    
-                    SoundManager.instance.soundPlayer.stop()
-                    SoundManager.instance.musicPlayer.stop()
-                    dismiss()
-                    
-                }
             }
             .onAppear {
                 UIApplication.shared.isIdleTimerDisabled = true
@@ -137,11 +145,15 @@ struct AirView: View {
                 complexSuccess()
                 
                 if settings.isMusicOn {
-                    SoundManager.instance.playMusic(music: settings.backgroundMusic)
+                    DispatchQueue.global(qos: .userInteractive).async {
+                        SoundManager.instance.playMusic(music: settings.backgroundMusic)
+                    }
                 }
                 
                 if settings.isBreathOn {
-                    SoundManager.instance.playSound(sound: "BreatheIn")
+                    DispatchQueue.global(qos: .userInteractive).async {
+                        SoundManager.instance.playSound(sound: "BreatheIn")
+                    }
                 }
             }
         }

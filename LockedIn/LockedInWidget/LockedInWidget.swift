@@ -65,7 +65,6 @@ struct LockedInWidgetEntryView : View {
                 Text("Focus")
                     .font(.title)
                     .foregroundStyle(.white)
-                    .fontDesign(.rounded)
                     .bold()
                 
                 HStack {
@@ -74,7 +73,6 @@ struct LockedInWidgetEntryView : View {
                 }
                 .font(.headline)
                 .foregroundStyle(.white)
-                .fontDesign(.rounded)
                 .bold()
                 .padding(10)
                 .background(.ultraThinMaterial)
@@ -101,7 +99,6 @@ struct LockedInWidgetEntry2View : View {
                 Text("Breathe")
                     .font(.title)
                     .foregroundStyle(.white)
-                    .fontDesign(.rounded)
                     .bold()
                 
                 HStack {
@@ -110,7 +107,6 @@ struct LockedInWidgetEntry2View : View {
                 }
                 .font(.caption)
                 .foregroundStyle(.white)
-                .fontDesign(.rounded)
                 .bold()
                 .padding(10)
                 .background(.ultraThinMaterial)

@@ -30,7 +30,7 @@ struct TimerView: View {
     @State private var isTimerPaused = false
     @State private var timerCounter = "Start"
     @State private var initialTime = 0
-    @State private var pomodoroIntervalCounter = 0
+    @State private var pomodoroIntervalCounter = 1
     
     @State private var startDate = Date()
     
@@ -44,6 +44,7 @@ struct TimerView: View {
     @State private var pauseTime = Date()
 
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var snapTimer = Timer.publish(every: Settings().snapInterval, on: .main, in: .common).autoconnect()
     
     let musicFadeTime = 0.5
     
@@ -82,7 +83,16 @@ struct TimerView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 100))
                     }
                 }
-                .padding(.bottom, 115)
+                .padding(.bottom, 130)
+                VStack {
+                    Text("\(time.pomodoroNumberOfIntervals - pomodoroIntervalCounter + 1) left")
+                    .foregroundStyle(Color.theme.foreground)
+                    .font(.headline)
+                    .padding(10)
+                    .background(.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                }
+                .padding(.top, 130)
                 
                 HStack {
                     Text("\(timerCounter)")
@@ -105,6 +115,10 @@ struct TimerView: View {
             
             .onReceive(timer) { time in
                 updateCountdown()
+            }
+            
+            .onReceive(snapTimer) { time in
+                snap()
             }
             
             Color.theme.secondary
@@ -228,7 +242,10 @@ struct TimerView: View {
 
     func snap() {
         if settings.isSnapOn {
-            SoundManager.instance.playSound(sound: "SnapSound")
+            DispatchQueue.global(qos: .userInteractive).async {
+                SoundManager.instance.playSound(sound: "SnapSound")
+                
+            }
             
             haptic()
             
@@ -238,7 +255,6 @@ struct TimerView: View {
                 flash = 0.0
             }
         }
-        
     }
     
     func vibrate() {
@@ -252,6 +268,7 @@ struct TimerView: View {
     
 //    Calculates the timer duration
     func start(hours: Int, minutes: Int) {
+        progress = 0.0
         initialTime = hours * 60 + minutes
         expectedEndDate = Date()
         expectedEndDate = Calendar.current.date(byAdding: .minute, value: initialTime, to: expectedEndDate)!
@@ -272,10 +289,10 @@ struct TimerView: View {
         
         if diff <= 0 {
             if settings.selectedItem == "Simple" {
-                self.timer.upstream.connect().cancel()
                 end()
             } else {
                 switchPomodoroModes()
+                print("I ran too yehoo!")
             }
         } else {
             progress += 1.0 / Double(initialTime * 60)
@@ -298,9 +315,12 @@ struct TimerView: View {
     }
 
     func end() {
+        fadeMusic()
         actualEndDate = Date()
         timerCounter = "Finish"
         SoundManager.instance.playSound(sound: "Sound")
+        timer.upstream.connect().cancel()
+        snapTimer.upstream.connect().cancel()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             UIApplication.shared.isIdleTimerDisabled = false
@@ -329,7 +349,8 @@ struct TimerView: View {
     
     func pauseTimer() {
         pauseTime = Date()
-        self.timer.upstream.connect().cancel()
+        timer.upstream.connect().cancel()
+        snapTimer.upstream.connect().cancel()
         isTimerPaused.toggle()
         fadeMusic()
     }
@@ -340,6 +361,7 @@ struct TimerView: View {
 //        1.5 added seconds are necessary to account for a lost second if paused at the end of a second
         expectedEndDate = expectedEndDate + elapsedTime + 1.5
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        snapTimer = Timer.publish(every: settings.snapInterval, on: .main, in: .common).autoconnect()
         isTimerPaused.toggle()
             
         if settings.isMusicOn {
@@ -350,19 +372,17 @@ struct TimerView: View {
     }
     
     func switchPomodoroModes() {
-        pomodoroIntervalCounter += 1
-        print(pomodoroIntervalCounter)
-        
-        if pomodoroIntervalCounter == time.pomodoroNumberOfIntervals {
-            end()
-        }
-        
         if isWorkOn {
-            progress = 0.0
-            start(hours: 0, minutes: time.pomodoroBreak)
-            isWorkOn.toggle()
+            if pomodoroIntervalCounter == time.pomodoroNumberOfIntervals {
+                progress = 100.0
+                pomodoroIntervalCounter += 1
+                end()
+            } else {
+                start(hours: 0, minutes: time.pomodoroBreak)
+                isWorkOn.toggle()
+            }
         } else {
-            progress = 0.0
+            pomodoroIntervalCounter += 1
             start(hours: 0, minutes: time.pomodoroWork)
             isWorkOn.toggle()
         }

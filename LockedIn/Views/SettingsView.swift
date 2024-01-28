@@ -25,7 +25,7 @@ struct SettingsView: View {
     @State private var notificationAuthorizationStatus: UNAuthorizationStatus = .notDetermined
     @StateObject private var healthKitManager = HealthKitManager()
     
-    let intervals = [5.0, 10.0, 15.0, 30.0, 60.0]
+    let intervals = [15.0, 30.0, 60.0]
     let backgroundMusicList = ["Campfire", "Dream", "Rain", "Stream"]
     let notify = NotificationManager()
     

@@ -31,5 +31,5 @@ class Settings: ObservableObject {
     @AppStorage("isPomodoroOn") var isPomodoroOn = false
     @AppStorage("backgroundMusic") var backgroundMusic = "Dream"
     @AppStorage("selectedItem") var selectedItem = "Simple"
-    @AppStorage("snapInterval") var snapInterval = 15.0
+    @AppStorage("snapInterval") var snapInterval = 30.0
 }

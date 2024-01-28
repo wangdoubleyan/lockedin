@@ -20,7 +20,7 @@ class SoundManager {
         guard let url = Bundle.main.url(forResource: sound, withExtension: "m4a") else { return }
         
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
             
             print(url)
