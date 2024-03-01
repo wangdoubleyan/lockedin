@@ -50,8 +50,10 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-            Image("Mountain")
-                .resizable()
+//            Image("Mountain")
+//                .resizable()
+            
+            GradientView()
 
             ZStack {
                 Circle()
@@ -278,7 +280,11 @@ struct TimerView: View {
         opacity = 1
         DispatchQueue.global(qos: .userInteractive).async {
             SoundManager.instance.playSound(sound: "Sound")
-            SoundManager.instance.playMusic(music: settings.backgroundMusic)
+            if isWorkOn {
+                SoundManager.instance.playMusic(music: settings.backgroundMusic)
+            } else {
+                SoundManager.instance.musicPlayer.stop()
+            }
         }
     }
     

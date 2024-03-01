@@ -31,6 +31,8 @@ struct SettingsView: View {
     
     var body: some View {
         ZStack {
+            GradientView()
+                .ignoresSafeArea()
             List {
                 Section {
                     HStack {
@@ -67,7 +69,7 @@ struct SettingsView: View {
 
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.surface)
+                        .fill(Material.ultraThinMaterial)
                         .padding(2)
                 )
                 .listRowSeparator(.hidden)
@@ -110,7 +112,7 @@ struct SettingsView: View {
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.surface)
+                        .fill(Material.ultraThinMaterial)
                         .padding(2)
                 )
                 .listRowSeparator(.hidden)
@@ -140,7 +142,7 @@ struct SettingsView: View {
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.surface)
+                        .fill(Material.ultraThinMaterial)
                         .padding(2)
                 )
                 .listRowSeparator(.hidden)
@@ -163,7 +165,7 @@ struct SettingsView: View {
 
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.surface)
+                        .fill(Material.ultraThinMaterial)
                         .padding(2)
                 )
                 .listRowSeparator(.hidden)
@@ -194,7 +196,7 @@ struct SettingsView: View {
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.surface)
+                        .fill(Material.ultraThinMaterial)
                         .padding(2)
                 )
                 
@@ -264,7 +266,7 @@ struct SettingsView: View {
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.surface)
+                        .fill(Material.ultraThinMaterial)
                         .padding(2)
                 )
                 .listRowSeparator(.hidden)
@@ -298,12 +300,11 @@ struct SettingsView: View {
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                        .fill(Color.theme.surface)
+                        .fill(Material.ultraThinMaterial)
                         .padding(2)
                 )
                 .listRowSeparator(.hidden)
             }
-            .background(Color.theme.background)
             .toolbar(.hidden, for: .tabBar)
             .environment(\.defaultMinListRowHeight, 60)
             .tint(Color.theme.accent)

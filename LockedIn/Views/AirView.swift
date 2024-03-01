@@ -28,6 +28,7 @@ struct AirView: View {
     var body: some View {
         ZStack {
             Image("Sea")
+                .overlay(GradientView())
 
             ZStack {
                 Capsule()
