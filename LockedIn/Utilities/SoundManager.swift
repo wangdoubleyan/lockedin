@@ -20,7 +20,7 @@ class SoundManager {
         guard let url = Bundle.main.url(forResource: sound, withExtension: "m4a") else { return }
         
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: .duckOthers)
             try AVAudioSession.sharedInstance().setActive(true)
             
             print(url)
@@ -49,7 +49,7 @@ class SoundManager {
                 musicPlayer.setVolume(0.0, fadeDuration: 0.0)
                 musicPlayer.prepareToPlay()
                 musicPlayer.play()
-                musicPlayer.setVolume(1, fadeDuration: 1)
+                musicPlayer.setVolume(0.3, fadeDuration: 1)
             } catch let error {
                 print("Error playing sound. \(error.localizedDescription)")
             }

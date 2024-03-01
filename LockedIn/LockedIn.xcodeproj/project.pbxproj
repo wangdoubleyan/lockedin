@@ -18,6 +18,7 @@
 		12622F892B924C2C0013A3B7 /* Meditation.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 12622F882B924C2C0013A3B7 /* Meditation.mp3 */; };
 		12622F8B2B924C810013A3B7 /* Piano.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 12622F8A2B924C800013A3B7 /* Piano.mp3 */; };
 		12622F8D2B924CC30013A3B7 /* Relax.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 12622F8C2B924CC30013A3B7 /* Relax.mp3 */; };
+		12622F8F2B928FD00013A3B7 /* TimeTrackingAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12622F8E2B928FD00013A3B7 /* TimeTrackingAttributes.swift */; };
 		12820B032A99A8550054DBFF /* LockedInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B022A99A8550054DBFF /* LockedInApp.swift */; };
 		12820B072A99A8570054DBFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B062A99A8570054DBFF /* Assets.xcassets */; };
 		12820B0A2A99A8570054DBFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B092A99A8570054DBFF /* Preview Assets.xcassets */; };
@@ -81,6 +82,7 @@
 		12622F882B924C2C0013A3B7 /* Meditation.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Meditation.mp3; path = ../../../../../Downloads/Meditation.mp3; sourceTree = "<group>"; };
 		12622F8A2B924C800013A3B7 /* Piano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Piano.mp3; path = ../../../../../Downloads/Piano.mp3; sourceTree = "<group>"; };
 		12622F8C2B924CC30013A3B7 /* Relax.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Relax.mp3; path = ../../../../../Downloads/Relax.mp3; sourceTree = "<group>"; };
+		12622F8E2B928FD00013A3B7 /* TimeTrackingAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingAttributes.swift; sourceTree = "<group>"; };
 		12820AFF2A99A8550054DBFF /* LockedIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LockedIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12820B022A99A8550054DBFF /* LockedInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedInApp.swift; sourceTree = "<group>"; };
 		12820B062A99A8570054DBFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			children = (
 				12FBB8512B353D3700D27C96 /* AppStorage.swift */,
 				12FBB8532B353DC000D27C96 /* SoundManager.swift */,
+				12622F8E2B928FD00013A3B7 /* TimeTrackingAttributes.swift */,
 				12943F9B2AA05AD30035C146 /* HealthKitManager.swift */,
 				12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */,
 				12A2640A2A9C5A1F00CE0FDD /* Color.swift */,
@@ -364,6 +367,7 @@
 				1295D65E2AC8802300034049 /* BreatheView.swift in Sources */,
 				12FBB8542B353DC000D27C96 /* SoundManager.swift in Sources */,
 				12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */,
+				12622F8F2B928FD00013A3B7 /* TimeTrackingAttributes.swift in Sources */,
 				12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */,
 				12622F812B91C43C0013A3B7 /* GradientView.swift in Sources */,
 				121D2E032ACE492B00398390 /* AirView.swift in Sources */,
@@ -536,6 +540,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let LockedIn to save your Pause duration to Mindful Minutes in Apple Health.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "LockedIn will save the duration of your Pause to Mindful Minutes in Apple Health.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -579,6 +584,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let LockedIn to save your Pause duration to Mindful Minutes in Apple Health.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "LockedIn will save the duration of your Pause to Mindful Minutes in Apple Health.";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -26,7 +26,7 @@ struct SettingsView: View {
     @StateObject private var healthKitManager = HealthKitManager()
     
     let intervals = [15.0, 30.0, 60.0]
-    let backgroundMusicList = ["Campfire", "Meditation", "Piano", "Rain", "Relax", "Stream"]
+    static let backgroundMusicList = ["Campfire", "Meditation", "Piano", "Rain", "Relax", "Stream"]
     let notify = NotificationManager()
     
     var body: some View {
@@ -47,7 +47,7 @@ struct SettingsView: View {
                     }
                     if settings.isMusicOn {
                         Picker(selection: $settings.backgroundMusic) {
-                            ForEach(backgroundMusicList, id: \.self) { list in
+                            ForEach(SettingsView.backgroundMusicList, id: \.self) { list in
                                 Text(list)
                                     .tag(list)
                             }

@@ -29,7 +29,7 @@ class Settings: ObservableObject {
     @AppStorage("isMusicOn") var isMusicOn = true
     @AppStorage("isBreathOn") var isBreathOn = true
     @AppStorage("isPomodoroOn") var isPomodoroOn = false
-    @AppStorage("backgroundMusic") var backgroundMusic = "Dream"
+    @AppStorage("backgroundMusic") var backgroundMusic = "Meditation"
     @AppStorage("selectedItem") var selectedItem = "Simple"
     @AppStorage("snapInterval") var snapInterval = 30.0
 }

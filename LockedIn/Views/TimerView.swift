@@ -7,6 +7,7 @@
 
 import SwiftUI
 import StoreKit
+import ActivityKit
 
 struct TimerView: View {
     @ObservedObject private var healthKitManager = HealthKitManager()
@@ -45,6 +46,8 @@ struct TimerView: View {
 
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var snapTimer = Timer.publish(every: Settings().snapInterval, on: .main, in: .common).autoconnect()
+    
+    @State private var activity: Activity<TimeTrackingAttributes>? = nil
     
     let musicFadeTime = 0.5
     
@@ -106,6 +109,10 @@ struct TimerView: View {
             .padding(40)
             .onAppear {
                 startDate = Date()
+                let attributes = TimeTrackingAttributes()
+                let state = TimeTrackingAttributes.ContentState(startTime: .now)
+                
+                activity = try? Activity<TimeTrackingAttributes>.request(attributes: attributes, contentState: state, pushType: nil)
                 
 //            Makes sure that a timer of 0 is not possible
                 if time.hr == 0 && time.min == 0 {
@@ -321,6 +328,10 @@ struct TimerView: View {
     }
 
     func end() {
+        let state = TimeTrackingAttributes.ContentState(startTime: startDate)
+        Task {
+            await activity?.end(using: state, dismissalPolicy: .immediate)
+        }
         fadeMusic()
         actualEndDate = Date()
         timerCounter = "Finish"
@@ -343,6 +354,8 @@ struct TimerView: View {
         if review.cycleCount % 50 == 0 {
             requestReview()
         }
+        
+        startDate = nil
     }
     
     func fadeMusic() {
