@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var logo = "StartLogo"
     var body: some View {
+        
+        
         NavigationStack {
             TabView {
                 FocusView()
@@ -35,14 +38,21 @@ struct ContentView: View {
                     }
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
-                    Image("Logo")
+                    Image(logo)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 70)
                         .offset(y: 15)
+                        .contentTransition(.numericText())
+                        .onAppear {
+                            withAnimation(.snappy(duration: 3)) {
+                                    logo = "FinishLogo"
+                                }
+                        }
                 }
             }
         }
+        
     }
 }
 

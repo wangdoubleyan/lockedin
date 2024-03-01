@@ -26,7 +26,7 @@ struct SettingsView: View {
     @StateObject private var healthKitManager = HealthKitManager()
     
     let intervals = [15.0, 30.0, 60.0]
-    let backgroundMusicList = ["Campfire", "Dream", "Rain", "Stream"]
+    let backgroundMusicList = ["Campfire", "Meditation", "Piano", "Rain", "Relax", "Stream"]
     let notify = NotificationManager()
     
     var body: some View {
