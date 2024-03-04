@@ -13,20 +13,35 @@ struct ContentView: View {
         
         
         NavigationStack {
-            TabView {
-                FocusView()
-                    .tabItem {
-                        Image(systemName: "brain.head.profile")
-                        Text("Focus")
-                            .captionTextStyle()
-                    }
-                BreatheView()
-                    .tabItem {
-                        Image(systemName: "wind")
-                        Text("Breathe")
-                            .captionTextStyle()
-                    }
+            ZStack {
+                GradientView()
+                    .ignoresSafeArea()
+                
+                ScrollView(showsIndicators: false) {
+                    FocusView()
+                    BreatheView()
+                        .padding(.bottom, 100)
+                }
+                .mask(LinearGradient(gradient: Gradient(stops: [
+                    .init(color: Color.theme.background, location: 0.8),
+                    .init(color: .clear, location: 1), ]),startPoint: .top, endPoint: .bottom))
             }
+            .navigationTitle("LockedIn")
+//            TabView {
+                
+//                FocusView()
+//                    .tabItem {
+//                        Image(systemName: "brain.head.profile")
+//                        Text("Focus")
+//                            .captionTextStyle()
+//                    }
+//                BreatheView()
+//                    .tabItem {
+//                        Image(systemName: "wind")
+//                        Text("Breathe")
+//                            .captionTextStyle()
+//                    }
+//            }
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink {
@@ -45,7 +60,7 @@ struct ContentView: View {
                         .offset(y: 15)
                         .contentTransition(.numericText())
                         .onAppear {
-                            withAnimation(.snappy(duration: 3)) {
+                            withAnimation(.snappy(duration: 5)) {
                                     logo = "FinishLogo"
                                 }
                         }

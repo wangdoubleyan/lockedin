@@ -27,13 +27,16 @@ struct BreatheView: View {
 //                    Spacer()
 //                }
                 
-                GradientView()
+//                GradientView()
                 
                 VStack(alignment: .leading) {
                     Spacer()
                     
-                    Text("Take a Breath")
-                        .largeTitleTextStyle()
+                    HStack {
+                        Image(systemName: "wind")
+                        Text("Take a Breath")
+                            .titleTextStyle()
+                    }
                     
                     Text("Select how many Breaths you want to take.")
                         .headlineTextStyle()
@@ -62,7 +65,7 @@ struct BreatheView: View {
                         NavigationLink {
                             AirView()
                         } label: {
-                            Text("Start Session")
+                            Text("Start Breathe Session")
                                 .foregroundColor(Color.theme.background)
                                 .font(.title3)
                                 .bold()
@@ -75,7 +78,6 @@ struct BreatheView: View {
                     .padding()
                     .background(.ultraThinMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: 30.0, style: .continuous))
-                    .padding(.bottom, 100)
                 }
                 .padding()
             }

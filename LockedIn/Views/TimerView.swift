@@ -21,7 +21,7 @@ struct TimerView: View {
     @ObservedObject var review = Review()
     
 //    Timer ring progress
-    @State private var progress = 0.0
+    @State var progress = 0.0
     
 //    Used for animation
     @State private var stroke = 0.0
@@ -109,10 +109,6 @@ struct TimerView: View {
             .padding(40)
             .onAppear {
                 startDate = Date()
-                let attributes = TimeTrackingAttributes()
-                let state = TimeTrackingAttributes.ContentState(startTime: .now)
-                
-                activity = try? Activity<TimeTrackingAttributes>.request(attributes: attributes, contentState: state, pushType: nil)
                 
 //            Makes sure that a timer of 0 is not possible
                 if time.hr == 0 && time.min == 0 {
@@ -293,6 +289,11 @@ struct TimerView: View {
                 SoundManager.instance.musicPlayer.stop()
             }
         }
+        
+        let attributes = TimeTrackingAttributes()
+        let state = TimeTrackingAttributes.ContentState(endDate: expectedEndDate)
+        
+        activity = try? Activity<TimeTrackingAttributes>.request(attributes: attributes, contentState: state, pushType: nil)
     }
     
     
@@ -328,7 +329,7 @@ struct TimerView: View {
     }
 
     func end() {
-        let state = TimeTrackingAttributes.ContentState(startTime: startDate)
+        let state = TimeTrackingAttributes.ContentState(endDate: expectedEndDate)
         Task {
             await activity?.end(using: state, dismissalPolicy: .immediate)
         }
@@ -354,8 +355,6 @@ struct TimerView: View {
         if review.cycleCount % 50 == 0 {
             requestReview()
         }
-        
-        startDate = nil
     }
     
     func fadeMusic() {

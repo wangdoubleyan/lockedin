@@ -305,6 +305,7 @@ struct SettingsView: View {
                 )
                 .listRowSeparator(.hidden)
             }
+            .navigationTitle("Settings")
             .toolbar(.hidden, for: .tabBar)
             .environment(\.defaultMinListRowHeight, 60)
             .tint(Color.theme.accent)
@@ -322,13 +323,6 @@ struct SettingsView: View {
                             .symbolRenderingMode(.hierarchical)
                     }
                 }
-                ToolbarItem(placement: .principal) {
-                    VStack {
-                        Text("Settings")
-                            .mediumTitleTextStyle()
-                    }
-                }
-                
             }
         }
         .onAppear {

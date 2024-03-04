@@ -13,5 +13,6 @@ struct LockedInWidgetBundle: WidgetBundle {
     var body: some Widget {
         LockedInWidget()
         LockedInWidget2()
+        LockedInWidgetLiveActivity()
     }
 }

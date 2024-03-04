@@ -36,13 +36,16 @@ struct FocusView: View {
 //                    Spacer()
 //                }
                 
-                GradientView()
+//                GradientView()
                 
                 VStack(alignment: .leading) {
                     Spacer()
                     
-                    Text("Time to Focus")
-                        .largeTitleTextStyle()
+                    HStack {
+                        Image(systemName: "brain.head.profile")
+                        Text("Time to Focus")
+                            .titleTextStyle()
+                    }
                     
                     Text("Select how long you want to Focus for.")
                         .headlineTextStyle()
@@ -149,7 +152,7 @@ struct FocusView: View {
                         NavigationLink {
                             TimerView()
                         } label: {
-                            Text("Start Session")
+                            Text("Start Focus Session")
                                 .foregroundColor(Color.theme.background)
                                 .font(.title3)
                                 .bold()
@@ -162,7 +165,6 @@ struct FocusView: View {
                     .padding()
                     .background(.ultraThinMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: 30.0, style: .continuous))
-                    .padding(.bottom, 100)
                 }
                 .padding()
             }

@@ -24,6 +24,9 @@
 		12820B0A2A99A8570054DBFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12820B092A99A8570054DBFF /* Preview Assets.xcassets */; };
 		12820B112A99A8A60054DBFF /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B102A99A8A60054DBFF /* FocusView.swift */; };
 		12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B122A99A8AF0054DBFF /* TimerView.swift */; };
+		128CCC422B94B61A00445540 /* LockedInWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CCC412B94B61A00445540 /* LockedInWidgetLiveActivity.swift */; };
+		128CCC432B94B88800445540 /* LockedInWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CCC412B94B61A00445540 /* LockedInWidgetLiveActivity.swift */; };
+		128CCC442B94B89F00445540 /* TimeTrackingAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12622F8E2B928FD00013A3B7 /* TimeTrackingAttributes.swift */; };
 		12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12943F9B2AA05AD30035C146 /* HealthKitManager.swift */; };
 		1295D65E2AC8802300034049 /* BreatheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1295D65D2AC8802300034049 /* BreatheView.swift */; };
 		12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2640A2A9C5A1F00CE0FDD /* Color.swift */; };
@@ -89,6 +92,7 @@
 		12820B092A99A8570054DBFF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Preview Assets.xcassets"; path = "LockedIn/Preview Content/Preview Assets.xcassets"; sourceTree = "<group>"; };
 		12820B102A99A8A60054DBFF /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		12820B122A99A8AF0054DBFF /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		128CCC412B94B61A00445540 /* LockedInWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedInWidgetLiveActivity.swift; sourceTree = "<group>"; };
 		12943F9B2AA05AD30035C146 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		1295D65D2AC8802300034049 /* BreatheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreatheView.swift; sourceTree = "<group>"; };
 		12A2640A2A9C5A1F00CE0FDD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 			children = (
 				12D9613C2AD491D100CD25D5 /* LockedInWidgetBundle.swift */,
 				12D9613E2AD491D100CD25D5 /* LockedInWidget.swift */,
+				128CCC412B94B61A00445540 /* LockedInWidgetLiveActivity.swift */,
 				12D961402AD491D300CD25D5 /* Assets.xcassets */,
 				12D961422AD491D300CD25D5 /* Info.plist */,
 			);
@@ -297,7 +302,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					12820AFE2A99A8550054DBFF = {
@@ -378,6 +383,7 @@
 				12FBB85E2B35426F00D27C96 /* Date+Raw.swift in Sources */,
 				12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */,
 				12820B112A99A8A60054DBFF /* FocusView.swift in Sources */,
+				128CCC422B94B61A00445540 /* LockedInWidgetLiveActivity.swift in Sources */,
 				12FBB85A2B3541C000D27C96 /* Text+CustomStyles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,7 +392,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				128CCC442B94B89F00445540 /* TimeTrackingAttributes.swift in Sources */,
 				12D9613F2AD491D100CD25D5 /* LockedInWidget.swift in Sources */,
+				128CCC432B94B88800445540 /* LockedInWidgetLiveActivity.swift in Sources */,
 				12D9613D2AD491D100CD25D5 /* LockedInWidgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -622,6 +630,7 @@
 				INFOPLIST_FILE = LockedInWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LockedInWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -653,6 +662,7 @@
 				INFOPLIST_FILE = LockedInWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LockedInWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
