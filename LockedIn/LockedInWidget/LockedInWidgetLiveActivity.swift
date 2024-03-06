@@ -15,30 +15,65 @@ struct LockedInWidgetLiveActivity: Widget {
             TimeTrackingWidgetView(context: context)
         } dynamicIsland: { context in
             DynamicIsland {
-                DynamicIslandExpandedRegion(.bottom) {
-                    HStack {
+                DynamicIslandExpandedRegion(.leading) {
+                    VStack {
+                        Spacer()
                         Image(systemName: "brain.head.profile")
-                            .font(.title)
-                            .dynamicIsland(verticalPlacement: .belowIfTooWide)
-                        Text(context.state.endDate, style: .timer)
-                            .contentTransition(.numericText())
-                            .fontDesign(.monospaced)
-                            .font(.title)
-                            .bold()
-                            .padding(.leading, 150)
+                            .font(.largeTitle)
+                            .padding(.bottom, 4)
                     }
-                
+                    .frame(maxHeight: .infinity)
+
+                }
+                DynamicIslandExpandedRegion(.trailing) {
+                    VStack {
+                        Spacer()
+                        Button {
+                            //
+                        } label: {
+                            Image(systemName: "gearshape.fill")
+                        }
+                        .buttonBorderShape(.roundedRectangle(radius: 20))
+                        .font(.largeTitle)
+                        .tint(Color("AccentColor"))
+                    }
+                    .frame(maxHeight: .infinity)
+                }
+                DynamicIslandExpandedRegion(.center) {
+                    HStack {
+                        Text("Focus")
+                            .bold()
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                    
+                    Text(context.state.endDate, style: .timer)
+                        .contentTransition(.numericText())
+                        .fontDesign(.monospaced)
+                        .bold()
+                        .font(.title)
+                   
+                    
                 }
                 
             } compactLeading: {
                 Image(systemName: "brain.head.profile")
-                    .frame(width: 45)
             } compactTrailing: {
-                Text(context.state.endDate, style: .timer)
-                    .frame(width: 45)
-                    .contentTransition(.numericText())
-                    .fontDesign(.monospaced)
-                    .bold()
+                let range = Date.now...context.state.endDate
+                if Int(context.state.endDate.timeIntervalSinceNow) > 3599 {
+                    Text(timerInterval: Date.now...context.state.endDate, pauseTime: range.lowerBound)
+                        .contentTransition(.numericText())
+                        .fontDesign(.monospaced)
+                        .bold()
+                        .frame(width: 65)
+                } else {
+                    Text(timerInterval: Date.now...context.state.endDate, pauseTime: range.lowerBound)
+                        .contentTransition(.numericText())
+                        .fontDesign(.monospaced)
+                        .bold()
+                        .frame(width: 45)
+                }
+                
             } minimal: {
                 Image(systemName: "brain.head.profile")
             }
@@ -50,7 +85,40 @@ struct TimeTrackingWidgetView: View {
     let context: ActivityViewContext<TimeTrackingAttributes>
     
     var body: some View {
-        Text(context.state.endDate, style: .relative)
+        let range = Date.now...context.state.endDate
+        HStack {
+            Image(systemName: "brain.head.profile")
+                .foregroundStyle(.white)
+                .font(.title)
+                .padding(.horizontal)
+            
+            VStack(spacing: 0) {
+                HStack {
+                    Text("Focus")
+                        .font(.caption)
+                        .bold()
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                
+                Text(context.state.endDate, style: .timer)
+                    .contentTransition(.numericText())
+                    .fontDesign(.monospaced)
+                    .bold()
+                    .font(.title)
+            }
+            .foregroundStyle(.white)
+            
+            Button {
+                //
+            } label: {
+                Image(systemName: "gearshape.fill")
+            }
+            .buttonBorderShape(.roundedRectangle(radius: 20))
+            .font(.largeTitle)
+            .tint(Color("AccentColor"))
+        }
+        .activityBackgroundTint(.black)
     }
 }
 

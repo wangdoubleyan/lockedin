@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import ActivityKit
 
 class Time: ObservableObject {
     @AppStorage("hr") var hr = 0
@@ -32,4 +33,5 @@ class Settings: ObservableObject {
     @AppStorage("backgroundMusic") var backgroundMusic = "Meditation"
     @AppStorage("selectedItem") var selectedItem = "Simple"
     @AppStorage("snapInterval") var snapInterval = 30.0
+    @AppStorage("expectedEndDate") var expectedEndDate = Date()
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct LockedInApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     
     var body: some Scene {
         WindowGroup {
@@ -17,4 +18,7 @@ struct LockedInApp: App {
         }
     }
 }
+
+
+
 

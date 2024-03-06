@@ -28,6 +28,10 @@
 		128CCC432B94B88800445540 /* LockedInWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128CCC412B94B61A00445540 /* LockedInWidgetLiveActivity.swift */; };
 		128CCC442B94B89F00445540 /* TimeTrackingAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12622F8E2B928FD00013A3B7 /* TimeTrackingAttributes.swift */; };
 		12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12943F9B2AA05AD30035C146 /* HealthKitManager.swift */; };
+		12949B512B96248F0040E9DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12949B502B96248E0040E9DE /* AppDelegate.swift */; };
+		12949B532B9625350040E9DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12949B522B9625350040E9DE /* SceneDelegate.swift */; };
+		12949B552B96299F0040E9DE /* LiveActivitiesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12949B542B96299F0040E9DE /* LiveActivitiesManager.swift */; };
+		12949B562B96299F0040E9DE /* LiveActivitiesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12949B542B96299F0040E9DE /* LiveActivitiesManager.swift */; };
 		1295D65E2AC8802300034049 /* BreatheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1295D65D2AC8802300034049 /* BreatheView.swift */; };
 		12A2640B2A9C5A1F00CE0FDD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2640A2A9C5A1F00CE0FDD /* Color.swift */; };
 		12D961392AD491D100CD25D5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D302AA595D90024257F /* WidgetKit.framework */; };
@@ -94,6 +98,9 @@
 		12820B122A99A8AF0054DBFF /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		128CCC412B94B61A00445540 /* LockedInWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedInWidgetLiveActivity.swift; sourceTree = "<group>"; };
 		12943F9B2AA05AD30035C146 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		12949B502B96248E0040E9DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		12949B522B9625350040E9DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		12949B542B96299F0040E9DE /* LiveActivitiesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitiesManager.swift; sourceTree = "<group>"; };
 		1295D65D2AC8802300034049 /* BreatheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreatheView.swift; sourceTree = "<group>"; };
 		12A2640A2A9C5A1F00CE0FDD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		12D961382AD491D100CD25D5 /* LockedInWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LockedInWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,12 +234,15 @@
 		12FBB8562B353FED00D27C96 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				12949B502B96248E0040E9DE /* AppDelegate.swift */,
+				12949B522B9625350040E9DE /* SceneDelegate.swift */,
 				12FBB8512B353D3700D27C96 /* AppStorage.swift */,
 				12FBB8532B353DC000D27C96 /* SoundManager.swift */,
 				12622F8E2B928FD00013A3B7 /* TimeTrackingAttributes.swift */,
 				12943F9B2AA05AD30035C146 /* HealthKitManager.swift */,
 				12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */,
 				12A2640A2A9C5A1F00CE0FDD /* Color.swift */,
+				12949B542B96299F0040E9DE /* LiveActivitiesManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -369,6 +379,7 @@
 			files = (
 				12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */,
 				12820B032A99A8550054DBFF /* LockedInApp.swift in Sources */,
+				12949B512B96248F0040E9DE /* AppDelegate.swift in Sources */,
 				1295D65E2AC8802300034049 /* BreatheView.swift in Sources */,
 				12FBB8542B353DC000D27C96 /* SoundManager.swift in Sources */,
 				12943F9C2AA05AD30035C146 /* HealthKitManager.swift in Sources */,
@@ -381,9 +392,11 @@
 				12DC4F0F2AA31064001AF2C5 /* NotificationManager.swift in Sources */,
 				12FBB8522B353D3700D27C96 /* AppStorage.swift in Sources */,
 				12FBB85E2B35426F00D27C96 /* Date+Raw.swift in Sources */,
+				12949B532B9625350040E9DE /* SceneDelegate.swift in Sources */,
 				12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */,
 				12820B112A99A8A60054DBFF /* FocusView.swift in Sources */,
 				128CCC422B94B61A00445540 /* LockedInWidgetLiveActivity.swift in Sources */,
+				12949B552B96299F0040E9DE /* LiveActivitiesManager.swift in Sources */,
 				12FBB85A2B3541C000D27C96 /* Text+CustomStyles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12949B562B96299F0040E9DE /* LiveActivitiesManager.swift in Sources */,
 				128CCC442B94B89F00445540 /* TimeTrackingAttributes.swift in Sources */,
 				12D9613F2AD491D100CD25D5 /* LockedInWidget.swift in Sources */,
 				128CCC432B94B88800445540 /* LockedInWidgetLiveActivity.swift in Sources */,
@@ -462,7 +476,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -519,7 +533,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -556,7 +570,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -600,7 +614,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -631,7 +645,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = LockedInWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -663,7 +677,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = LockedInWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

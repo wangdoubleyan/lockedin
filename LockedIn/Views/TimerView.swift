@@ -15,13 +15,14 @@ struct TimerView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.requestReview) var requestReview
+    @Environment(\.scenePhase) var scenePhase
     
     @ObservedObject var time = Time()
     @ObservedObject var settings = Settings()
     @ObservedObject var review = Review()
     
 //    Timer ring progress
-    @State var progress = 0.0
+    @State private var progress = 0.0
     
 //    Used for animation
     @State private var stroke = 0.0
@@ -34,10 +35,7 @@ struct TimerView: View {
     @State private var pomodoroIntervalCounter = 1
     
     @State private var startDate = Date()
-    
-//    Calculated when user starts timer
-    @State private var expectedEndDate = Date()
-    
+        
 //    Calculated when user exits timer
     @State private var actualEndDate = Date()
     
@@ -47,7 +45,10 @@ struct TimerView: View {
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var snapTimer = Timer.publish(every: Settings().snapInterval, on: .main, in: .common).autoconnect()
     
-    @State private var activity: Activity<TimeTrackingAttributes>? = nil
+    @State var activity: Activity<TimeTrackingAttributes>? = nil
+    
+    
+    
     
     let musicFadeTime = 0.5
     
@@ -229,6 +230,8 @@ struct TimerView: View {
                     
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     presentationMode.wrappedValue.dismiss()
+                    
+                    end()
                 } label: {
                     Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
                         .font(.system(size: 35))
@@ -244,6 +247,7 @@ struct TimerView: View {
             }
         }
     }
+    
 
     func snap() {
         if settings.isSnapOn {
@@ -275,8 +279,8 @@ struct TimerView: View {
     func start(hours: Int, minutes: Int) {
         progress = 0.0
         initialTime = hours * 60 + minutes
-        expectedEndDate = Date()
-        expectedEndDate = Calendar.current.date(byAdding: .minute, value: initialTime, to: expectedEndDate)!
+        settings.expectedEndDate = Date()
+        settings.expectedEndDate = Calendar.current.date(byAdding: .minute, value: initialTime, to: settings.expectedEndDate)!
         UIApplication.shared.isIdleTimerDisabled = true
         vibrate()
         stroke = 40.0
@@ -290,23 +294,19 @@ struct TimerView: View {
             }
         }
         
-        let attributes = TimeTrackingAttributes()
-        let state = TimeTrackingAttributes.ContentState(endDate: expectedEndDate)
-        
-        activity = try? Activity<TimeTrackingAttributes>.request(attributes: attributes, contentState: state, pushType: nil)
+        LiveActivitiesManager.startLiveActivity(activity: activity, expectedEndDate: settings.expectedEndDate)
     }
     
     
     func updateCountdown() {
         let now = Date()
-        let diff = expectedEndDate.timeIntervalSince(now)
+        let diff = settings.expectedEndDate.timeIntervalSince(now)
         
         if diff <= 0 {
             if settings.selectedItem == "Simple" {
                 end()
             } else {
                 switchPomodoroModes()
-                print("I ran too yehoo!")
             }
         } else {
             progress += 1.0 / Double(initialTime * 60)
@@ -329,10 +329,8 @@ struct TimerView: View {
     }
 
     func end() {
-        let state = TimeTrackingAttributes.ContentState(endDate: expectedEndDate)
-        Task {
-            await activity?.end(using: state, dismissalPolicy: .immediate)
-        }
+        LiveActivitiesManager.stopLiveActivity()
+        
         fadeMusic()
         actualEndDate = Date()
         timerCounter = "Finish"
@@ -371,13 +369,14 @@ struct TimerView: View {
         snapTimer.upstream.connect().cancel()
         isTimerPaused.toggle()
         fadeMusic()
+        LiveActivitiesManager.stopLiveActivity()
     }
     
     func resumeTimer() {
         let elapsedTime = Date().timeIntervalSince(pauseTime)
         
 //        1.5 added seconds are necessary to account for a lost second if paused at the end of a second
-        expectedEndDate = expectedEndDate + elapsedTime + 1.5
+        settings.expectedEndDate = settings.expectedEndDate + elapsedTime + 1.5
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         snapTimer = Timer.publish(every: settings.snapInterval, on: .main, in: .common).autoconnect()
         isTimerPaused.toggle()
@@ -387,9 +386,12 @@ struct TimerView: View {
             SoundManager.instance.playMusic(music: settings.backgroundMusic)
             SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: musicFadeTime)
         }
+        LiveActivitiesManager.startLiveActivity(activity: activity, expectedEndDate: settings.expectedEndDate)
     }
     
     func switchPomodoroModes() {
+        LiveActivitiesManager.stopLiveActivity()
+        
         if isWorkOn {
             if pomodoroIntervalCounter == time.pomodoroNumberOfIntervals {
                 progress = 100.0
@@ -404,6 +406,8 @@ struct TimerView: View {
             start(hours: 0, minutes: time.pomodoroWork)
             isWorkOn.toggle()
         }
+        
+        LiveActivitiesManager.startLiveActivity(activity: activity, expectedEndDate: settings.expectedEndDate)
     }
 }
 
