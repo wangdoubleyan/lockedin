@@ -72,15 +72,15 @@ struct LockedInWidgetEntryView : View {
                     Text("25 min")
                 }
                 .font(.headline)
-                .foregroundStyle(.white)
+                .foregroundStyle(Color("BackgroundColor"))
                 .bold()
                 .padding(10)
-                .background(.ultraThinMaterial)
+                .background(Color("AccentColor"))
                 .clipShape(RoundedRectangle(cornerRadius: 15.0, style: .continuous))
             }
             Spacer()
         }
-        .widgetBackground(backgroundView: Image("Stream").resizable().aspectRatio(contentMode: .fill))
+        .widgetBackground(backgroundView: Color("BackgroundColor"))
         .widgetURL(URL(string: "widget://link0"))
     }
 }
@@ -106,15 +106,15 @@ struct LockedInWidgetEntry2View : View {
                     Text("5 breaths")
                 }
                 .font(.caption)
-                .foregroundStyle(.white)
+                .foregroundStyle(Color("BackgroundColor"))
                 .bold()
                 .padding(10)
-                .background(.ultraThinMaterial)
+                .background(Color("AccentColor"))
                 .clipShape(RoundedRectangle(cornerRadius: 15.0, style: .continuous))
             }
             Spacer()
         }
-        .widgetBackground(backgroundView: Image("Beach").resizable().aspectRatio(contentMode: .fill))
+        .widgetBackground(backgroundView: Color("BackgroundColor"))
         .widgetURL(URL(string: "widget://link1"))
     }
 }
@@ -133,6 +133,7 @@ struct LockedInWidget: Widget {
         }
         .configurationDisplayName("Focus")
         .description("Focus for 25 minutes.")
+        .supportedFamilies([.systemSmall])
     }
 }
 
@@ -150,5 +151,6 @@ struct LockedInWidget2: Widget {
         }
         .configurationDisplayName("Breathe")
         .description("Take 5 breaths.")
+        .supportedFamilies([.systemSmall])
     }
 }

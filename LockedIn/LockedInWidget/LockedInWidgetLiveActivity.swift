@@ -85,7 +85,6 @@ struct TimeTrackingWidgetView: View {
     let context: ActivityViewContext<TimeTrackingAttributes>
     
     var body: some View {
-        let range = Date.now...context.state.endDate
         HStack {
             Image(systemName: "brain.head.profile")
                 .foregroundStyle(.white)
