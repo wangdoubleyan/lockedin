@@ -47,7 +47,7 @@ struct ContentView: View {
                     NavigationLink {
                         SettingsView()
                     } label: {
-                        Text(Image(systemName: "gear.circle.fill"))
+                        Text(Image(systemName: "gearshape.circle.fill"))
                             .font(.system(size: 35))
                             .symbolRenderingMode(.hierarchical)
                     }

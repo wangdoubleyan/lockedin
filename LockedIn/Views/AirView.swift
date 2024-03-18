@@ -27,24 +27,24 @@ struct AirView: View {
     
     var body: some View {
         ZStack {
-            Image("Sea")
-                .overlay(GradientView())
+            Color.theme.background
+                .ignoresSafeArea()
 
             ZStack {
                 Capsule()
-                    .offset(y: 500)
+                    .offset(y: 700)
                     .fill(Color.theme.primary.opacity(0.75))
-                    .frame(width: 700, height: height)
+                    .frame(width: 1100, height: height)
                     .animation(.easeInOut(duration: 5.0), value: height)
                 Capsule()
-                    .offset(y: 500)
+                    .offset(y: 700)
                     .fill(Color.theme.primary.opacity(0.75))
-                    .frame(width: 700, height: height)
+                    .frame(width: 1100, height: height)
                     .animation(.easeInOut(duration: 5.0).delay(0.25), value: height)
                 Capsule()
-                    .offset(y: 500)
+                    .offset(y: 700)
                     .fill(Color.theme.primary.opacity(0.75))
-                    .frame(width: 700, height: height)
+                    .frame(width: 1100, height: height)
                     .animation(.easeInOut(duration: 5.0).delay(0.5), value: height)
                 
                 VStack(spacing: 0) {
@@ -127,7 +127,7 @@ struct AirView: View {
             .onReceive(timer) { time in
                 DispatchQueue.global(qos: .userInteractive).async {
                     isBreathingIn.toggle()
-                    isBreathingIn ? (height = 1200) : (height = 0)
+                    isBreathingIn ? (height = 1700) : (height = 0)
                     if settings.isBreathOn {
                         DispatchQueue.global(qos: .userInteractive).async {
                                 SoundManager.instance.playSound(sound: isBreathingIn ? "BreatheIn" : "BreatheOut")
@@ -142,7 +142,7 @@ struct AirView: View {
                 vibrate()
                 prepareHaptics()
                 breathesRemaining = breath.breaths
-                height = 1200
+                height = 1700
                 complexSuccess()
                 
                 if settings.isMusicOn {
@@ -172,7 +172,7 @@ struct AirView: View {
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
+                    Text(Image(systemName: "stop.circle.fill"))
                         .font(.system(size: 35))
                         .symbolRenderingMode(.hierarchical)
                 }

@@ -22,22 +22,6 @@ struct FocusView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-//                VStack {
-//                    Image("Mountain")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .ignoresSafeArea()
-//                    
-////                    Darkens bottom of the background
-//                        .mask(LinearGradient(gradient: Gradient(stops: [
-//                            .init(color: Color.theme.background, location: 0),
-//                            .init(color: .clear, location: 1), ]),
-//                            startPoint: .top, endPoint: .bottom))
-//                    Spacer()
-//                }
-                
-//                GradientView()
-                
                 VStack(alignment: .leading) {
                     Spacer()
                     

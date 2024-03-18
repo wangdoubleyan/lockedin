@@ -33,6 +33,7 @@ struct TimerView: View {
     @State private var timerCounter = "Start"
     @State private var initialTime = 0
     @State private var pomodoroIntervalCounter = 1
+    @State private var showingEndAlert = false
     
     @State private var startDate = Date()
         
@@ -54,83 +55,80 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-//            Image("Mountain")
-//                .resizable()
-            
             GradientView()
-
-            ZStack {
-                Circle()
-                    .stroke(lineWidth: stroke)
-                    .foregroundStyle(.ultraThinMaterial)
-                    .animation(.linear(duration: 1), value: stroke)
-                
-                Circle()
-                    .trim(from: 0.0, to: min(progress, 1.0))
-                    .stroke(Color.theme.primary.opacity(opacity), style: StrokeStyle(lineWidth: 30.0, lineCap: .round, lineJoin: .round))
-                    .rotationEffect(Angle(degrees: 270))
-                    .animation(.easeIn(duration: 3), value: opacity)
-                    .animation(.linear(duration: 1), value: progress)
-                
-                
+            VStack {
                 VStack {
-                    if settings.selectedItem == "Pomodoro" {
-                        Button {
-                            switchPomodoroModes()
-                        } label: {
-                            Image(systemName: "forward.fill")
-                            Text(isWorkOn ? "Work" : "Break")
+                    ZStack {
+                        Circle()
+                            .stroke(lineWidth: stroke)
+                            .foregroundStyle(.ultraThinMaterial)
+                            .animation(.linear(duration: 1), value: stroke)
+                        
+                        Circle()
+                            .trim(from: 0.0, to: min(progress, 1.0))
+                            .stroke(Color.theme.primary.opacity(opacity), style: StrokeStyle(lineWidth: 35.0, lineCap: .round, lineJoin: .round))
+                            .rotationEffect(Angle(degrees: 270))
+                            .animation(.easeIn(duration: 3), value: opacity)
+                            .animation(.linear(duration: 1), value: progress)
+                        
+                        Text("\(timerCounter)")
+                            .largeTitleTextStyle()
+                            .contentTransition(.numericText())
+                            .fontDesign(.monospaced)
+                        
+                        VStack {
+                            if settings.selectedItem == "Pomodoro" {
+                                Button {
+                                    switchPomodoroModes()
+                                } label: {
+                                    Image(systemName: "forward.fill")
+                                    Text(isWorkOn ? "Work" : "Break")
+                                }
+                                .foregroundStyle(Color.theme.background)
+                                .font(.headline)
+                                .bold()
+                                .padding(10)
+                                .background(Color.theme.primary)
+                                .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                            }
                         }
-                        .foregroundStyle(Color.theme.background)
-                        .font(.headline)
-                        .bold()
-                        .padding(10)
-                        .background(Color.theme.primary)
-                        .clipShape(RoundedRectangle(cornerRadius: 100))
+                        .offset(y: -60)
+                        
+                        VStack {
+                            Text("\(time.pomodoroNumberOfIntervals - pomodoroIntervalCounter + 1) left")
+                                .foregroundStyle(Color.theme.foreground)
+                                .font(.headline)
+                                .padding(10)
+                                .background(.ultraThinMaterial)
+                                .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                            
+                        }
+                        .offset(y: 60)
+                        
+                        .onAppear {
+                            startDate = Date()
+                            
+                            //            Makes sure that a timer of 0 is not possible
+                            if time.hr == 0 && time.min == 0 {
+                                time.min = 1
+                            }
+                            
+                            settings.selectedItem == "Simple" ? start(hours: time.hr, minutes: time.min) : start(hours: 0, minutes: time.pomodoroWork)
+                        }
+                        
+                        .onReceive(timer) { time in
+                            updateCountdown()
+                        }
+                        
+                        .onReceive(snapTimer) { time in
+                            snap()
+                        }
                     }
                 }
-                .padding(.bottom, 130)
-                VStack {
-                    Text("\(time.pomodoroNumberOfIntervals - pomodoroIntervalCounter + 1) left")
-                    .foregroundStyle(Color.theme.foreground)
-                    .font(.headline)
-                    .padding(10)
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                }
-                .padding(.top, 130)
-                
-                HStack {
-                    Text("\(timerCounter)")
-                        .largeTitleTextStyle()
-                        .contentTransition(.numericText())
-                        .fontDesign(.monospaced)
-                }
             }
-            .padding(40)
-            .onAppear {
-                startDate = Date()
-                
-//            Makes sure that a timer of 0 is not possible
-                if time.hr == 0 && time.min == 0 {
-                    time.min = 1
-                }
-  
-                settings.selectedItem == "Simple" ? start(hours: time.hr, minutes: time.min) : start(hours: 0, minutes: time.pomodoroWork)
-            }
+            .padding(.vertical, 155)
+            .padding(.horizontal, 40)
             
-            .onReceive(timer) { time in
-                updateCountdown()
-            }
-            
-            .onReceive(snapTimer) { time in
-                snap()
-            }
-            
-            Color.theme.secondary
-                .ignoresSafeArea()
-                .opacity(flash)
-                .animation(.easeInOut(duration: 1), value: flash)
             
             VStack {
                 Spacer()
@@ -162,7 +160,7 @@ struct TimerView: View {
                         .bold()
                     }
                     .frame(width: 100, alignment: .leading)
-        
+                    
                     HStack {
                         Button {
                             isTimerPaused ? resumeTimer() : pauseTimer()
@@ -174,7 +172,7 @@ struct TimerView: View {
                                     .id(isTimerPaused)
                                     .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
                                     .font(.system(size: 35))
-                                    
+                                
                             } else {
                                 Image(systemName: "pause.fill")
                                     .id(isTimerPaused)
@@ -211,7 +209,15 @@ struct TimerView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
             }
             .padding()
-            .padding(.vertical, 50)
+            .padding(.bottom, 25)
+            
+            
+            
+//            Color.theme.secondary
+//                .ignoresSafeArea()
+//                .opacity(flash)
+//                .animation(.easeInOut(duration: 1), value: flash)
+                
         }
         .toolbar(.hidden, for: .tabBar)
         .navigationBarBackButtonHidden(true)
@@ -219,25 +225,19 @@ struct TimerView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    UIApplication.shared.isIdleTimerDisabled = false
-                    
-                    fadeMusic()
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(musicFadeTime * 1000))) {
-                        SoundManager.instance.soundPlayer.stop()
-                        SoundManager.instance.musicPlayer.stop()
-                    }
-                    
-                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                    presentationMode.wrappedValue.dismiss()
-                    
-                    end()
+                    showingEndAlert = true
                 } label: {
-                    Text(Image(systemName: "arrow.uturn.backward.circle.fill"))
+                    Text(Image(systemName: "stop.circle.fill"))
                         .font(.system(size: 35))
                         .symbolRenderingMode(.hierarchical)
                         .foregroundStyle(Color.theme.primary)
                 }
+                .alert("End This Focus Session?", isPresented: $showingEndAlert) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("End", role: .destructive) { end() }
+                }
+                
+                        
             }
             ToolbarItem(placement: .principal) {
                 VStack {
@@ -283,7 +283,7 @@ struct TimerView: View {
         settings.expectedEndDate = Calendar.current.date(byAdding: .minute, value: initialTime, to: settings.expectedEndDate)!
         UIApplication.shared.isIdleTimerDisabled = true
         vibrate()
-        stroke = 40.0
+        stroke = 45.0
         opacity = 1
         DispatchQueue.global(qos: .userInteractive).async {
             SoundManager.instance.playSound(sound: "Sound")
@@ -329,6 +329,7 @@ struct TimerView: View {
     }
 
     func end() {
+        progress = 100
         LiveActivitiesManager.stopLiveActivity()
         
         fadeMusic()
@@ -347,10 +348,11 @@ struct TimerView: View {
             healthKitManager.saveMindfulMinutes(start: startDate, end: actualEndDate)
             
             dismiss()
+            presentationMode.wrappedValue.dismiss()
         }
         
         review.cycleCount += 1
-        if review.cycleCount % 50 == 0 {
+        if review.cycleCount % 30 == 0 {
             requestReview()
         }
     }

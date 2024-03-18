@@ -40,20 +40,34 @@ struct LockedInWidgetLiveActivity: Widget {
                     .frame(maxHeight: .infinity)
                 }
                 DynamicIslandExpandedRegion(.center) {
-                    HStack {
-                        Text("Focus")
+                    if context.isStale {
+                        HStack {
+                            Text("Focus")
+                                .bold()
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity)
+                        
+                        Text("Finished")
+                            .contentTransition(.numericText())
+                            .fontDesign(.monospaced)
                             .bold()
-                        Spacer()
+                            .font(.title)
+                    } else {
+                        HStack {
+                            Text("Focus")
+                                .bold()
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity)
+                        
+                        Text(context.state.endDate, style: .timer)
+                            .contentTransition(.numericText())
+                            .fontDesign(.monospaced)
+                            .bold()
+                            .font(.title)
+                        
                     }
-                    .frame(maxWidth: .infinity)
-                    
-                    Text(context.state.endDate, style: .timer)
-                        .contentTransition(.numericText())
-                        .fontDesign(.monospaced)
-                        .bold()
-                        .font(.title)
-                   
-                    
                 }
                 
             } compactLeading: {
@@ -85,39 +99,83 @@ struct TimeTrackingWidgetView: View {
     let context: ActivityViewContext<TimeTrackingAttributes>
     
     var body: some View {
-        HStack {
-            Image(systemName: "brain.head.profile")
-                .foregroundStyle(.white)
-                .font(.title)
-                .padding(.horizontal)
-            
-            VStack(spacing: 0) {
-                HStack {
-                    Text("Focus")
-                        .font(.caption)
-                        .bold()
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity)
-                
-                Text(context.state.endDate, style: .timer)
-                    .contentTransition(.numericText())
-                    .fontDesign(.monospaced)
-                    .bold()
+        
+        if context.isStale {
+            HStack {
+                Image(systemName: "brain.head.profile")
+                    .foregroundStyle(.white)
                     .font(.title)
+                    .padding(.horizontal)
+                
+                VStack(spacing: 0) {
+                    HStack {
+                        Text("Focus")
+                            .font(.caption)
+                            .bold()
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                    
+                    Text("Finished")
+                        .contentTransition(.numericText())
+                        .fontDesign(.monospaced)
+                        .bold()
+                        .font(.title)
+                }
+                .foregroundStyle(.white)
+                
+                Button {
+                    //
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                }
+                .buttonBorderShape(.roundedRectangle(radius: 20))
+                .font(.largeTitle)
+                .tint(Color("AccentColor"))
+                .padding()
             }
-            .foregroundStyle(.white)
             
-            Button {
-                //
-            } label: {
-                Image(systemName: "gearshape.fill")
-            }
-            .buttonBorderShape(.roundedRectangle(radius: 20))
-            .font(.largeTitle)
-            .tint(Color("AccentColor"))
+            .activityBackgroundTint(.black)
+            
         }
-        .activityBackgroundTint(.black)
+        else {
+            HStack {
+                Image(systemName: "brain.head.profile")
+                    .foregroundStyle(.white)
+                    .font(.title)
+                    .padding(.horizontal)
+                
+                VStack(spacing: 0) {
+                    HStack {
+                        Text("Focus")
+                            .font(.caption)
+                            .bold()
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                    
+                    Text(context.state.endDate, style: .timer)
+                        .contentTransition(.numericText())
+                        .fontDesign(.monospaced)
+                        .bold()
+                        .font(.title)
+                }
+                .foregroundStyle(.white)
+                
+                Button {
+                    //
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                }
+                .buttonBorderShape(.roundedRectangle(radius: 20))
+                .font(.largeTitle)
+                .tint(Color("AccentColor"))
+                .padding()
+            }
+            
+            .activityBackgroundTint(.black)
+            
+        }
     }
 }
 
