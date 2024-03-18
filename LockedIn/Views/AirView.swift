@@ -17,6 +17,8 @@ struct AirView: View {
     @State private var isBreathingIn = true
     @State private var height = 0.0
     @State private var breathesRemaining = 0
+    @State private var showingEndAlert = false
+    
     @State private var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State private var counter = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     
@@ -110,18 +112,7 @@ struct AirView: View {
                     breathesRemaining -= 1
                     print(breathesRemaining)
                 } else {
-                    SoundManager.instance.soundPlayer.stop()
-                    SoundManager.instance.musicPlayer.stop()
-                    
-                    timer.upstream.connect().cancel()
-                    counter.upstream.connect().cancel()
-                    
-                    vibrate()
-                    fadeMusic()
-                    
-                    UIApplication.shared.isIdleTimerDisabled = false
-                    dismiss()
-                    
+                    end()
                 }
             }
             .onReceive(timer) { time in
@@ -163,19 +154,17 @@ struct AirView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    UIApplication.shared.isIdleTimerDisabled = false
-                    fadeMusic()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(fadeTime * 1000))) {
-                        SoundManager.instance.soundPlayer.stop()
-                        SoundManager.instance.musicPlayer.stop()
-                    }
-                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                    presentationMode.wrappedValue.dismiss()
+                    showingEndAlert = true
                 } label: {
                     Text(Image(systemName: "stop.circle.fill"))
                         .font(.system(size: 35))
                         .symbolRenderingMode(.hierarchical)
                 }
+                .alert("End This Breathe Session?", isPresented: $showingEndAlert) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("End", role: .destructive) { end() }
+                }
+                
             }
             ToolbarItem(placement: .principal) {
                 VStack {
@@ -184,6 +173,25 @@ struct AirView: View {
                 }
             }
         }
+    }
+    
+    func end() {
+        UIApplication.shared.isIdleTimerDisabled = false
+        
+        vibrate()
+        fadeMusic()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(fadeTime * 1000))) {
+            SoundManager.instance.soundPlayer.stop()
+            SoundManager.instance.musicPlayer.stop()
+        }
+        
+        presentationMode.wrappedValue.dismiss()
+        
+        timer.upstream.connect().cancel()
+        counter.upstream.connect().cancel()
+        
+        dismiss()
     }
     
     func fadeMusic() {
