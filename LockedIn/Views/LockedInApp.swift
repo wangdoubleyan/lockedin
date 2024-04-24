@@ -8,9 +8,7 @@
 import SwiftUI
 
 @main
-struct LockedInApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
-    
+struct LockedInApp: App {    
     var body: some Scene {
         WindowGroup {
             ContentView()

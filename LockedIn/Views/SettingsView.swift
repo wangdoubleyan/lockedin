@@ -26,13 +26,12 @@ struct SettingsView: View {
     @StateObject private var healthKitManager = HealthKitManager()
     
     let intervals = [15.0, 30.0, 60.0]
-    static let backgroundMusicList = ["Campfire", "Meditation", "Piano", "Rain", "Relax", "Stream"]
+    static let backgroundMusicList = ["Brown Noise", "Campfire", "Focus", "Meditation", "Piano", "Rain", "Relax", "Sleep", "Stream"]
     let notify = NotificationManager()
     
     var body: some View {
         ZStack {
-            GradientView()
-                .ignoresSafeArea()
+            BackgroundView()
             List {
                 Section {
                     HStack {

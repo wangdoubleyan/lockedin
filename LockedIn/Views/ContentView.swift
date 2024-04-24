@@ -14,8 +14,7 @@ struct ContentView: View {
         
         NavigationStack {
             ZStack {
-                GradientView()
-                    .ignoresSafeArea()
+                BackgroundView()
                 
                 ScrollView(showsIndicators: false) {
                     FocusView()

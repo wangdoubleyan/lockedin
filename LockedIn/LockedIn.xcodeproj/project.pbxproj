@@ -11,9 +11,13 @@
 		120D5D4A2AA629350024257F /* Sound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 120D5D492AA629350024257F /* Sound.m4a */; };
 		121D2E032ACE492B00398390 /* AirView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121D2E022ACE492B00398390 /* AirView.swift */; };
 		1237D2DB2AC887C800C80F6B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1237D2DA2AC887C800C80F6B /* ContentView.swift */; };
-		1242978A2BA7606C003F3A17 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D322AA595D90024257F /* SwiftUI.framework */; };
-		1242978D2BA7606E003F3A17 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D302AA595D90024257F /* WidgetKit.framework */; };
 		1242979D2BA76437003F3A17 /* Rain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1242979C2BA76437003F3A17 /* Rain.mp3 */; };
+		12463D922BD7F1F800B67AC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12463D912BD7F1F800B67AC9 /* ContentView.swift */; };
+		12463D942BD7F1FA00B67AC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12463D932BD7F1FA00B67AC9 /* Assets.xcassets */; };
+		12463D972BD7F1FA00B67AC9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12463D962BD7F1FA00B67AC9 /* Preview Assets.xcassets */; };
+		12463D9D2BD7F38500B67AC9 /* LockedInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12820B022A99A8550054DBFF /* LockedInApp.swift */; };
+		12463D9F2BD7F49700B67AC9 /* ProgressCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12463D9E2BD7F49700B67AC9 /* ProgressCircle.swift */; };
+		124D133D2BADD139000404A2 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124D133C2BADD139000404A2 /* BackgroundView.swift */; };
 		12622F812B91C43C0013A3B7 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12622F802B91C43C0013A3B7 /* GradientView.swift */; };
 		12622F832B924B610013A3B7 /* Stream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 12622F822B924B610013A3B7 /* Stream.mp3 */; };
 		12622F852B924BC50013A3B7 /* Campfire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 12622F842B924BC50013A3B7 /* Campfire.mp3 */; };
@@ -42,6 +46,7 @@
 		12D961452AD491D300CD25D5 /* LockedInWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 12D961382AD491D100CD25D5 /* LockedInWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		12DC4F0F2AA31064001AF2C5 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */; };
 		12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1D9602A9DA38600E047AF /* SettingsView.swift */; };
+		12F254B32BC7705E00C4BABF /* BrownNoise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 12F254B22BC7705E00C4BABF /* BrownNoise.mp3 */; };
 		12F960672AD66060004FD46A /* BreatheOut.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12F960662AD66060004FD46A /* BreatheOut.m4a */; };
 		12F960692AD66069004FD46A /* BreatheIn.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12F960682AD66069004FD46A /* BreatheIn.m4a */; };
 		12FBB8522B353D3700D27C96 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBB8512B353D3700D27C96 /* AppStorage.swift */; };
@@ -49,6 +54,12 @@
 		12FBB85A2B3541C000D27C96 /* Text+CustomStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBB8592B3541C000D27C96 /* Text+CustomStyles.swift */; };
 		12FBB85C2B35421500D27C96 /* UINavigationController+SwipeBackGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBB85B2B35421500D27C96 /* UINavigationController+SwipeBackGesture.swift */; };
 		12FBB85E2B35426F00D27C96 /* Date+Raw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBB85D2B35426F00D27C96 /* Date+Raw.swift */; };
+		12FD93162BD6C0EB00C43F51 /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124297962BA761CF003F3A17 /* ActivityKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		12FD93172BD6C0F100C43F51 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D302AA595D90024257F /* WidgetKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		12FD93192BD6C68600C43F51 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12FD93182BD6C68600C43F51 /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		12FD931B2BD6C7F100C43F51 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12FD93182BD6C68600C43F51 /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		12FD931E2BD6C7F200C43F51 /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 124297962BA761CF003F3A17 /* ActivityKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		12FD93202BD6C7F400C43F51 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120D5D302AA595D90024257F /* WidgetKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +95,13 @@
 		1237D2DA2AC887C800C80F6B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		124297962BA761CF003F3A17 /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = System/Library/Frameworks/ActivityKit.framework; sourceTree = SDKROOT; };
 		1242979C2BA76437003F3A17 /* Rain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Rain.mp3; sourceTree = "<group>"; };
+		12463D8D2BD7F1F800B67AC9 /* MacLockedIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacLockedIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		12463D912BD7F1F800B67AC9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		12463D932BD7F1FA00B67AC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		12463D962BD7F1FA00B67AC9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		12463D982BD7F1FA00B67AC9 /* MacLockedIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacLockedIn.entitlements; sourceTree = "<group>"; };
+		12463D9E2BD7F49700B67AC9 /* ProgressCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircle.swift; sourceTree = "<group>"; };
+		124D133C2BADD139000404A2 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		12622F802B91C43C0013A3B7 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		12622F822B924B610013A3B7 /* Stream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Stream.mp3; sourceTree = "<group>"; };
 		12622F842B924BC50013A3B7 /* Campfire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Campfire.mp3; sourceTree = "<group>"; };
@@ -111,6 +129,7 @@
 		12D961422AD491D300CD25D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12DC4F0E2AA31064001AF2C5 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		12F1D9602A9DA38600E047AF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		12F254B22BC7705E00C4BABF /* BrownNoise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = BrownNoise.mp3; path = ../../../../../Documents/Developer/LockedIn/BrownNoise.mp3; sourceTree = "<group>"; };
 		12F960662AD66060004FD46A /* BreatheOut.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreatheOut.m4a; sourceTree = "<group>"; };
 		12F960682AD66069004FD46A /* BreatheIn.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreatheIn.m4a; sourceTree = "<group>"; };
 		12FBB8512B353D3700D27C96 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
@@ -118,13 +137,24 @@
 		12FBB8592B3541C000D27C96 /* Text+CustomStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+CustomStyles.swift"; sourceTree = "<group>"; };
 		12FBB85B2B35421500D27C96 /* UINavigationController+SwipeBackGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+SwipeBackGesture.swift"; sourceTree = "<group>"; };
 		12FBB85D2B35426F00D27C96 /* Date+Raw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Raw.swift"; sourceTree = "<group>"; };
+		12FD93182BD6C68600C43F51 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		12463D8A2BD7F1F800B67AC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		12820AFC2A99A8550054DBFF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12FD931E2BD6C7F200C43F51 /* ActivityKit.framework in Frameworks */,
+				12FD931B2BD6C7F100C43F51 /* HealthKit.framework in Frameworks */,
+				12FD93202BD6C7F400C43F51 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,8 +162,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1242978A2BA7606C003F3A17 /* SwiftUI.framework in Frameworks */,
-				1242978D2BA7606E003F3A17 /* WidgetKit.framework in Frameworks */,
+				12FD93192BD6C68600C43F51 /* HealthKit.framework in Frameworks */,
+				12FD93172BD6C0F100C43F51 /* WidgetKit.framework in Frameworks */,
+				12FD93162BD6C0EB00C43F51 /* ActivityKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +174,7 @@
 		120D5D2F2AA595D90024257F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				12FD93182BD6C68600C43F51 /* HealthKit.framework */,
 				124297962BA761CF003F3A17 /* ActivityKit.framework */,
 				120D5D302AA595D90024257F /* WidgetKit.framework */,
 				120D5D322AA595D90024257F /* SwiftUI.framework */,
@@ -150,11 +182,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		12463D8E2BD7F1F800B67AC9 /* MacLockedIn */ = {
+			isa = PBXGroup;
+			children = (
+				12463D912BD7F1F800B67AC9 /* ContentView.swift */,
+				12463D932BD7F1FA00B67AC9 /* Assets.xcassets */,
+				12463D982BD7F1FA00B67AC9 /* MacLockedIn.entitlements */,
+				12463D952BD7F1FA00B67AC9 /* Preview Content */,
+			);
+			path = MacLockedIn;
+			sourceTree = "<group>";
+		};
+		12463D952BD7F1FA00B67AC9 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				12463D962BD7F1FA00B67AC9 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		12463D9C2BD7F35C00B67AC9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				12463D9E2BD7F49700B67AC9 /* ProgressCircle.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		12820AF62A99A8550054DBFF = {
 			isa = PBXGroup;
 			children = (
 				12820B012A99A8550054DBFF /* LockedIn */,
 				12D9613B2AD491D100CD25D5 /* LockedInWidget */,
+				12463D8E2BD7F1F800B67AC9 /* MacLockedIn */,
 				120D5D2F2AA595D90024257F /* Frameworks */,
 				12820B002A99A8550054DBFF /* Products */,
 			);
@@ -165,6 +225,7 @@
 			children = (
 				12820AFF2A99A8550054DBFF /* LockedIn.app */,
 				12D961382AD491D100CD25D5 /* LockedInWidgetExtension.appex */,
+				12463D8D2BD7F1F800B67AC9 /* MacLockedIn.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +235,7 @@
 			children = (
 				12FBB8552B353F3F00D27C96 /* Views */,
 				12FBB8562B353FED00D27C96 /* Utilities */,
+				12463D9C2BD7F35C00B67AC9 /* Helpers */,
 				12FBB8582B35417100D27C96 /* Extentions */,
 				12FBB8572B3540A300D27C96 /* Media */,
 				12820B082A99A8570054DBFF /* Preview Content */,
@@ -192,6 +254,7 @@
 		12943F8D2A9FAEDB0035C146 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				12F254B22BC7705E00C4BABF /* BrownNoise.mp3 */,
 				1242979C2BA76437003F3A17 /* Rain.mp3 */,
 				12F960682AD66069004FD46A /* BreatheIn.m4a */,
 				12F960662AD66060004FD46A /* BreatheOut.m4a */,
@@ -222,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				12820B022A99A8550054DBFF /* LockedInApp.swift */,
+				124D133C2BADD139000404A2 /* BackgroundView.swift */,
 				12622F802B91C43C0013A3B7 /* GradientView.swift */,
 				1237D2DA2AC887C800C80F6B /* ContentView.swift */,
 				12820B102A99A8A60054DBFF /* FocusView.swift */,
@@ -271,6 +335,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		12463D8C2BD7F1F800B67AC9 /* MacLockedIn */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12463D992BD7F1FA00B67AC9 /* Build configuration list for PBXNativeTarget "MacLockedIn" */;
+			buildPhases = (
+				12463D892BD7F1F800B67AC9 /* Sources */,
+				12463D8A2BD7F1F800B67AC9 /* Frameworks */,
+				12463D8B2BD7F1F800B67AC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacLockedIn;
+			productName = MacLockedIn;
+			productReference = 12463D8D2BD7F1F800B67AC9 /* MacLockedIn.app */;
+			productType = "com.apple.product-type.application";
+		};
 		12820AFE2A99A8550054DBFF /* LockedIn */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 12820B0D2A99A8570054DBFF /* Build configuration list for PBXNativeTarget "LockedIn" */;
@@ -314,9 +395,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					12463D8C2BD7F1F800B67AC9 = {
+						CreatedOnToolsVersion = 15.3;
+					};
 					12820AFE2A99A8550054DBFF = {
 						CreatedOnToolsVersion = 15.0;
 					};
@@ -340,16 +424,27 @@
 			targets = (
 				12820AFE2A99A8550054DBFF /* LockedIn */,
 				12D961372AD491D100CD25D5 /* LockedInWidgetExtension */,
+				12463D8C2BD7F1F800B67AC9 /* MacLockedIn */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		12463D8B2BD7F1F800B67AC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12463D972BD7F1FA00B67AC9 /* Preview Assets.xcassets in Resources */,
+				12463D942BD7F1FA00B67AC9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		12820AFD2A99A8550054DBFF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1242979D2BA76437003F3A17 /* Rain.mp3 in Resources */,
+				12F254B32BC7705E00C4BABF /* BrownNoise.mp3 in Resources */,
 				12820B0A2A99A8570054DBFF /* Preview Assets.xcassets in Resources */,
 				12622F8D2B924CC30013A3B7 /* Relax.mp3 in Resources */,
 				120D5D4A2AA629350024257F /* Sound.m4a in Resources */,
@@ -375,12 +470,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		12463D892BD7F1F800B67AC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12463D9D2BD7F38500B67AC9 /* LockedInApp.swift in Sources */,
+				12463D922BD7F1F800B67AC9 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		12820AFB2A99A8550054DBFF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				12F1D9612A9DA38600E047AF /* SettingsView.swift in Sources */,
 				12820B032A99A8550054DBFF /* LockedInApp.swift in Sources */,
+				124D133D2BADD139000404A2 /* BackgroundView.swift in Sources */,
+				12463D9F2BD7F49700B67AC9 /* ProgressCircle.swift in Sources */,
 				12949B512B96248F0040E9DE /* AppDelegate.swift in Sources */,
 				1295D65E2AC8802300034049 /* BreatheView.swift in Sources */,
 				12FBB8542B353DC000D27C96 /* SoundManager.swift in Sources */,
@@ -426,6 +532,68 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		12463D9A2BD7F1FA00B67AC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MacLockedIn/MacLockedIn.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MacLockedIn/Preview Content\"";
+				DEVELOPMENT_TEAM = TQ579GB38P;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LockedIn;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MacLockedIn;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		12463D9B2BD7F1FA00B67AC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MacLockedIn/MacLockedIn.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MacLockedIn/Preview Content\"";
+				DEVELOPMENT_TEAM = TQ579GB38P;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LockedIn;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MacLockedIn;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		12820B0B2A99A8570054DBFF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -548,6 +716,7 @@
 		12820B0E2A99A8570054DBFF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -562,8 +731,8 @@
 				INFOPLIST_FILE = LockedIn/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LockedIn;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let LockedIn to save your Pause duration to Mindful Minutes in Apple Health.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "LockedIn will save the duration of your Pause to Mindful Minutes in Apple Health.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let LockedIn to save your Focus duration to Mindful Minutes in Apple Health.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "LockedIn will save the duration of your Focus to Mindful Minutes in Apple Health.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -577,14 +746,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.23;
+				MARKETING_VERSION = 1.24;
 				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MindfulPause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -594,6 +763,7 @@
 		12820B0F2A99A8570054DBFF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -608,8 +778,8 @@
 				INFOPLIST_FILE = LockedIn/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LockedIn;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let LockedIn to save your Pause duration to Mindful Minutes in Apple Health.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "LockedIn will save the duration of your Pause to Mindful Minutes in Apple Health.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to let LockedIn to save your Focus duration to Mindful Minutes in Apple Health.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "LockedIn will save the duration of your Focus to Mindful Minutes in Apple Health.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -623,14 +793,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.23;
+				MARKETING_VERSION = 1.24;
 				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MindfulPause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -651,19 +821,19 @@
 				INFOPLIST_KEY_CFBundleDisplayName = LockedInWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.22;
+				MARKETING_VERSION = 1.24;
 				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MindfulPause.LockedInWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -685,19 +855,19 @@
 				INFOPLIST_KEY_CFBundleDisplayName = LockedInWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.22;
+				MARKETING_VERSION = 1.24;
 				PRODUCT_BUNDLE_IDENTIFIER = com.matsvei.MindfulPause.LockedInWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -708,6 +878,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		12463D992BD7F1FA00B67AC9 /* Build configuration list for PBXNativeTarget "MacLockedIn" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12463D9A2BD7F1FA00B67AC9 /* Debug */,
+				12463D9B2BD7F1FA00B67AC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		12820AFA2A99A8550054DBFF /* Build configuration list for PBXProject "LockedIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

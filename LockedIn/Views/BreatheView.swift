@@ -15,20 +15,6 @@ struct BreatheView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-//                VStack {
-//                    Image("Sea")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .ignoresSafeArea()
-//                        .mask(LinearGradient(gradient: Gradient(stops: [
-//                            .init(color: Color.theme.background, location: 0),
-//                            .init(color: .clear, location: 1), ]),
-//                            startPoint: .top, endPoint: .bottom))
-//                    Spacer()
-//                }
-                
-//                GradientView()
-                
                 VStack(alignment: .leading) {
                     Spacer()
                     

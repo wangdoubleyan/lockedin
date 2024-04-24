@@ -29,8 +29,7 @@ struct AirView: View {
     
     var body: some View {
         ZStack {
-            Color.theme.background
-                .ignoresSafeArea()
+            BackgroundView()
 
             ZStack {
                 Capsule()

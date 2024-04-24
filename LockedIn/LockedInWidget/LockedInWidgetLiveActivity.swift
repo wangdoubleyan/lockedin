@@ -5,7 +5,9 @@
 //  Created by Matsvei Liapich on 3/1/24.
 //
 
+#if !os(macOS)
 import ActivityKit
+#endif
 import WidgetKit
 import SwiftUI
 
