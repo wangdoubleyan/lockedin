@@ -32,7 +32,6 @@ struct ProgressCircle: View {
                 .contentTransition(.numericText())
                 .fontDesign(.monospaced)
         }
-        .padding(50)
     }
 }
 

@@ -49,6 +49,9 @@
 		12F254B32BC7705E00C4BABF /* BrownNoise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 12F254B22BC7705E00C4BABF /* BrownNoise.mp3 */; };
 		12F960672AD66060004FD46A /* BreatheOut.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12F960662AD66060004FD46A /* BreatheOut.m4a */; };
 		12F960692AD66069004FD46A /* BreatheIn.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 12F960682AD66069004FD46A /* BreatheIn.m4a */; };
+		12FB71DB2BD8C410004BE2C9 /* PomodoroStatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FB71DA2BD8C410004BE2C9 /* PomodoroStatusButton.swift */; };
+		12FB71DD2BD8C648004BE2C9 /* PomodoroCounterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FB71DC2BD8C648004BE2C9 /* PomodoroCounterButton.swift */; };
+		12FB71DF2BD8C7BD004BE2C9 /* MediaControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FB71DE2BD8C7BD004BE2C9 /* MediaControlButton.swift */; };
 		12FBB8522B353D3700D27C96 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBB8512B353D3700D27C96 /* AppStorage.swift */; };
 		12FBB8542B353DC000D27C96 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBB8532B353DC000D27C96 /* SoundManager.swift */; };
 		12FBB85A2B3541C000D27C96 /* Text+CustomStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FBB8592B3541C000D27C96 /* Text+CustomStyles.swift */; };
@@ -132,6 +135,9 @@
 		12F254B22BC7705E00C4BABF /* BrownNoise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = BrownNoise.mp3; path = ../../../../../Documents/Developer/LockedIn/BrownNoise.mp3; sourceTree = "<group>"; };
 		12F960662AD66060004FD46A /* BreatheOut.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreatheOut.m4a; sourceTree = "<group>"; };
 		12F960682AD66069004FD46A /* BreatheIn.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreatheIn.m4a; sourceTree = "<group>"; };
+		12FB71DA2BD8C410004BE2C9 /* PomodoroStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroStatusButton.swift; sourceTree = "<group>"; };
+		12FB71DC2BD8C648004BE2C9 /* PomodoroCounterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroCounterButton.swift; sourceTree = "<group>"; };
+		12FB71DE2BD8C7BD004BE2C9 /* MediaControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaControlButton.swift; sourceTree = "<group>"; };
 		12FBB8512B353D3700D27C96 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 		12FBB8532B353DC000D27C96 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		12FBB8592B3541C000D27C96 /* Text+CustomStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+CustomStyles.swift"; sourceTree = "<group>"; };
@@ -205,6 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				12463D9E2BD7F49700B67AC9 /* ProgressCircle.swift */,
+				12FB71DA2BD8C410004BE2C9 /* PomodoroStatusButton.swift */,
+				12FB71DC2BD8C648004BE2C9 /* PomodoroCounterButton.swift */,
+				12FB71DE2BD8C7BD004BE2C9 /* MediaControlButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -487,6 +496,8 @@
 				12820B032A99A8550054DBFF /* LockedInApp.swift in Sources */,
 				124D133D2BADD139000404A2 /* BackgroundView.swift in Sources */,
 				12463D9F2BD7F49700B67AC9 /* ProgressCircle.swift in Sources */,
+				12FB71DD2BD8C648004BE2C9 /* PomodoroCounterButton.swift in Sources */,
+				12FB71DB2BD8C410004BE2C9 /* PomodoroStatusButton.swift in Sources */,
 				12949B512B96248F0040E9DE /* AppDelegate.swift in Sources */,
 				1295D65E2AC8802300034049 /* BreatheView.swift in Sources */,
 				12FBB8542B353DC000D27C96 /* SoundManager.swift in Sources */,
@@ -503,6 +514,7 @@
 				12949B532B9625350040E9DE /* SceneDelegate.swift in Sources */,
 				12820B132A99A8AF0054DBFF /* TimerView.swift in Sources */,
 				12820B112A99A8A60054DBFF /* FocusView.swift in Sources */,
+				12FB71DF2BD8C7BD004BE2C9 /* MediaControlButton.swift in Sources */,
 				128CCC422B94B61A00445540 /* LockedInWidgetLiveActivity.swift in Sources */,
 				12949B552B96299F0040E9DE /* LiveActivitiesManager.swift in Sources */,
 				12FBB85A2B3541C000D27C96 /* Text+CustomStyles.swift in Sources */,

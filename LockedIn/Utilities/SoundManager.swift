@@ -56,4 +56,12 @@ class SoundManager {
             
         }
     }
+    
+    func fadeMusic() {
+        SoundManager.instance.musicPlayer.setVolume(0, fadeDuration: settings.musicFadeTime)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(settings.musicFadeTime) * 1000)) {
+            SoundManager.instance.musicPlayer.pause()
+        }
+    }
 }

@@ -29,29 +29,22 @@ struct TimerView: View {
     @State private var opacity = 0.0
     
     @State private var flash = 0.0
-    @State private var isTimerPaused = false
     @State private var timerCounter = "Start"
     @State private var initialTime = 0
-    @State private var pomodoroIntervalCounter = 1
+    
     @State private var showingEndAlert = false
     
     @State private var startDate = Date()
         
 //    Calculated when user exits timer
     @State private var actualEndDate = Date()
-    
-    @State private var isWorkOn = true
+
     @State private var pauseTime = Date()
 
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var snapTimer = Timer.publish(every: Settings().snapInterval, on: .main, in: .common).autoconnect()
     
     @State var activity: Activity<TimeTrackingAttributes>? = nil
-    
-    
-    
-    
-    let musicFadeTime = 0.5
     
     var body: some View {
         ZStack {
@@ -61,34 +54,11 @@ struct TimerView: View {
                     ZStack {
                         ProgressCircle(stroke: stroke, progress: progress, opacity: opacity, timerText: timerCounter)
                         
-                        VStack {
-                            if settings.selectedItem == "Pomodoro" {
-                                Button {
-                                    switchPomodoroModes()
-                                } label: {
-                                    Image(systemName: "forward.fill")
-                                    Text(isWorkOn ? "Work" : "Break")
-                                }
-                                .foregroundStyle(Color.theme.background)
-                                .font(.headline)
-                                .bold()
-                                .padding(10)
-                                .background(Color.theme.primary)
-                                .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                            }
-                        }
-                        .offset(y: -60)
+                        PomodoroStatusButton()
+                            .offset(y: -60)
                         
-                        VStack {
-                            Text("\(time.pomodoroNumberOfIntervals - pomodoroIntervalCounter + 1) left")
-                                .foregroundStyle(Color.theme.foreground)
-                                .font(.headline)
-                                .padding(10)
-                                .background(.ultraThinMaterial)
-                                .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-                            
-                        }
-                        .offset(y: 60)
+                        PomodoroCounterButton()
+                            .offset(y: 60)
                         
                         .onAppear {
                             startDate = Date()
@@ -118,91 +88,10 @@ struct TimerView: View {
             VStack {
                 Spacer()
                 
-                HStack {
-                    HStack {
-                        Button {
-                            settings.isMusicOn.toggle()
-                            if settings.isMusicOn {
-                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                                SoundManager.instance.musicPlayer.setVolume(0.0, fadeDuration: 0.0)
-                                SoundManager.instance.playMusic(music: settings.backgroundMusic)
-                                SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: musicFadeTime)
-                            } else {
-                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                                fadeMusic()
-                            }
-                        } label: {
-                            Image(systemName: settings.isMusicOn ? "speaker.wave.2.fill": "speaker.slash.fill")
-                                .frame(width: 25, height: 25)
-                                .id(settings.isMusicOn)
-                                .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
-                            HStack {
-                                Text("Music")
-                            }
-                        }
-                        .foregroundStyle(settings.isMusicOn ? Color.theme.foreground : Color.theme.trinary)
-                        .font(.headline)
-                        .bold()
-                    }
-                    .frame(width: 100, alignment: .leading)
-                    
-                    HStack {
-                        Button {
-                            isTimerPaused ? resumeTimer() : pauseTimer()
-                            
-                            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                        } label: {
-                            if isTimerPaused {
-                                Image(systemName: "play.fill")
-                                    .id(isTimerPaused)
-                                    .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
-                                    .font(.system(size: 35))
-                                
-                            } else {
-                                Image(systemName: "pause.fill")
-                                    .id(isTimerPaused)
-                                    .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
-                                    .font(.system(size: 35))
-                            }
-                        }
-                    }
-                    .foregroundStyle(Color.theme.foreground)
-                    .frame(width: 65, height: 65, alignment: .center)
-                    
-                    HStack {
-                        Button {
-                            settings.isSnapOn.toggle()
-                            
-                            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                        } label: {
-                            Image(systemName: settings.isSnapOn ? "bell.badge.waveform.fill" : "bell.slash.fill")
-                                .frame(width: 25, height: 25)
-                                .id(settings.isSnapOn)
-                                .transition(.asymmetric(insertion: .scale, removal: .scale).combined(with: .opacity))
-                            HStack {
-                                Text("Snaps")
-                            }
-                        }
-                        .foregroundStyle(settings.isSnapOn ? Color.theme.foreground : Color.theme.trinary)
-                        .font(.headline)
-                        .bold()
-                    }
-                    .frame(width: 100, alignment: .trailing)
-                }
-                .frame(maxWidth: .infinity)
-                .background(.ultraThinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                MediaControlButton()
             }
             .padding()
             .padding(.bottom, 25)
-            
-            
-            
-//            Color.theme.secondary
-//                .ignoresSafeArea()
-//                .opacity(flash)
-//                .animation(.easeInOut(duration: 1), value: flash)
-                
         }
         .toolbar(.hidden, for: .tabBar)
         .navigationBarBackButtonHidden(true)
@@ -272,7 +161,7 @@ struct TimerView: View {
         opacity = 1
         DispatchQueue.global(qos: .userInteractive).async {
             SoundManager.instance.playSound(sound: "Sound")
-            if isWorkOn {
+            if settings.isWorkOn {
                 SoundManager.instance.playMusic(music: settings.backgroundMusic)
             } else {
                 SoundManager.instance.musicPlayer.stop()
@@ -317,17 +206,16 @@ struct TimerView: View {
         progress = 100
         LiveActivitiesManager.stopLiveActivity()
         
-        fadeMusic()
+        SoundManager.instance.fadeMusic()
         actualEndDate = Date()
         timerCounter = "Finish"
         SoundManager.instance.playSound(sound: "Sound")
         timer.upstream.connect().cancel()
         snapTimer.upstream.connect().cancel()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             UIApplication.shared.isIdleTimerDisabled = false
                         
-            SoundManager.instance.soundPlayer.stop()
             SoundManager.instance.musicPlayer.stop()
             
             healthKitManager.saveMindfulMinutes(start: startDate, end: actualEndDate)
@@ -337,25 +225,19 @@ struct TimerView: View {
         }
         
         review.cycleCount += 1
-        if review.cycleCount % 30 == 0 {
+        if review.cycleCount % 15 == 0 {
             requestReview()
         }
     }
     
-    func fadeMusic() {
-        SoundManager.instance.musicPlayer.setVolume(0, fadeDuration: musicFadeTime)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(musicFadeTime) * 1000)) {
-            SoundManager.instance.musicPlayer.pause()
-        }
-    }
+    
     
     func pauseTimer() {
         pauseTime = Date()
         timer.upstream.connect().cancel()
         snapTimer.upstream.connect().cancel()
-        isTimerPaused.toggle()
-        fadeMusic()
+        settings.isTimerPaused.toggle()
+        SoundManager.instance.fadeMusic()
         LiveActivitiesManager.stopLiveActivity()
     }
     
@@ -366,12 +248,12 @@ struct TimerView: View {
         settings.expectedEndDate = settings.expectedEndDate + elapsedTime + 1.5
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         snapTimer = Timer.publish(every: settings.snapInterval, on: .main, in: .common).autoconnect()
-        isTimerPaused.toggle()
+        settings.isTimerPaused.toggle()
             
         if settings.isMusicOn {
             SoundManager.instance.musicPlayer.setVolume(0.0, fadeDuration: 0.0)
             SoundManager.instance.playMusic(music: settings.backgroundMusic)
-            SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: musicFadeTime)
+            SoundManager.instance.musicPlayer.setVolume(1, fadeDuration: settings.musicFadeTime)
         }
         LiveActivitiesManager.startLiveActivity(activity: activity, expectedEndDate: settings.expectedEndDate)
     }
@@ -379,19 +261,19 @@ struct TimerView: View {
     func switchPomodoroModes() {
         LiveActivitiesManager.stopLiveActivity()
         
-        if isWorkOn {
-            if pomodoroIntervalCounter == time.pomodoroNumberOfIntervals {
+        if settings.isWorkOn {
+            if time.pomodoroIntervalCounter == time.pomodoroNumberOfIntervals {
                 progress = 100.0
-                pomodoroIntervalCounter += 1
+                time.pomodoroIntervalCounter += 1
                 end()
             } else {
                 start(hours: 0, minutes: time.pomodoroBreak)
-                isWorkOn.toggle()
+                settings.isWorkOn.toggle()
             }
         } else {
-            pomodoroIntervalCounter += 1
+            time.pomodoroIntervalCounter += 1
             start(hours: 0, minutes: time.pomodoroWork)
-            isWorkOn.toggle()
+            settings.isWorkOn.toggle()
         }
         
         LiveActivitiesManager.startLiveActivity(activity: activity, expectedEndDate: settings.expectedEndDate)
