@@ -11,7 +11,7 @@ import ActivityKit
 
 class Time: ObservableObject {
     @AppStorage("hr") var hr = 0
-    @AppStorage("min") var min = 1
+    @AppStorage("min") var min = 0.0
     @AppStorage("pomodoroWork") var pomodoroWork = 25
     @AppStorage("pomodoroBreak") var pomodoroBreak = 5
     @AppStorage("pomodoroNumberOfSessions") var pomodoroNumberOfIntervals = 3

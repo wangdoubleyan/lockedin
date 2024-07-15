@@ -17,171 +17,72 @@ struct FocusView: View {
     @State private var showAirView = false
     @State private var showTimerView = false
     @State private var modes = ["Simple", "Pomodoro"]
+    @State private var config: WheelPicker.Config = .init(count: 18, multiplier: 5)
     let hour = Calendar.current.component(.hour, from: Date())
     
     var body: some View {
-        NavigationStack {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Image(systemName: "brain.head.profile")
+                Text("Pomodoro Focus")
+                    .titleTextStyle()
+            }
+            .padding(.top)
+            
+            Text("Select Pomodoro interval length.")
+                .headlineTextStyle()
+                .padding(.bottom)
+            
             ZStack {
-                VStack(alignment: .leading) {
-                    Spacer()
+                Image("tomato")
+                    .resizable()
+                    .fixedSize()
+                    .scaleEffect(1.2, anchor: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .offset(y: -25)
+                
+                VStack(spacing: 0) {
+                    Text(verbatim: "\(Int(time.min))")
+                        .largeTitleTextStyle()
+                        .contentTransition(.numericText(value: time.min))
+                        .animation(.snappy, value: time.min)
+                        .padding(.top, 120)
                     
-                    HStack {
-                        Image(systemName: "brain.head.profile")
-                        Text("Time to Focus")
-                            .titleTextStyle()
-                    }
+                    Text("minutes")
+                        .smallTitleTextStyle()
+                        .padding(.bottom, 10)
                     
-                    Text("Select how long you want to Focus for.")
-                        .headlineTextStyle()
-                        .padding(.bottom)
+                    Triangle()
+                        .rotation(.degrees(180))
+                        .frame(width: 20, height: 20)
+                        .foregroundStyle(Color.theme.foreground)
                     
+                    WheelPicker(config: config, value: $time.min)
+                        .frame(width: 200, height: 160)
                     
-                    VStack {
-                        if settings.selectedItem == "Simple" {
-                            HStack {
-                                Picker("Select hours", selection: $time.hr) {
-                                    ForEach(0..<13, id: \.self) { i in
-                                        Text("\(i) hr")
-                                            .titleTextStyle()
-                                            .tag(i)
-                                    }
-                                }
-                                .pickerStyle(.wheel)
-                                .frame(height: 100)
-                                
-                                Picker("Select minutes", selection: $time.min) {
-                                    ForEach((time.hr > 0 ? 0 : 1)..<60, id: \.self) { i in
-                                        Text("\(i) min")
-                                            .titleTextStyle()
-                                            .tag(i)
-                                    }
-                                }
-                                .pickerStyle(.wheel)
-                                .frame(height: 100)
-                            }
-                        } else if settings.selectedItem == "Pomodoro" {
-                            HStack {
-                                VStack {
-                                    Text("WORK")
-                                        .captionTextStyle()
-                                    Picker("Select minutes", selection: $time.pomodoroWork) {
-                                        ForEach(1..<60, id: \.self) { i in
-                                            Text("\(i) min")
-                                                .titleTextStyle()
-                                                .tag(i)
-                                        }
-                                    }
-                                    .pickerStyle(.wheel)
-                                    .frame(height: 100)
-                                }
-                                VStack {
-                                    Text("BREAK")
-                                        .captionTextStyle()
-                                    Picker("Select minutes", selection: $time.pomodoroBreak) {
-                                        ForEach(1..<60, id: \.self) { i in
-                                            Text("\(i) min")
-                                                .titleTextStyle()
-                                                .tag(i)
-                                        }
-                                    }
-                                    .pickerStyle(.wheel)
-                                    .frame(height: 100)
-                                }
-                            }
-                        }
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(modes, id: \.self) { mode in
-                                    if settings.selectedItem == mode {
-                                        Button {
-                                            withAnimation {
-                                                settings.selectedItem = mode
-                                            }
-                                        } label: {
-                                            HStack {
-                                                Image(systemName: settings.selectedItem == mode ? "checkmark.circle.fill" : "circle")
-                                                Text(mode)
-                                            }
-                                            .foregroundStyle(Color.theme.background)
-                                            .padding()
-                                            .font(.headline)
-                                        }
-                                        .frame(height: 30)
-                                        .background(Color.theme.primary)
-                                        .clipShape(RoundedRectangle(cornerRadius: 100))
-                                    } else {
-                                        Button {
-                                            withAnimation {
-                                                settings.selectedItem = mode
-                                            }
-                                        } label: {
-                                            HStack {
-                                                Image(systemName: settings.selectedItem == mode ? "checkmark.circle.fill" : "circle")
-                                                Text(mode)
-                                            }
-                                            .foregroundStyle(Color.theme.secondary)
-                                            .padding()
-                                            .font(.headline)
-                                        }
-                                        .frame(height: 30)
-                                        .background(.ultraThinMaterial)
-                                        .clipShape(RoundedRectangle(cornerRadius: 100))
-                                    }
-                                }
-                            }
-                        }
-                        .padding(.bottom)
-                        
-                        NavigationLink {
-                            TimerView()
-                        } label: {
-                            Text("Start Focus Session")
-                                .foregroundColor(Color.theme.background)
-                                .font(.title3)
-                                .bold()
-                        }
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .frame(height: 60)
-                        .background(Color.theme.primary)
-                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    }
-                    .padding()
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 30.0, style: .continuous))
+                    NavigationButton(destinationView: TimerView())
+                        .padding(.top)
+                    
                 }
-                .padding()
             }
-            .ignoresSafeArea()
-            .navigationDestination(isPresented: $showTimerView) {
-                TimerView()
-            }
-            .navigationDestination(isPresented: $showAirView) {
-                AirView()
-            }
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 30.0, style: .continuous))
         }
-        
-//        Opens screen from widget or link
-        .onOpenURL { url in
-            if url.absoluteString == "widget://link0" {
-                time.hr = 0
-                time.min = 25
-                showTimerView = true
-            } else if url.absoluteString == "widget://link1" {
-                breath.breaths = 5
-                showAirView = true
-            }
-        }
-        
-//        Reduces the lag when playing music in TimerView and AirView (maybe)
-        .onAppear() {
-            SoundManager.instance.musicPlayer.prepareToPlay()
-            SoundManager.instance.soundPlayer.prepareToPlay()
+        .padding()
+    }
+}
+
+struct Triangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        Path { path in
+            path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+            path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
         }
     }
 }
 
 #Preview {
-    FocusView()
+    ContentView()
 }
 
