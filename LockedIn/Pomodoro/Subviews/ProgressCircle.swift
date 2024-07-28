@@ -30,7 +30,7 @@ struct ProgressCircle: View {
             Text("\(timerText)")
                 .largeTitleTextStyle()
                 .contentTransition(.numericText())
-                .fontDesign(.monospaced)
+                .monospacedDigit()
         }
     }
 }

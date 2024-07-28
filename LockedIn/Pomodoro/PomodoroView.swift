@@ -45,6 +45,7 @@ struct PomodoroView: View {
                         .largeTitleTextStyle()
                         .contentTransition(.numericText(value: time.min))
                         .animation(.snappy, value: time.min)
+                        .monospacedDigit()
                         .padding(.top, 120)
                     
                     Text("minutes")
