@@ -1,5 +1,5 @@
 //
-//  FocusView.swift
+//  PomodoroView.swift
 //  LockedIn
 //
 //  Created by Matsvei Liapich on 8/25/23.
@@ -9,7 +9,7 @@ import SwiftUI
 import HealthKit
 import UserNotifications
 
-struct FocusView: View {
+struct PomodoroView: View {
     @StateObject private var healthKitManager = HealthKitManager()
     @StateObject var time = Time()
     @StateObject var breath = Breath()
@@ -23,7 +23,7 @@ struct FocusView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Image(systemName: "brain.head.profile")
+                Image(systemName: "timer")
                 Text("Pomodoro Focus")
                     .titleTextStyle()
             }
@@ -41,7 +41,7 @@ struct FocusView: View {
                     .offset(y: -25)
                 
                 VStack(spacing: 0) {
-                    Text(verbatim: "\(Int(time.min))")
+                    Text(verbatim: time.min == 0 ? "∞" : "\(Int(time.min))")
                         .largeTitleTextStyle()
                         .contentTransition(.numericText(value: time.min))
                         .animation(.snappy, value: time.min)
@@ -59,7 +59,7 @@ struct FocusView: View {
                     WheelPicker(config: config, value: $time.min)
                         .frame(width: 200, height: 160)
                     
-                    NavigationButton(destinationView: TimerView())
+                    NavigationButton(destinationView: PomodoroTimerView())
                         .padding(.top)
                     
                 }
@@ -83,6 +83,6 @@ struct Triangle: Shape {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
 }
 

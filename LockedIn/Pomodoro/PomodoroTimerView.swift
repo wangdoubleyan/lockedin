@@ -1,5 +1,5 @@
 //
-//  TimerView.swift
+//  PomodoroTimerView.swift
 //  LockedIn
 //
 //  Created by Matsvei Liapich on 8/25/23.
@@ -9,7 +9,7 @@ import SwiftUI
 import StoreKit
 import ActivityKit
 
-struct TimerView: View {
+struct PomodoroTimerView: View {
     @ObservedObject private var healthKitManager = HealthKitManager()
     
     @Environment(\.dismiss) var dismiss
@@ -281,6 +281,6 @@ struct TimerView: View {
 }
 
 #Preview {
-    TimerView()
+    PomodoroTimerView()
 }
 

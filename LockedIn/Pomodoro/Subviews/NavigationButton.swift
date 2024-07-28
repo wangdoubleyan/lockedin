@@ -36,5 +36,5 @@ struct NavigationButton<Content: View>: View {
 }
 
 #Preview {
-    NavigationButton(destinationView: TimerView())
+    NavigationButton(destinationView: PomodoroView())
 }

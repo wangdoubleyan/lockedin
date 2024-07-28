@@ -14,7 +14,7 @@ struct PomodoroStatusButton: View {
         VStack {
             if settings.selectedItem == "Pomodoro" {
                 Button {
-                    TimerView().switchPomodoroModes()
+                    PomodoroTimerView().switchPomodoroModes()
                 } label: {
                     Image(systemName: "forward.fill")
                     Text(settings.isWorkOn ? "Work" : "Break")

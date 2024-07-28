@@ -27,7 +27,7 @@ struct WheelPicker: View {
                             .frame(maxHeight: 60, alignment: .center)
                             .overlay(alignment: .center) {
                                 if remainder == 0 && config.showsText {
-                                    Text("\((index / config.steps) * config.multiplier)")
+                                    Text(index == 0 ? "∞" : "\((index / config.steps) * config.multiplier)")
                                         .foregroundStyle(Color.theme.foreground)
                                         .headlineTextStyle()
                                         .fixedSize()
@@ -49,6 +49,7 @@ struct WheelPicker: View {
             .scrollTargetBehavior(.viewAligned)
             .scrollPosition(id: .init(get: {
                 let position: Int? = isLoaded ? (Int(value) * config.steps) / config.multiplier : nil
+                
                 return position
             }, set: { newValue in
                 if let newValue {
@@ -83,5 +84,5 @@ struct WheelPicker: View {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     @State private var logo = "StartLogo"
     var body: some View {
         NavigationStack {
@@ -15,7 +15,7 @@ struct ContentView: View {
                 BackgroundView()
                 
                 ScrollView(showsIndicators: false) {
-                    FocusView()
+                    PomodoroView()
                     BreatheView()
                 }
             }
@@ -50,5 +50,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
 }

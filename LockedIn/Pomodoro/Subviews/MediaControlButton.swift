@@ -41,7 +41,7 @@ struct MediaControlButton: View {
             
             HStack {
                 Button {
-                    settings.isTimerPaused ? TimerView().resumeTimer() : TimerView().pauseTimer()
+                    settings.isTimerPaused ? PomodoroTimerView().resumeTimer() : PomodoroTimerView().pauseTimer()
                     
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 } label: {
