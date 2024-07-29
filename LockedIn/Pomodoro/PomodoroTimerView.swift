@@ -15,7 +15,6 @@ struct PomodoroTimerView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.requestReview) var requestReview
-    @Environment(\.scenePhase) var scenePhase
     
     @ObservedObject var time = Time()
     @ObservedObject var settings = Settings()

@@ -23,13 +23,16 @@ struct WheelPicker: View {
                         let remainder = index % config.steps
                         Rectangle()
                             .background(Color.theme.foreground)
-                            .frame(width: 3, height: remainder == 0 ? 50 : 30, alignment: .top)
+                            .frame(width: 7, height: remainder == 0 ? 50 : 30, alignment: .top)
+                            .cornerRadius(20.0)
                             .frame(maxHeight: 60, alignment: .center)
+                            
                             .overlay(alignment: .center) {
                                 if remainder == 0 && config.showsText {
                                     Text(index == 0 ? "∞" : "\((index / config.steps) * config.multiplier)")
                                         .foregroundStyle(Color.theme.foreground)
                                         .headlineTextStyle()
+                                        .bold()
                                         .fixedSize()
                                         .offset(y: 40)
                                 }
